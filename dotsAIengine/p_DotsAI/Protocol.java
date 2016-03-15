@@ -14,35 +14,36 @@ import p_TreeEngine.TreeApplicationInGame;
 
 public class Protocol {
 	
-	public static String appName="DotsAI";//название программы
-	public static String appVersion="2.0";//версия
-	public static String appDate="12 марта 2016";//дата
-	public static String appAuthor="copyright &#169; 2016 Pryimak Alexey";//автор
+	public static String appName="DotsAI";//РЅР°Р·РІР°РЅРёРµ РїСЂРѕРіСЂР°РјРјС‹
+	public static String appVersion="2.0";//РІРµСЂСЃРёСЏ
+	public static String appDate="12 РјР°СЂС‚Р° 2016";//РґР°С‚Р°
+	public static String appLicense="Р›РёС†РµРЅР·РёСЏ GPLv2";//Р»РёС†РµРЅР·РёСЏ
+	public static String appAuthor="copyright &#169; 2016 Pryimak Alexey";//Р°РІС‚РѕСЂ
 	
-	public static byte maxSize=15;//максимальный размер шаблона
+	public static byte maxSize=15;//РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ С€Р°Р±Р»РѕРЅР°
 	
-	public static byte templateDotType_ANY=0;//тип точки шаблона - любая (зеленого цвета)
-	public static byte templateDotType_LAND=1;//тип точки шаблона - граница поля (черный квадрат)
-	public static byte templateDotType_EMPTY=2;//тип точки шаблона - пустое место
-	public static byte templateDotType_BLUE=3;//тип точки шаблона - синяя точка
-	public static byte templateDotType_BLUE_or_EMPTY=4;//тип точки шаблона - синяя или пустая точка
-	public static byte templateDotType_RED=5;//тип точки шаблона - красная точка
-	public static byte templateDotType_RED_or_EMPTY=6;//тип точки шаблона - красная или пустая
+	public static byte templateDotType_ANY=0;//С‚РёРї С‚РѕС‡РєРё С€Р°Р±Р»РѕРЅР° - Р»СЋР±Р°СЏ (Р·РµР»РµРЅРѕРіРѕ С†РІРµС‚Р°)
+	public static byte templateDotType_LAND=1;//С‚РёРї С‚РѕС‡РєРё С€Р°Р±Р»РѕРЅР° - РіСЂР°РЅРёС†Р° РїРѕР»СЏ (С‡РµСЂРЅС‹Р№ РєРІР°РґСЂР°С‚)
+	public static byte templateDotType_EMPTY=2;//С‚РёРї С‚РѕС‡РєРё С€Р°Р±Р»РѕРЅР° - РїСѓСЃС‚РѕРµ РјРµСЃС‚Рѕ
+	public static byte templateDotType_BLUE=3;//С‚РёРї С‚РѕС‡РєРё С€Р°Р±Р»РѕРЅР° - СЃРёРЅСЏСЏ С‚РѕС‡РєР°
+	public static byte templateDotType_BLUE_or_EMPTY=4;//С‚РёРї С‚РѕС‡РєРё С€Р°Р±Р»РѕРЅР° - СЃРёРЅСЏСЏ РёР»Рё РїСѓСЃС‚Р°СЏ С‚РѕС‡РєР°
+	public static byte templateDotType_RED=5;//С‚РёРї С‚РѕС‡РєРё С€Р°Р±Р»РѕРЅР° - РєСЂР°СЃРЅР°СЏ С‚РѕС‡РєР°
+	public static byte templateDotType_RED_or_EMPTY=6;//С‚РёРї С‚РѕС‡РєРё С€Р°Р±Р»РѕРЅР° - РєСЂР°СЃРЅР°СЏ РёР»Рё РїСѓСЃС‚Р°СЏ
 	
-	Random rand=new Random();//генератор случаных чисел
+	Random rand=new Random();//РіРµРЅРµСЂР°С‚РѕСЂ СЃР»СѓС‡Р°РЅС‹С… С‡РёСЃРµР»
 	
-	public TemplateEngine templateEngine;//база шаблонов
-	public ArrayList<Game> games;//список игр
-	public StatisticsFrame stat;//статистика игры
+	public TemplateEngine templateEngine;//Р±Р°Р·Р° С€Р°Р±Р»РѕРЅРѕРІ
+	public ArrayList<Game> games;//СЃРїРёСЃРѕРє РёРіСЂ
+	public StatisticsFrame stat;//СЃС‚Р°С‚РёСЃС‚РёРєР° РёРіСЂС‹
 	
 	public Protocol(){
-		//инициализация переменных
+		//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРµСЂРµРјРµРЅРЅС‹С…
 		stat=new StatisticsFrame();
 		templateEngine=new TemplateEngine();
 		games=new ArrayList<Game>();
 	}	
 	
-	//получить игру по ее индексу. Игры хранятся в списке и в игру делается ход и ищется ход ИИ при обращении к игре с помощью индекса
+	//РїРѕР»СѓС‡РёС‚СЊ РёРіСЂСѓ РїРѕ РµРµ РёРЅРґРµРєСЃСѓ. РРіСЂС‹ С…СЂР°РЅСЏС‚СЃСЏ РІ СЃРїРёСЃРєРµ Рё РІ РёРіСЂСѓ РґРµР»Р°РµС‚СЃСЏ С…РѕРґ Рё РёС‰РµС‚СЃСЏ С…РѕРґ РР РїСЂРё РѕР±СЂР°С‰РµРЅРёРё Рє РёРіСЂРµ СЃ РїРѕРјРѕС‰СЊСЋ РёРЅРґРµРєСЃР°
 	public Game getGame(int gameIdx) {
 		for(int i=0;i<games.size();i++){
 			if(games.get(i).gameIdx==gameIdx)return games.get(i);
@@ -50,69 +51,69 @@ public class Protocol {
 		return null;
 	}
 	
-	//удалить игру по индексу. Игра удаляется, когда она заканчивается
+	//СѓРґР°Р»РёС‚СЊ РёРіСЂСѓ РїРѕ РёРЅРґРµРєСЃСѓ. РРіСЂР° СѓРґР°Р»СЏРµС‚СЃСЏ, РєРѕРіРґР° РѕРЅР° Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ
 	public void deleteGame(int gameIdx) {
 		for(int i=0;i<games.size();i++){
 			if(games.get(i).gameIdx==gameIdx)games.remove(i);
 		}
 	}
 	
-	//добавить новую игру в список игр
+	//РґРѕР±Р°РІРёС‚СЊ РЅРѕРІСѓСЋ РёРіСЂСѓ РІ СЃРїРёСЃРѕРє РёРіСЂ
 	public void addNewGame(int gameIdx,EnemyType enemyType1,byte sizeX,byte sizeY,int redX1,int redY1,int blueX1,int blueY1,int redX2,int redY2,int blueX2,int blueY2){
 		games.add(new Game(gameIdx,enemyType1,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2));
 	}
 	
-	//класс Game хранит всю информацию об игре
+	//РєР»Р°СЃСЃ Game С…СЂР°РЅРёС‚ РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РёРіСЂРµ
 	public class Game{
-		public int gameIdx;//индекс игры
-		public byte sizeX;//размер поля клеток (X x Y)
-		public byte sizeY;//размер поля клеток (X x Y)
-		public EnemyType enemyType;//тип соперника - человек, рандом или другой ИИ
-		public GameField gameField;//модель игрового поля
-		public Point lastAimove;//последний ход ИИ
-		public byte[][] movesMas;//список ходов в игре
-		int movesCount;//число ходов в игре
+		public int gameIdx;//РёРЅРґРµРєСЃ РёРіСЂС‹
+		public byte sizeX;//СЂР°Р·РјРµСЂ РїРѕР»СЏ РєР»РµС‚РѕРє (X x Y)
+		public byte sizeY;//СЂР°Р·РјРµСЂ РїРѕР»СЏ РєР»РµС‚РѕРє (X x Y)
+		public EnemyType enemyType;//С‚РёРї СЃРѕРїРµСЂРЅРёРєР° - С‡РµР»РѕРІРµРє, СЂР°РЅРґРѕРј РёР»Рё РґСЂСѓРіРѕР№ РР
+		public GameField gameField;//РјРѕРґРµР»СЊ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
+		public Point lastAimove;//РїРѕСЃР»РµРґРЅРёР№ С…РѕРґ РР
+		public byte[][] movesMas;//СЃРїРёСЃРѕРє С…РѕРґРѕРІ РІ РёРіСЂРµ
+		int movesCount;//С‡РёСЃР»Рѕ С…РѕРґРѕРІ РІ РёРіСЂРµ
 		
-		public ArrayList<Point> BSSpoints;//список точек, которые помогают избежать окружения ИИ в некоторых случаях
-		public ArrayList<TreeApplicationInGame> treeApplicationInGame;//список применения деревьев в игре
-		boolean isCanGroung;//может ли ИИ заземляться
-		public byte[][] fieldState;//состояние поля
-		public byte[][] fieldTerrytoryState;//состояние поля с учетом территории - пустые места в домиках считаются того цвета, что и домик
+		public ArrayList<Point> BSSpoints;//СЃРїРёСЃРѕРє С‚РѕС‡РµРє, РєРѕС‚РѕСЂС‹Рµ РїРѕРјРѕРіР°СЋС‚ РёР·Р±РµР¶Р°С‚СЊ РѕРєСЂСѓР¶РµРЅРёСЏ РР РІ РЅРµРєРѕС‚РѕСЂС‹С… СЃР»СѓС‡Р°СЏС…
+		public ArrayList<TreeApplicationInGame> treeApplicationInGame;//СЃРїРёСЃРѕРє РїСЂРёРјРµРЅРµРЅРёСЏ РґРµСЂРµРІСЊРµРІ РІ РёРіСЂРµ
+		boolean isCanGroung;//РјРѕР¶РµС‚ Р»Рё РР Р·Р°Р·РµРјР»СЏС‚СЊСЃСЏ
+		public byte[][] fieldState;//СЃРѕСЃС‚РѕСЏРЅРёРµ РїРѕР»СЏ
+		public byte[][] fieldTerrytoryState;//СЃРѕСЃС‚РѕСЏРЅРёРµ РїРѕР»СЏ СЃ СѓС‡РµС‚РѕРј С‚РµСЂСЂРёС‚РѕСЂРёРё - РїСѓСЃС‚С‹Рµ РјРµСЃС‚Р° РІ РґРѕРјРёРєР°С… СЃС‡РёС‚Р°СЋС‚СЃСЏ С‚РѕРіРѕ С†РІРµС‚Р°, С‡С‚Рѕ Рё РґРѕРјРёРє
 		
-		//не используется в игре, цель применения - для шаблонов типа "глобальной атаки"
-		//boolean isUseGlobalAttackTemplate;//можно ли атаковать глобально. Использовать только один раз в игре
+		//РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ РёРіСЂРµ, С†РµР»СЊ РїСЂРёРјРµРЅРµРЅРёСЏ - РґР»СЏ С€Р°Р±Р»РѕРЅРѕРІ С‚РёРїР° "РіР»РѕР±Р°Р»СЊРЅРѕР№ Р°С‚Р°РєРё"
+		//boolean isUseGlobalAttackTemplate;//РјРѕР¶РЅРѕ Р»Рё Р°С‚Р°РєРѕРІР°С‚СЊ РіР»РѕР±Р°Р»СЊРЅРѕ. РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ С‚РѕР»СЊРєРѕ РѕРґРёРЅ СЂР°Р· РІ РёРіСЂРµ
 		
-		public Point moveAI;//ход ИИ в процессе его поиска - сюда могут записываться промежуточные результаты поиска
-		public int crossCount;//число скрестов в игре
-		public int closestRedChainIdx;//наименьшая цепь точек у ИИ
-		public ArrayList<Chain> redChains;//список красных цепей точек (цепей ИИ)
-		public ArrayList<Chain> blueChains;//список синих цепей точек (цепей соперника ИИ)
-		public String[][] fieldOfChains;//хранит информацию о цепях
-		boolean isMoveByBeginTemplate;//вначале игры ходить по BeginTemplate до первого хода по другому типу шаблона
-		private int lossLevel;//какое преимущество надо добыть над ИИ, чтобы ИИ сдался
+		public Point moveAI;//С…РѕРґ РР РІ РїСЂРѕС†РµСЃСЃРµ РµРіРѕ РїРѕРёСЃРєР° - СЃСЋРґР° РјРѕРіСѓС‚ Р·Р°РїРёСЃС‹РІР°С‚СЊСЃСЏ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Рµ СЂРµР·СѓР»СЊС‚Р°С‚С‹ РїРѕРёСЃРєР°
+		public int crossCount;//С‡РёСЃР»Рѕ СЃРєСЂРµСЃС‚РѕРІ РІ РёРіСЂРµ
+		public int closestRedChainIdx;//РЅР°РёРјРµРЅСЊС€Р°СЏ С†РµРїСЊ С‚РѕС‡РµРє Сѓ РР
+		public ArrayList<Chain> redChains;//СЃРїРёСЃРѕРє РєСЂР°СЃРЅС‹С… С†РµРїРµР№ С‚РѕС‡РµРє (С†РµРїРµР№ РР)
+		public ArrayList<Chain> blueChains;//СЃРїРёСЃРѕРє СЃРёРЅРёС… С†РµРїРµР№ С‚РѕС‡РµРє (С†РµРїРµР№ СЃРѕРїРµСЂРЅРёРєР° РР)
+		public String[][] fieldOfChains;//С…СЂР°РЅРёС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С†РµРїСЏС…
+		boolean isMoveByBeginTemplate;//РІРЅР°С‡Р°Р»Рµ РёРіСЂС‹ С…РѕРґРёС‚СЊ РїРѕ BeginTemplate РґРѕ РїРµСЂРІРѕРіРѕ С…РѕРґР° РїРѕ РґСЂСѓРіРѕРјСѓ С‚РёРїСѓ С€Р°Р±Р»РѕРЅР°
+		private int lossLevel;//РєР°РєРѕРµ РїСЂРµРёРјСѓС‰РµСЃС‚РІРѕ РЅР°РґРѕ РґРѕР±С‹С‚СЊ РЅР°Рґ РР, С‡С‚РѕР±С‹ РР СЃРґР°Р»СЃСЏ
 		
-		//хранят влияние точек двух игроков. Чем ближе точка к данной позиции, тем ее влияние больше
-		//используются для абстрактных ходов, чтобы они ставились в места с минимальным числом точек соперника ИИ
+		//С…СЂР°РЅСЏС‚ РІР»РёСЏРЅРёРµ С‚РѕС‡РµРє РґРІСѓС… РёРіСЂРѕРєРѕРІ. Р§РµРј Р±Р»РёР¶Рµ С‚РѕС‡РєР° Рє РґР°РЅРЅРѕР№ РїРѕР·РёС†РёРё, С‚РµРј РµРµ РІР»РёСЏРЅРёРµ Р±РѕР»СЊС€Рµ
+		//РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ РґР»СЏ Р°Р±СЃС‚СЂР°РєС‚РЅС‹С… С…РѕРґРѕРІ, С‡С‚РѕР±С‹ РѕРЅРё СЃС‚Р°РІРёР»РёСЃСЊ РІ РјРµСЃС‚Р° СЃ РјРёРЅРёРјР°Р»СЊРЅС‹Рј С‡РёСЃР»РѕРј С‚РѕС‡РµРє СЃРѕРїРµСЂРЅРёРєР° РР
 		public double fieldSpectrumRed[][];
 		public double fieldSpectrumBlue[][];
 		public double fieldSpectrumRedMax;
 		public double fieldSpectrumBlueMax;
 		
-		//создание объекта игры
+		//СЃРѕР·РґР°РЅРёРµ РѕР±СЉРµРєС‚Р° РёРіСЂС‹
 		public Game(int gameIdx,EnemyType enemyType,byte sizeX,byte sizeY,
 					int redX1,int redY1,int blueX1,int blueY1,int redX2,int redY2,int blueX2,int blueY2
 				){
-			stat.clearStat();//очистить статистику
+			stat.clearStat();//РѕС‡РёСЃС‚РёС‚СЊ СЃС‚Р°С‚РёСЃС‚РёРєСѓ
 			
-			lossLevel=rand.nextInt(30)+17;//определить разницу проигранных точек, при которых ИИ сдается
+			lossLevel=rand.nextInt(30)+17;//РѕРїСЂРµРґРµР»РёС‚СЊ СЂР°Р·РЅРёС†Сѓ РїСЂРѕРёРіСЂР°РЅРЅС‹С… С‚РѕС‡РµРє, РїСЂРё РєРѕС‚РѕСЂС‹С… РР СЃРґР°РµС‚СЃСЏ
 			
-			//размер и состояние поля
+			//СЂР°Р·РјРµСЂ Рё СЃРѕСЃС‚РѕСЏРЅРёРµ РїРѕР»СЏ
 			this.sizeX=sizeX;
 			this.sizeY=sizeY;
 			fieldState=new byte[sizeX][sizeY];
 			fieldTerrytoryState=new byte[sizeX][sizeY];
 			
-			//влияние синих и красных на окружающие точки
+			//РІР»РёСЏРЅРёРµ СЃРёРЅРёС… Рё РєСЂР°СЃРЅС‹С… РЅР° РѕРєСЂСѓР¶Р°СЋС‰РёРµ С‚РѕС‡РєРё
 			fieldSpectrumRed=new double[sizeX][sizeY];
 			fieldSpectrumBlue=new double[sizeX][sizeY];
 			for(int i=0;i<sizeX;i++)for(int j=0;j<sizeY;j++){
@@ -122,7 +123,7 @@ public class Protocol {
 			fieldSpectrumRedMax=0;
 			fieldSpectrumBlueMax=0;
 			
-			//запомнить другие параметры
+			//Р·Р°РїРѕРјРЅРёС‚СЊ РґСЂСѓРіРёРµ РїР°СЂР°РјРµС‚СЂС‹
 			this.gameIdx=gameIdx;
 			closestRedChainIdx=-1;
 			isMoveByBeginTemplate=true;			
@@ -134,16 +135,16 @@ public class Protocol {
 			treeApplicationInGame=new ArrayList<TreeApplicationInGame>();			
 			movesCount=0;
 			movesMas=new byte[sizeX*sizeY][3];
-			gameField=new GameField(sizeX,sizeY);//модель игрового поля
+			gameField=new GameField(sizeX,sizeY);//РјРѕРґРµР»СЊ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
 			
-			//добавить на игровое поле точки стартовой позиции
+			//РґРѕР±Р°РІРёС‚СЊ РЅР° РёРіСЂРѕРІРѕРµ РїРѕР»Рµ С‚РѕС‡РєРё СЃС‚Р°СЂС‚РѕРІРѕР№ РїРѕР·РёС†РёРё
 			gameField.addMove(new Point(redX1,redY1),GameField.RED);
 			gameField.addMove(new Point(blueX1,blueY1), GameField.BLUE);
 			gameField.addMove(new Point(redX2,redY2),GameField.RED);
 			gameField.addMove(new Point(blueX2,blueY2), GameField.BLUE);
 		}
 
-		//список ходов в игре
+		//СЃРїРёСЃРѕРє С…РѕРґРѕРІ РІ РёРіСЂРµ
 		public void addInMovesMas(Point p, int type){//red=0,blue=1		
 			movesMas[movesCount][0]=(byte) p.x;
 			movesMas[movesCount][1]=(byte) p.y;
@@ -151,79 +152,79 @@ public class Protocol {
 			movesCount++;
 		}
 
-		//вернуть число ходов в игре
+		//РІРµСЂРЅСѓС‚СЊ С‡РёСЃР»Рѕ С…РѕРґРѕРІ РІ РёРіСЂРµ
 		public int getMovesCount(){return movesCount;}
 		
 	}
 	
-	//выполнить ход соперника ИИ
+	//РІС‹РїРѕР»РЅРёС‚СЊ С…РѕРґ СЃРѕРїРµСЂРЅРёРєР° РР
 	public void addAIenemyMove(int gameIdx,int x,int y){
 		Game game=getGame(gameIdx);
 		if(game==null)return;
 		game.addInMovesMas(new Point(x,y), GameField.BLUE);
 		game.gameField.addMove(new Point(x,y), GameField.BLUE);
-		if(game.movesCount%9==0){//чистка мусора в памяти программы каждые 9 ходов
+		if(game.movesCount%9==0){//С‡РёСЃС‚РєР° РјСѓСЃРѕСЂР° РІ РїР°РјСЏС‚Рё РїСЂРѕРіСЂР°РјРјС‹ РєР°Р¶РґС‹Рµ 9 С…РѕРґРѕРІ
 			System.gc();
 		}
 	}
 	
-	//найти ход ИИ
+	//РЅР°Р№С‚Рё С…РѕРґ РР
 	public Point getAImove(int gameIdx,int level,Point recommendedMove){
 		Game game=getGame(gameIdx);
-		game.lastAimove=getAImovePoint(game,gameIdx,level,recommendedMove);//поиск хода ИИ
+		game.lastAimove=getAImovePoint(game,gameIdx,level,recommendedMove);//РїРѕРёСЃРє С…РѕРґР° РР
 		game.addInMovesMas(game.lastAimove, GameField.RED);
 		game.gameField.addMove(game.lastAimove, GameField.RED);
 		return game.lastAimove;
 	}
 	
-	//найти ход ИИ. Как только находится ход ИИ по одному из способов, дальнейший поиск на данном ходе прекращается
+	//РЅР°Р№С‚Рё С…РѕРґ РР. РљР°Рє С‚РѕР»СЊРєРѕ РЅР°С…РѕРґРёС‚СЃСЏ С…РѕРґ РР РїРѕ РѕРґРЅРѕРјСѓ РёР· СЃРїРѕСЃРѕР±РѕРІ, РґР°Р»СЊРЅРµР№С€РёР№ РїРѕРёСЃРє РЅР° РґР°РЅРЅРѕРј С…РѕРґРµ РїСЂРµРєСЂР°С‰Р°РµС‚СЃСЏ
 	Point getAImovePoint(Game game,int gameIdx,int level,Point recommendedMove){
 		
-		//поиск хода ИИ blue surround security
+		//РїРѕРёСЃРє С…РѕРґР° РР blue surround security
 		if(isMoveBlueSurroundSecurity(game)){stat.moveStatMas.addMoveStat(MoveStatType.BLUE_SURROUND_SECURITY);return game.moveAI;}
 		
-		game.gameField.setFieldState(game);//получить состояние игры
+		game.gameField.setFieldState(game);//РїРѕР»СѓС‡РёС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ РёРіСЂС‹
 		
-		//поиск хода по списку ранее применявшихся в игре деревьев
+		//РїРѕРёСЃРє С…РѕРґР° РїРѕ СЃРїРёСЃРєСѓ СЂР°РЅРµРµ РїСЂРёРјРµРЅСЏРІС€РёС…СЃСЏ РІ РёРіСЂРµ РґРµСЂРµРІСЊРµРІ
 		if(isMoveByTree(game,recommendedMove)){return game.moveAI;}		
 				
-		chainsSearch(game);//поиск цепей в игре
+		chainsSearch(game);//РїРѕРёСЃРє С†РµРїРµР№ РІ РёРіСЂРµ
 		
-		if(isEndGame(game,GameField.RED)){//проверка на окончание игры - заземлился ли ИИ
-			if(isMoveByGround(game,recommendedMove))return game.moveAI;//вернуть ход по шаблонам заземления, если это возможно
+		if(isEndGame(game,GameField.RED)){//РїСЂРѕРІРµСЂРєР° РЅР° РѕРєРѕРЅС‡Р°РЅРёРµ РёРіСЂС‹ - Р·Р°Р·РµРјР»РёР»СЃСЏ Р»Рё РР
+			if(isMoveByGround(game,recommendedMove))return game.moveAI;//РІРµСЂРЅСѓС‚СЊ С…РѕРґ РїРѕ С€Р°Р±Р»РѕРЅР°Рј Р·Р°Р·РµРјР»РµРЅРёСЏ, РµСЃР»Рё СЌС‚Рѕ РІРѕР·РјРѕР¶РЅРѕ
 			else{
 				game.closestRedChainIdx=-1;
-				return new Point(-2,-2);//ИИ заземлился, ИИ заканчивает игру
+				return new Point(-2,-2);//РР Р·Р°Р·РµРјР»РёР»СЃСЏ, РР Р·Р°РєР°РЅС‡РёРІР°РµС‚ РёРіСЂСѓ
 			}
 		}
-		if(isEndGame(game,GameField.BLUE)){//проверка на окончание игры - заземлился ли соперник ИИ
+		if(isEndGame(game,GameField.BLUE)){//РїСЂРѕРІРµСЂРєР° РЅР° РѕРєРѕРЅС‡Р°РЅРёРµ РёРіСЂС‹ - Р·Р°Р·РµРјР»РёР»СЃСЏ Р»Рё СЃРѕРїРµСЂРЅРёРє РР
 			game.closestRedChainIdx=-1;
-			return new Point(-3,-3);//человек заземлился, ИИ сдается
+			return new Point(-3,-3);//С‡РµР»РѕРІРµРє Р·Р°Р·РµРјР»РёР»СЃСЏ, РР СЃРґР°РµС‚СЃСЏ
 		}
-		if(game.gameField.scoreBlue-game.gameField.scoreRed>game.lossLevel){//проверка на окончание игры - ИИ сдается, если потерял много точек
+		if(game.gameField.scoreBlue-game.gameField.scoreRed>game.lossLevel){//РїСЂРѕРІРµСЂРєР° РЅР° РѕРєРѕРЅС‡Р°РЅРёРµ РёРіСЂС‹ - РР СЃРґР°РµС‚СЃСЏ, РµСЃР»Рё РїРѕС‚РµСЂСЏР» РјРЅРѕРіРѕ С‚РѕС‡РµРє
 			game.closestRedChainIdx=-1;
-			return new Point(-4,-4);//ИИ сдается, т.к. потерял много точек
+			return new Point(-4,-4);//РР СЃРґР°РµС‚СЃСЏ, С‚.Рє. РїРѕС‚РµСЂСЏР» РјРЅРѕРіРѕ С‚РѕС‡РµРє
 		}
 						
-		//поиск хода по начальному типу шаблона (тип BEGIN)
-		if(game.isMoveByBeginTemplate){//искать ли по данному типу шаблона
+		//РїРѕРёСЃРє С…РѕРґР° РїРѕ РЅР°С‡Р°Р»СЊРЅРѕРјСѓ С‚РёРїСѓ С€Р°Р±Р»РѕРЅР° (С‚РёРї BEGIN)
+		if(game.isMoveByBeginTemplate){//РёСЃРєР°С‚СЊ Р»Рё РїРѕ РґР°РЅРЅРѕРјСѓ С‚РёРїСѓ С€Р°Р±Р»РѕРЅР°
 			if(templateEngine.isMoveIfEqualsLikeAreaByPoint(this,game,TemplateType.templateTypeBEGIN,game.gameField.lastDot,game.fieldState,recommendedMove)){
-				return game.moveAI;//ход по начальному шаблону найден
-			}else{//после того, как сделан впервые не найден ход по начальному шаблону, больше по начальным шаблонам поиска не происходит
+				return game.moveAI;//С…РѕРґ РїРѕ РЅР°С‡Р°Р»СЊРЅРѕРјСѓ С€Р°Р±Р»РѕРЅСѓ РЅР°Р№РґРµРЅ
+			}else{//РїРѕСЃР»Рµ С‚РѕРіРѕ, РєР°Рє СЃРґРµР»Р°РЅ РІРїРµСЂРІС‹Рµ РЅРµ РЅР°Р№РґРµРЅ С…РѕРґ РїРѕ РЅР°С‡Р°Р»СЊРЅРѕРјСѓ С€Р°Р±Р»РѕРЅСѓ, Р±РѕР»СЊС€Рµ РїРѕ РЅР°С‡Р°Р»СЊРЅС‹Рј С€Р°Р±Р»РѕРЅР°Рј РїРѕРёСЃРєР° РЅРµ РїСЂРѕРёСЃС…РѕРґРёС‚
 				game.isMoveByBeginTemplate=false;
 			}
 		}
 		
-		//поиск хода по боковому шаблону, если точка соперника ИИ поставлена вблизи края поля		
+		//РїРѕРёСЃРє С…РѕРґР° РїРѕ Р±РѕРєРѕРІРѕРјСѓ С€Р°Р±Р»РѕРЅСѓ, РµСЃР»Рё С‚РѕС‡РєР° СЃРѕРїРµСЂРЅРёРєР° РР РїРѕСЃС‚Р°РІР»РµРЅР° РІР±Р»РёР·Рё РєСЂР°СЏ РїРѕР»СЏ		
 		try{if(TemplateFieldSideType.getFieldSideType(game,game.gameField.lastDot)!=TemplateFieldSideType.templateFieldSideTypeINSIDE){
 			if(templateEngine.isMoveIfEqualsLikeAreaByPoint(this,game,TemplateType.templateTypeSQUARE_SIDE,game.gameField.lastDot,game.fieldState,recommendedMove))return game.moveAI;
 		}}catch(Exception e){}
 
-		//поиск по обычным шаблонам, которые содержат ответ ИИ относительно последнего хода соперника ИИ 
+		//РїРѕРёСЃРє РїРѕ РѕР±С‹С‡РЅС‹Рј С€Р°Р±Р»РѕРЅР°Рј, РєРѕС‚РѕСЂС‹Рµ СЃРѕРґРµСЂР¶Р°С‚ РѕС‚РІРµС‚ РР РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РїРѕСЃР»РµРґРЅРµРіРѕ С…РѕРґР° СЃРѕРїРµСЂРЅРёРєР° РР 
 		try{if(templateEngine.isMoveIfEqualsLikeAreaByPoint(this,game,TemplateType.templateTypeSQUARE,game.gameField.lastDot,game.fieldState,recommendedMove))return game.moveAI;}catch(Exception e){}
 		
-		//шаблоны глобальной атаки отключены
-		//найти для всех концов синих цепей ход по GLOBAL_ATTACK шаблону
+		//С€Р°Р±Р»РѕРЅС‹ РіР»РѕР±Р°Р»СЊРЅРѕР№ Р°С‚Р°РєРё РѕС‚РєР»СЋС‡РµРЅС‹
+		//РЅР°Р№С‚Рё РґР»СЏ РІСЃРµС… РєРѕРЅС†РѕРІ СЃРёРЅРёС… С†РµРїРµР№ С…РѕРґ РїРѕ GLOBAL_ATTACK С€Р°Р±Р»РѕРЅСѓ
 		/*try{if(game.isUseGlobalAttackTemplate&&game.getMovesCount()>15){
 			ArrayList<Point> pBlueWallEnds = new ArrayList<Point>();
 			for(int i=0;i<game.wallBlue.size();i++){
@@ -235,22 +236,22 @@ public class Protocol {
 			}
 		}}catch(Exception e){}*/
 			
-		//<расчет спектра>
+		//<СЂР°СЃС‡РµС‚ СЃРїРµРєС‚СЂР°>
 		if(!game.isCanGroung){
-			for(int i=0;i<game.sizeX;i++){for(int j=0;j<game.sizeY;j++){//обнуление спектра
+			for(int i=0;i<game.sizeX;i++){for(int j=0;j<game.sizeY;j++){//РѕР±РЅСѓР»РµРЅРёРµ СЃРїРµРєС‚СЂР°
 				game.fieldSpectrumRed[i][j]=0;
 				game.fieldSpectrumBlue[i][j]=0;
 			}}
-			int depth=5;//глубина влияния точки на окружающее пространство
+			int depth=5;//РіР»СѓР±РёРЅР° РІР»РёСЏРЅРёСЏ С‚РѕС‡РєРё РЅР° РѕРєСЂСѓР¶Р°СЋС‰РµРµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ
 			for(int i=0;i<game.sizeX;i++){for(int j=0;j<game.sizeY;j++){
-				if(game.fieldState[i][j]==templateDotType_RED){//считается влияние красных точек
+				if(game.fieldState[i][j]==templateDotType_RED){//СЃС‡РёС‚Р°РµС‚СЃСЏ РІР»РёСЏРЅРёРµ РєСЂР°СЃРЅС‹С… С‚РѕС‡РµРє
 					for(int i1=-depth;i1<=depth;i1++){
 						for(int j1=-depth;j1<=depth;j1++){
 							if(i1==0&j1==0)continue;
 							try{game.fieldSpectrumRed[i+i1][j+j1]+=1.0/Math.sqrt(i1*i1+j1*j1);}catch(Exception e){continue;}
 						}
 					}
-				}else if(game.fieldState[i][j]==templateDotType_BLUE){//считается влияние синих точек
+				}else if(game.fieldState[i][j]==templateDotType_BLUE){//СЃС‡РёС‚Р°РµС‚СЃСЏ РІР»РёСЏРЅРёРµ СЃРёРЅРёС… С‚РѕС‡РµРє
 					for(int i1=-depth;i1<=depth;i1++){
 						for(int j1=-depth;j1<=depth;j1++){
 							if(i1==0&j1==0)continue;
@@ -260,7 +261,7 @@ public class Protocol {
 				}		
 			}}			
 
-			//коррекция, чтобы в местах точек красных и синих были значения максимума влияния
+			//РєРѕСЂСЂРµРєС†РёСЏ, С‡С‚РѕР±С‹ РІ РјРµСЃС‚Р°С… С‚РѕС‡РµРє РєСЂР°СЃРЅС‹С… Рё СЃРёРЅРёС… Р±С‹Р»Рё Р·РЅР°С‡РµРЅРёСЏ РјР°РєСЃРёРјСѓРјР° РІР»РёСЏРЅРёСЏ
 			game.fieldSpectrumRedMax=0;
 			game.fieldSpectrumBlueMax=0;
 			for(int i=0;i<game.sizeX;i++){for(int j=0;j<game.sizeY;j++){
@@ -271,37 +272,37 @@ public class Protocol {
 			}}
 		}
 		
-		//искать ходы для всех точек ближней красной цепи к последнему ходу соперника ИИ, затем поиск для всех других красных цепей
-		game.closestRedChainIdx=getSmallerRedChainIdx(game);//найти индекс самой близкой цепи ИИ к последнему синему ходу
+		//РёСЃРєР°С‚СЊ С…РѕРґС‹ РґР»СЏ РІСЃРµС… С‚РѕС‡РµРє Р±Р»РёР¶РЅРµР№ РєСЂР°СЃРЅРѕР№ С†РµРїРё Рє РїРѕСЃР»РµРґРЅРµРјСѓ С…РѕРґСѓ СЃРѕРїРµСЂРЅРёРєР° РР, Р·Р°С‚РµРј РїРѕРёСЃРє РґР»СЏ РІСЃРµС… РґСЂСѓРіРёС… РєСЂР°СЃРЅС‹С… С†РµРїРµР№
+		game.closestRedChainIdx=getSmallerRedChainIdx(game);//РЅР°Р№С‚Рё РёРЅРґРµРєСЃ СЃР°РјРѕР№ Р±Р»РёР·РєРѕР№ С†РµРїРё РР Рє РїРѕСЃР»РµРґРЅРµРјСѓ СЃРёРЅРµРјСѓ С…РѕРґСѓ
 		
-		//если самая близкая цепь не найдена (т.е. все цепи достигли края поля), можно заземляться
+		//РµСЃР»Рё СЃР°РјР°СЏ Р±Р»РёР·РєР°СЏ С†РµРїСЊ РЅРµ РЅР°Р№РґРµРЅР° (С‚.Рµ. РІСЃРµ С†РµРїРё РґРѕСЃС‚РёРіР»Рё РєСЂР°СЏ РїРѕР»СЏ), РјРѕР¶РЅРѕ Р·Р°Р·РµРјР»СЏС‚СЊСЃСЏ
 		if(game.closestRedChainIdx==-1){
 			game.isCanGroung=true;
 		}else{
 			game.isCanGroung=false;
 		}
 		
-		//если еще нельзя заземляться, поиск хода идет для точек самой близкой цепи ИИ к последнему синему ходу
+		//РµСЃР»Рё РµС‰Рµ РЅРµР»СЊР·СЏ Р·Р°Р·РµРјР»СЏС‚СЊСЃСЏ, РїРѕРёСЃРє С…РѕРґР° РёРґРµС‚ РґР»СЏ С‚РѕС‡РµРє СЃР°РјРѕР№ Р±Р»РёР·РєРѕР№ С†РµРїРё РР Рє РїРѕСЃР»РµРґРЅРµРјСѓ СЃРёРЅРµРјСѓ С…РѕРґСѓ
 		if(!game.isCanGroung){
 			if(isMoveByRedOriented(game,game.redChains.get(game.closestRedChainIdx),level,recommendedMove))return game.moveAI;
 		}
-		//поиск хода для всех остальных цепей ИИ
+		//РїРѕРёСЃРє С…РѕРґР° РґР»СЏ РІСЃРµС… РѕСЃС‚Р°Р»СЊРЅС‹С… С†РµРїРµР№ РР
 		for(int i=0;i<game.redChains.size();i++){
-			if(!game.isCanGroung){//не искать для самой близкой цепи
+			if(!game.isCanGroung){//РЅРµ РёСЃРєР°С‚СЊ РґР»СЏ СЃР°РјРѕР№ Р±Р»РёР·РєРѕР№ С†РµРїРё
 				if(i==game.closestRedChainIdx){
 					continue;
 				}
 			}
-			if(isMoveByRedOriented(game,game.redChains.get(i),level,recommendedMove)){//искать ход для всех точек одной из цепей ИИ
+			if(isMoveByRedOriented(game,game.redChains.get(i),level,recommendedMove)){//РёСЃРєР°С‚СЊ С…РѕРґ РґР»СЏ РІСЃРµС… С‚РѕС‡РµРє РѕРґРЅРѕР№ РёР· С†РµРїРµР№ РР
 				return game.moveAI;
 			}
 		}
 			
-		//поиск хода по заземлению
+		//РїРѕРёСЃРє С…РѕРґР° РїРѕ Р·Р°Р·РµРјР»РµРЅРёСЋ
 		if(isMoveByGround(game,recommendedMove))return game.moveAI;
 		
-		//ни по одному шаблону ход не найден, значит ход ИИ делается случайно
-		game.gameField.setTerrytoryState(game);//чтобы не ходить в домики соперника сохраняется поле с учетом контролируемой территории
+		//РЅРё РїРѕ РѕРґРЅРѕРјСѓ С€Р°Р±Р»РѕРЅСѓ С…РѕРґ РЅРµ РЅР°Р№РґРµРЅ, Р·РЅР°С‡РёС‚ С…РѕРґ РР РґРµР»Р°РµС‚СЃСЏ СЃР»СѓС‡Р°Р№РЅРѕ
+		game.gameField.setTerrytoryState(game);//С‡С‚РѕР±С‹ РЅРµ С…РѕРґРёС‚СЊ РІ РґРѕРјРёРєРё СЃРѕРїРµСЂРЅРёРєР° СЃРѕС…СЂР°РЅСЏРµС‚СЃСЏ РїРѕР»Рµ СЃ СѓС‡РµС‚РѕРј РєРѕРЅС‚СЂРѕР»РёСЂСѓРµРјРѕР№ С‚РµСЂСЂРёС‚РѕСЂРёРё
 		game.moveAI.x=game.lastAimove.x;game.moveAI.y=game.lastAimove.y;	
 		while(!game.gameField.canAddMove((byte)game.moveAI.x,(byte)game.moveAI.y)||game.fieldTerrytoryState[game.moveAI.x][game.moveAI.y]!=templateDotType_EMPTY){
 			game.moveAI.x=rand.nextInt(game.sizeX);
@@ -311,53 +312,53 @@ public class Protocol {
 		return game.moveAI;
 	}
 
-	//поиск хода ИИ относительно всех точек в одной из цепей ИИ
+	//РїРѕРёСЃРє С…РѕРґР° РР РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РІСЃРµС… С‚РѕС‡РµРє РІ РѕРґРЅРѕР№ РёР· С†РµРїРµР№ РР
 	private boolean isMoveByRedOriented(Game game,Chain chain,int level,Point recommendedMove){
 		
-		//поиск хода по шаблону разрыва цепи соперника (поиск только для точки конца цепи)
+		//РїРѕРёСЃРє С…РѕРґР° РїРѕ С€Р°Р±Р»РѕРЅСѓ СЂР°Р·СЂС‹РІР° С†РµРїРё СЃРѕРїРµСЂРЅРёРєР° (РїРѕРёСЃРє С‚РѕР»СЊРєРѕ РґР»СЏ С‚РѕС‡РєРё РєРѕРЅС†Р° С†РµРїРё)
 		try{if(templateEngine.isMoveIfEqualsLikeAreaByPoint(this,game,TemplateType.templateTypeWALL_DESTROY,new Point(chain.chainEndX,chain.chainEndY),game.fieldState,recommendedMove))return true;}catch(Exception e){}
 		
-		//поиск по шаблону завершающей части атаки, когда окружение соперника близко (поиск только для точки конца цепи)
+		//РїРѕРёСЃРє РїРѕ С€Р°Р±Р»РѕРЅСѓ Р·Р°РІРµСЂС€Р°СЋС‰РµР№ С‡Р°СЃС‚Рё Р°С‚Р°РєРё, РєРѕРіРґР° РѕРєСЂСѓР¶РµРЅРёРµ СЃРѕРїРµСЂРЅРёРєР° Р±Р»РёР·РєРѕ (РїРѕРёСЃРє С‚РѕР»СЊРєРѕ РґР»СЏ С‚РѕС‡РєРё РєРѕРЅС†Р° С†РµРїРё)
 		try{if(templateEngine.isMoveIfEqualsLikeAreaByPoint(this,game,TemplateType.templateTypeFINAL_RED_ATTACK,new Point(chain.chainEndX,chain.chainEndY),game.fieldState,recommendedMove))return true;}catch(Exception e){}
 		
-		//поиск по шаблонам разрыва, завершающей и продолжающей части атаки для всех остальных точек цепи 
+		//РїРѕРёСЃРє РїРѕ С€Р°Р±Р»РѕРЅР°Рј СЂР°Р·СЂС‹РІР°, Р·Р°РІРµСЂС€Р°СЋС‰РµР№ Рё РїСЂРѕРґРѕР»Р¶Р°СЋС‰РµР№ С‡Р°СЃС‚Рё Р°С‚Р°РєРё РґР»СЏ РІСЃРµС… РѕСЃС‚Р°Р»СЊРЅС‹С… С‚РѕС‡РµРє С†РµРїРё 
 		try{if(templateEngine.isMoveIfEqualsLikeAreaByPointList(this,game,TemplateType.templateTypeWALL_DESTROY,chain.points,game.fieldState,recommendedMove))return true;}catch(Exception e){}
 		try{if(templateEngine.isMoveIfEqualsLikeAreaByPointList(this,game,TemplateType.templateTypeFINAL_RED_ATTACK,chain.points,game.fieldState,recommendedMove))return true;}catch(Exception e){}
 		try{if(templateEngine.isMoveIfEqualsLikeAreaByPointList(this,game,TemplateType.templateTypeCONTINUED_RED_ATTACK,chain.points,game.fieldState,recommendedMove))return true;}catch(Exception e){}
 		
-		//поиск абстраткного хода ИИ
-		if(game.movesCount>20){//абстрактные ходы делаются, если в игре сделано больше 20 ходов
-			//поиск абстрактного хода идет для точек из списка ранее сделаных абстрактных ходов для данной цепи
-			for(int i=chain.abstractPoints.size()-1;i>=0;i--){//искать ход с последних добавленных точек
+		//РїРѕРёСЃРє Р°Р±СЃС‚СЂР°С‚РєРЅРѕРіРѕ С…РѕРґР° РР
+		if(game.movesCount>20){//Р°Р±СЃС‚СЂР°РєС‚РЅС‹Рµ С…РѕРґС‹ РґРµР»Р°СЋС‚СЃСЏ, РµСЃР»Рё РІ РёРіСЂРµ СЃРґРµР»Р°РЅРѕ Р±РѕР»СЊС€Рµ 20 С…РѕРґРѕРІ
+			//РїРѕРёСЃРє Р°Р±СЃС‚СЂР°РєС‚РЅРѕРіРѕ С…РѕРґР° РёРґРµС‚ РґР»СЏ С‚РѕС‡РµРє РёР· СЃРїРёСЃРєР° СЂР°РЅРµРµ СЃРґРµР»Р°РЅС‹С… Р°Р±СЃС‚СЂР°РєС‚РЅС‹С… С…РѕРґРѕРІ РґР»СЏ РґР°РЅРЅРѕР№ С†РµРїРё
+			for(int i=chain.abstractPoints.size()-1;i>=0;i--){//РёСЃРєР°С‚СЊ С…РѕРґ СЃ РїРѕСЃР»РµРґРЅРёС… РґРѕР±Р°РІР»РµРЅРЅС‹С… С‚РѕС‡РµРє
 				try{if(templateEngine.isMoveIfEqualsLikeAreaByPoint(this,game,TemplateType.templateTypeABSTRACT_ATTACK_WALL,chain.abstractPoints.get(i),game.fieldState,recommendedMove)){
-					chain.abstractPoints.add(new Point(game.moveAI.x,game.moveAI.y));//найденный абстрактный ход добавляется в список абстрактных ходов
+					chain.abstractPoints.add(new Point(game.moveAI.x,game.moveAI.y));//РЅР°Р№РґРµРЅРЅС‹Р№ Р°Р±СЃС‚СЂР°РєС‚РЅС‹Р№ С…РѕРґ РґРѕР±Р°РІР»СЏРµС‚СЃСЏ РІ СЃРїРёСЃРѕРє Р°Р±СЃС‚СЂР°РєС‚РЅС‹С… С…РѕРґРѕРІ
 					return true;
 				}}catch(Exception e){}
 			}
-			//поиск абстрактного хода идет для точек цепи ИИ
-			for(int i=chain.points.size();i>=0;i--){//искать ход с конца стен
+			//РїРѕРёСЃРє Р°Р±СЃС‚СЂР°РєС‚РЅРѕРіРѕ С…РѕРґР° РёРґРµС‚ РґР»СЏ С‚РѕС‡РµРє С†РµРїРё РР
+			for(int i=chain.points.size();i>=0;i--){//РёСЃРєР°С‚СЊ С…РѕРґ СЃ РєРѕРЅС†Р° СЃС‚РµРЅ
 				try{if(templateEngine.isMoveIfEqualsLikeAreaByPoint(this,game,TemplateType.templateTypeABSTRACT_ATTACK_WALL,chain.points.get(i),game.fieldState,recommendedMove)){
-					chain.abstractPoints.add(new Point(game.moveAI.x,game.moveAI.y));//найденный абстрактный ход добавляется в список абстрактных ходов
+					chain.abstractPoints.add(new Point(game.moveAI.x,game.moveAI.y));//РЅР°Р№РґРµРЅРЅС‹Р№ Р°Р±СЃС‚СЂР°РєС‚РЅС‹Р№ С…РѕРґ РґРѕР±Р°РІР»СЏРµС‚СЃСЏ РІ СЃРїРёСЃРѕРє Р°Р±СЃС‚СЂР°РєС‚РЅС‹С… С…РѕРґРѕРІ
 					return true;
 				}}catch(Exception e){}
 			}
 		}	
 		
-		//поиск хода по шаблонам цепей
-		if(!chain.isAtSide(game)){//если цепь не на краю поля
-			//в данной программе уровень сложности ИИ всегда задан максимальный, хотя можно и варьировать его
-			//чем слабее задать уровень сложности, тем меньше шаблонов будет использоваться для поиска хода по шаблонам для цепей,
-			//а значит тем хуже будут построенные цепи. Хотя это сейчас не так актуально, т.к. появились шаблоны абстрактных ходовs
-			double koef=1.0+(10-level)/10.0;//определить уровень сложности, где level=[0;10], чем выше, тем сильнее		
+		//РїРѕРёСЃРє С…РѕРґР° РїРѕ С€Р°Р±Р»РѕРЅР°Рј С†РµРїРµР№
+		if(!chain.isAtSide(game)){//РµСЃР»Рё С†РµРїСЊ РЅРµ РЅР° РєСЂР°СЋ РїРѕР»СЏ
+			//РІ РґР°РЅРЅРѕР№ РїСЂРѕРіСЂР°РјРјРµ СѓСЂРѕРІРµРЅСЊ СЃР»РѕР¶РЅРѕСЃС‚Рё РР РІСЃРµРіРґР° Р·Р°РґР°РЅ РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№, С…РѕС‚СЏ РјРѕР¶РЅРѕ Рё РІР°СЂСЊРёСЂРѕРІР°С‚СЊ РµРіРѕ
+			//С‡РµРј СЃР»Р°Р±РµРµ Р·Р°РґР°С‚СЊ СѓСЂРѕРІРµРЅСЊ СЃР»РѕР¶РЅРѕСЃС‚Рё, С‚РµРј РјРµРЅСЊС€Рµ С€Р°Р±Р»РѕРЅРѕРІ Р±СѓРґРµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ РґР»СЏ РїРѕРёСЃРєР° С…РѕРґР° РїРѕ С€Р°Р±Р»РѕРЅР°Рј РґР»СЏ С†РµРїРµР№,
+			//Р° Р·РЅР°С‡РёС‚ С‚РµРј С…СѓР¶Рµ Р±СѓРґСѓС‚ РїРѕСЃС‚СЂРѕРµРЅРЅС‹Рµ С†РµРїРё. РҐРѕС‚СЏ СЌС‚Рѕ СЃРµР№С‡Р°СЃ РЅРµ С‚Р°Рє Р°РєС‚СѓР°Р»СЊРЅРѕ, С‚.Рє. РїРѕСЏРІРёР»РёСЃСЊ С€Р°Р±Р»РѕРЅС‹ Р°Р±СЃС‚СЂР°РєС‚РЅС‹С… С…РѕРґРѕРІs
+			double koef=1.0+(10-level)/10.0;//РѕРїСЂРµРґРµР»РёС‚СЊ СѓСЂРѕРІРµРЅСЊ СЃР»РѕР¶РЅРѕСЃС‚Рё, РіРґРµ level=[0;10], С‡РµРј РІС‹С€Рµ, С‚РµРј СЃРёР»СЊРЅРµРµ		
 			for(double s=0;s<=game.fieldSpectrumBlueMax;s+=game.fieldSpectrumBlueMax/10.0){
-				for(int i=0;i<chain.points.size()/koef;i++){//искать ход с конца стен
+				for(int i=0;i<chain.points.size()/koef;i++){//РёСЃРєР°С‚СЊ С…РѕРґ СЃ РєРѕРЅС†Р° СЃС‚РµРЅ
 					if(game.fieldSpectrumBlue[chain.points.get(i).x][chain.points.get(i).y]<s
 							||
 						game.fieldSpectrumBlue[chain.points.get(i).x][chain.points.get(i).y]>s+game.fieldSpectrumBlueMax/10.0
 					){
 						continue;
 					}
-					try{if(isMoveByChain(game,chain.points.get(i).x,chain.points.get(i).y,recommendedMove)){//найден ход по цепи
+					try{if(isMoveByChain(game,chain.points.get(i).x,chain.points.get(i).y,recommendedMove)){//РЅР°Р№РґРµРЅ С…РѕРґ РїРѕ С†РµРїРё
 						return true;
 					}}catch(Exception e){}
 				}
@@ -367,14 +368,14 @@ public class Protocol {
 		return false;
 	}
 
-	//поиск хода по шаблонам заземления
+	//РїРѕРёСЃРє С…РѕРґР° РїРѕ С€Р°Р±Р»РѕРЅР°Рј Р·Р°Р·РµРјР»РµРЅРёСЏ
 	private boolean isMoveByGround(Game game,Point recommendedMove){
-		//поиск по шаблонам заземления не для края поля
-		for(int i=0;i<game.redChains.size();i++){//проходим все красные цепи и отправляем на поиск хода весь список точек в цепи
+		//РїРѕРёСЃРє РїРѕ С€Р°Р±Р»РѕРЅР°Рј Р·Р°Р·РµРјР»РµРЅРёСЏ РЅРµ РґР»СЏ РєСЂР°СЏ РїРѕР»СЏ
+		for(int i=0;i<game.redChains.size();i++){//РїСЂРѕС…РѕРґРёРј РІСЃРµ РєСЂР°СЃРЅС‹Рµ С†РµРїРё Рё РѕС‚РїСЂР°РІР»СЏРµРј РЅР° РїРѕРёСЃРє С…РѕРґР° РІРµСЃСЊ СЃРїРёСЃРѕРє С‚РѕС‡РµРє РІ С†РµРїРё
 			if(templateEngine.isMoveIfEqualsLikeAreaByPointList(this,game,TemplateType.templateTypeGROUND,game.redChains.get(i).points,game.fieldState,recommendedMove))return true;
 		}
-		//поиск по шаблонам заземления для края поля
-		for(int i=0;i<game.redChains.size();i++){//проходим все точки красных цепей
+		//РїРѕРёСЃРє РїРѕ С€Р°Р±Р»РѕРЅР°Рј Р·Р°Р·РµРјР»РµРЅРёСЏ РґР»СЏ РєСЂР°СЏ РїРѕР»СЏ
+		for(int i=0;i<game.redChains.size();i++){//РїСЂРѕС…РѕРґРёРј РІСЃРµ С‚РѕС‡РєРё РєСЂР°СЃРЅС‹С… С†РµРїРµР№
 			for(int j=0;j<game.redChains.get(i).points.size();j++){
 				int x=game.redChains.get(i).points.get(j).x;
 				int y=game.redChains.get(i).points.get(j).y;
@@ -386,24 +387,24 @@ public class Protocol {
 		return false;
 	}
 
-	//поиск хода ИИ для защиты от возможных окружений ИИ от соперника ИИ
+	//РїРѕРёСЃРє С…РѕРґР° РР РґР»СЏ Р·Р°С‰РёС‚С‹ РѕС‚ РІРѕР·РјРѕР¶РЅС‹С… РѕРєСЂСѓР¶РµРЅРёР№ РР РѕС‚ СЃРѕРїРµСЂРЅРёРєР° РР
 	private boolean isMoveBlueSurroundSecurity(Game game){	
-		for(int i=0;i<game.BSSpoints.size();i++){//для каждой точки из списка сохраненных точек проверяем
-			GameField e=game.gameField.clone();//клонируем игру
-			e.addMove(game.BSSpoints.get(i), GameField.BLUE);//делаем ход синей точкой (точкой соперника ИИ)
-			if(e.blueEnclosures.size()>game.gameField.blueEnclosures.size()){//если этот ход ведет к окружению точек ИИ
-				game.moveAI=game.BSSpoints.get(i);//то ИИ делает этот ход для блокировки окружения своих точек
+		for(int i=0;i<game.BSSpoints.size();i++){//РґР»СЏ РєР°Р¶РґРѕР№ С‚РѕС‡РєРё РёР· СЃРїРёСЃРєР° СЃРѕС…СЂР°РЅРµРЅРЅС‹С… С‚РѕС‡РµРє РїСЂРѕРІРµСЂСЏРµРј
+			GameField e=game.gameField.clone();//РєР»РѕРЅРёСЂСѓРµРј РёРіСЂСѓ
+			e.addMove(game.BSSpoints.get(i), GameField.BLUE);//РґРµР»Р°РµРј С…РѕРґ СЃРёРЅРµР№ С‚РѕС‡РєРѕР№ (С‚РѕС‡РєРѕР№ СЃРѕРїРµСЂРЅРёРєР° РР)
+			if(e.blueEnclosures.size()>game.gameField.blueEnclosures.size()){//РµСЃР»Рё СЌС‚РѕС‚ С…РѕРґ РІРµРґРµС‚ Рє РѕРєСЂСѓР¶РµРЅРёСЋ С‚РѕС‡РµРє РР
+				game.moveAI=game.BSSpoints.get(i);//С‚Рѕ РР РґРµР»Р°РµС‚ СЌС‚РѕС‚ С…РѕРґ РґР»СЏ Р±Р»РѕРєРёСЂРѕРІРєРё РѕРєСЂСѓР¶РµРЅРёСЏ СЃРІРѕРёС… С‚РѕС‡РµРє
 				return true;
 			}
 		}
 		return false;
 	}
 
-	//дополнительная проверка на возможность хода ИИ после его нахождения
+	//РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ РїСЂРѕРІРµСЂРєР° РЅР° РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ С…РѕРґР° РР РїРѕСЃР»Рµ РµРіРѕ РЅР°С…РѕР¶РґРµРЅРёСЏ
 	public boolean isAICanMakeMove(byte x,byte y,Game game,int templateType){
 		if(game.gameField.canAddMove(x, y)){
-			//проверка возможности улучшить ход ИИ путем максимизации захватываемой территории
-			Point p1=getMaxTerrSecurityMove(game, x, y);//получить улучшенный ход ИИ
+			//РїСЂРѕРІРµСЂРєР° РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё СѓР»СѓС‡С€РёС‚СЊ С…РѕРґ РР РїСѓС‚РµРј РјР°РєСЃРёРјРёР·Р°С†РёРё Р·Р°С…РІР°С‚С‹РІР°РµРјРѕР№ С‚РµСЂСЂРёС‚РѕСЂРёРё
+			Point p1=getMaxTerrSecurityMove(game, x, y);//РїРѕР»СѓС‡РёС‚СЊ СѓР»СѓС‡С€РµРЅРЅС‹Р№ С…РѕРґ РР
 			if(p1.x!=x||p1.y!=y){
 				game.moveAI=p1;
 				stat.moveStatMas.addMoveStat(MoveStatType.EXPRESS_MAX_TERR_SECURITY);
@@ -411,7 +412,7 @@ public class Protocol {
 			}
 			
 			//move by express surround security 1
-			/*if(templateType!=-1&templateType!=5){//для макросов (templateType=-1) and BST не искать по SurSec1
+			/*if(templateType!=-1&templateType!=5){//РґР»СЏ РјР°РєСЂРѕСЃРѕРІ (templateType=-1) and BST РЅРµ РёСЃРєР°С‚СЊ РїРѕ SurSec1
 				if(Math.abs(x-game.gameField.lastDot.x)<2&&Math.abs(y-game.gameField.lastDot.y)<2){
 					Point p=getExpressSurroundSecurity1Move(game, new Point(x,y));
 					if(p.x!=x||p.y!=y){
@@ -428,23 +429,23 @@ public class Protocol {
 		}else return false;			
 	}
 
-	//поиск хода по списку деревьев, ранее примененных в игре
+	//РїРѕРёСЃРє С…РѕРґР° РїРѕ СЃРїРёСЃРєСѓ РґРµСЂРµРІСЊРµРІ, СЂР°РЅРµРµ РїСЂРёРјРµРЅРµРЅРЅС‹С… РІ РёРіСЂРµ
 	private boolean isMoveByTree(Game game,Point recommendedMove){	
 		for(int i=game.treeApplicationInGame.size()-1;i>=0;i--){
-			TreeApplicationInGame ta=game.treeApplicationInGame.get(i);//применение дерева в конкретной точке поля
+			TreeApplicationInGame ta=game.treeApplicationInGame.get(i);//РїСЂРёРјРµРЅРµРЅРёРµ РґРµСЂРµРІР° РІ РєРѕРЅРєСЂРµС‚РЅРѕР№ С‚РѕС‡РєРµ РїРѕР»СЏ
 			
-			//если ход синего делается вдали от дерева, то поиск хода ИИ только по default синему ходу
+			//РµСЃР»Рё С…РѕРґ СЃРёРЅРµРіРѕ РґРµР»Р°РµС‚СЃСЏ РІРґР°Р»Рё РѕС‚ РґРµСЂРµРІР°, С‚Рѕ РїРѕРёСЃРє С…РѕРґР° РР С‚РѕР»СЊРєРѕ РїРѕ default СЃРёРЅРµРјСѓ С…РѕРґСѓ
 			boolean isMoveOnlyByDefault=false;
 			if(Math.abs(ta.center.x-game.gameField.lastDot.x)>7||Math.abs(ta.center.y-game.gameField.lastDot.y)>7){
 				isMoveOnlyByDefault=true;
 			}
 			
 			try{
-				//для последнего добавленного дерева не использовать такую проверку,
-				//проверка выполняется на соответствие игровой ситуации шаблону, который ее описывает.
-				//Т.к. список примененных деревьев хранит все примененные деревья во время игры,
-				//то состояние поля могло уже измениться в этом месте поля, 
-				//а значит дерево удаляется из списка, чтобы больше по нему не искать ход
+				//РґР»СЏ РїРѕСЃР»РµРґРЅРµРіРѕ РґРѕР±Р°РІР»РµРЅРЅРѕРіРѕ РґРµСЂРµРІР° РЅРµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ С‚Р°РєСѓСЋ РїСЂРѕРІРµСЂРєСѓ,
+				//РїСЂРѕРІРµСЂРєР° РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РЅР° СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРё С€Р°Р±Р»РѕРЅСѓ, РєРѕС‚РѕСЂС‹Р№ РµРµ РѕРїРёСЃС‹РІР°РµС‚.
+				//Рў.Рє. СЃРїРёСЃРѕРє РїСЂРёРјРµРЅРµРЅРЅС‹С… РґРµСЂРµРІСЊРµРІ С…СЂР°РЅРёС‚ РІСЃРµ РїСЂРёРјРµРЅРµРЅРЅС‹Рµ РґРµСЂРµРІСЊСЏ РІРѕ РІСЂРµРјСЏ РёРіСЂС‹,
+				//С‚Рѕ СЃРѕСЃС‚РѕСЏРЅРёРµ РїРѕР»СЏ РјРѕРіР»Рѕ СѓР¶Рµ РёР·РјРµРЅРёС‚СЊСЃСЏ РІ СЌС‚РѕРј РјРµСЃС‚Рµ РїРѕР»СЏ, 
+				//Р° Р·РЅР°С‡РёС‚ РґРµСЂРµРІРѕ СѓРґР°Р»СЏРµС‚СЃСЏ РёР· СЃРїРёСЃРєР°, С‡С‚РѕР±С‹ Р±РѕР»СЊС€Рµ РїРѕ РЅРµРјСѓ РЅРµ РёСЃРєР°С‚СЊ С…РѕРґ
 				if(i!=game.treeApplicationInGame.size()-1){
 					if(!ta.templateView.isEquals(game,game.gameField.lastDot,game.fieldState,TemplateType.isSide(ta.templateType),TemplateFieldSideType.getFieldSideType(game, game.gameField.lastDot))){
 						game.treeApplicationInGame.remove(i);
@@ -452,12 +453,12 @@ public class Protocol {
 					}
 				}
 				
-				//поиск хода по дереву
+				//РїРѕРёСЃРє С…РѕРґР° РїРѕ РґРµСЂРµРІСѓ
 				if(ta.isExistsLevelMove(game,game.gameField.lastDot,isMoveOnlyByDefault,recommendedMove)){
 					
-					//перехват макросов, когда один кончается, а другой из другого шаблона начинается.
-					//Раньше тут искалось продолжение дерева ходов за пределами данного дерева и шаблона.
-					//Поиск шел по всему списку шаблонов. Однако это сложный и противоречивый способ, пока отключен
+					//РїРµСЂРµС…РІР°С‚ РјР°РєСЂРѕСЃРѕРІ, РєРѕРіРґР° РѕРґРёРЅ РєРѕРЅС‡Р°РµС‚СЃСЏ, Р° РґСЂСѓРіРѕР№ РёР· РґСЂСѓРіРѕРіРѕ С€Р°Р±Р»РѕРЅР° РЅР°С‡РёРЅР°РµС‚СЃСЏ.
+					//Р Р°РЅСЊС€Рµ С‚СѓС‚ РёСЃРєР°Р»РѕСЃСЊ РїСЂРѕРґРѕР»Р¶РµРЅРёРµ РґРµСЂРµРІР° С…РѕРґРѕРІ Р·Р° РїСЂРµРґРµР»Р°РјРё РґР°РЅРЅРѕРіРѕ РґРµСЂРµРІР° Рё С€Р°Р±Р»РѕРЅР°.
+					//РџРѕРёСЃРє С€РµР» РїРѕ РІСЃРµРјСѓ СЃРїРёСЃРєСѓ С€Р°Р±Р»РѕРЅРѕРІ. РћРґРЅР°РєРѕ СЌС‚Рѕ СЃР»РѕР¶РЅС‹Р№ Рё РїСЂРѕС‚РёРІРѕСЂРµС‡РёРІС‹Р№ СЃРїРѕСЃРѕР±, РїРѕРєР° РѕС‚РєР»СЋС‡РµРЅ
 					/*
 					try{if((x<7&&y>5&&y<game.sizeY-5)||(x>game.sizeX-6&&y>5&&y<game.sizeY-5)||(y<7&&x>5&&x<game.sizeX-5)||(y>game.sizeY-6&&x>5&&x<game.sizeX-5)){
 						protocol.templateEngine.getPointIfEqualsLikeArea(protocol,game,TemplateType.SQUARE_SIDE,p,true);
@@ -469,10 +470,10 @@ public class Protocol {
 					try{protocol.templateEngine.getPointIfEqualsLikeArea(protocol,game,TemplateType.RED_ATTACK,getRedPointsForTemplateSearch(game,x,y),true);}catch(Exception e){}
 					*/
 					
-					//ход ИИ по дереву найден
+					//С…РѕРґ РР РїРѕ РґРµСЂРµРІСѓ РЅР°Р№РґРµРЅ
 					game.moveAI=ta.transformAIPoint;
 					if(isAICanMakeMove((byte)game.moveAI.x,(byte)game.moveAI.y,game,-1)){
-						//если ход ИИ возможен, то в редакторе шаблонов отобразить шаблон, по дереву которого был найден ход
+						//РµСЃР»Рё С…РѕРґ РР РІРѕР·РјРѕР¶РµРЅ, С‚Рѕ РІ СЂРµРґР°РєС‚РѕСЂРµ С€Р°Р±Р»РѕРЅРѕРІ РѕС‚РѕР±СЂР°Р·РёС‚СЊ С€Р°Р±Р»РѕРЅ, РїРѕ РґРµСЂРµРІСѓ РєРѕС‚РѕСЂРѕРіРѕ Р±С‹Р» РЅР°Р№РґРµРЅ С…РѕРґ
 						if(templateEngine.foundedNumber!=0){
 							templateEngine.foundedNumber=templateEngine.getBaseIndexByTemplateID(ta.tree.templateID);
 							templateEngine.foundedIndex=ta.templateID;
@@ -482,17 +483,17 @@ public class Protocol {
 						return true;				
 					}
 					
-					game.treeApplicationInGame.remove(i);//если ход невозможен, то дерево удаляется из списка рассматриваемых в дальнейшем
+					game.treeApplicationInGame.remove(i);//РµСЃР»Рё С…РѕРґ РЅРµРІРѕР·РјРѕР¶РµРЅ, С‚Рѕ РґРµСЂРµРІРѕ СѓРґР°Р»СЏРµС‚СЃСЏ РёР· СЃРїРёСЃРєР° СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјС‹С… РІ РґР°Р»СЊРЅРµР№С€РµРј
 					
 				}
-			}catch(Exception e){return false;}//обработка исключения, если макрос применим за пределами поля	
+			}catch(Exception e){return false;}//РѕР±СЂР°Р±РѕС‚РєР° РёСЃРєР»СЋС‡РµРЅРёСЏ, РµСЃР»Рё РјР°РєСЂРѕСЃ РїСЂРёРјРµРЅРёРј Р·Р° РїСЂРµРґРµР»Р°РјРё РїРѕР»СЏ	
 		}
 		return false;
 	}
 
-	//поиск хода по шаблонам для цепей - типы шаблонов WALL и для края поля WALL_SIDE
+	//РїРѕРёСЃРє С…РѕРґР° РїРѕ С€Р°Р±Р»РѕРЅР°Рј РґР»СЏ С†РµРїРµР№ - С‚РёРїС‹ С€Р°Р±Р»РѕРЅРѕРІ WALL Рё РґР»СЏ РєСЂР°СЏ РїРѕР»СЏ WALL_SIDE
 	private boolean isMoveByChain(Game game,int x,int y,Point recommendedMove){
-		//если точка (x,y), для которой ищется шаблон, находится возле границ, то использовать WALL_SIDE, т.к. обычный WALL у края может давать неоптимальные ходы
+		//РµСЃР»Рё С‚РѕС‡РєР° (x,y), РґР»СЏ РєРѕС‚РѕСЂРѕР№ РёС‰РµС‚СЃСЏ С€Р°Р±Р»РѕРЅ, РЅР°С…РѕРґРёС‚СЃСЏ РІРѕР·Р»Рµ РіСЂР°РЅРёС†, С‚Рѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ WALL_SIDE, С‚.Рє. РѕР±С‹С‡РЅС‹Р№ WALL Сѓ РєСЂР°СЏ РјРѕР¶РµС‚ РґР°РІР°С‚СЊ РЅРµРѕРїС‚РёРјР°Р»СЊРЅС‹Рµ С…РѕРґС‹
 		if(x<7||x>game.sizeX-8||y<7||y>game.sizeY-8){
 			if(templateEngine.isMoveIfEqualsLikeAreaByPoint(this,game,TemplateType.templateTypeWALL_SIDE,new Point(x,y),game.fieldState,recommendedMove))return true;
 			if(x>3&y>3&x<game.sizeX-4&y<game.sizeY-4){
@@ -504,11 +505,11 @@ public class Protocol {
 		return false;
 	}
 	
-	//найти улучшенный ход ИИ, который максимизирует захваченную территорию
+	//РЅР°Р№С‚Рё СѓР»СѓС‡С€РµРЅРЅС‹Р№ С…РѕРґ РР, РєРѕС‚РѕСЂС‹Р№ РјР°РєСЃРёРјРёР·РёСЂСѓРµС‚ Р·Р°С…РІР°С‡РµРЅРЅСѓСЋ С‚РµСЂСЂРёС‚РѕСЂРёСЋ
 	public Point getMaxTerrSecurityMove(Game game,byte nextRedX,byte nextRedY){
-		int sign=templateDotType_RED;//искать только для красных точек
+		int sign=templateDotType_RED;//РёСЃРєР°С‚СЊ С‚РѕР»СЊРєРѕ РґР»СЏ РєСЂР°СЃРЅС‹С… С‚РѕС‡РµРє
 		
-		int scoreMax=game.gameField.scoreRed-game.gameField.scoreBlue;//текущая разница в счете игры
+		int scoreMax=game.gameField.scoreRed-game.gameField.scoreBlue;//С‚РµРєСѓС‰Р°СЏ СЂР°Р·РЅРёС†Р° РІ СЃС‡РµС‚Рµ РёРіСЂС‹
 		Point AImove=new Point(nextRedX,nextRedY);
 		int moveMax=0;
 		
@@ -518,7 +519,7 @@ public class Protocol {
 					continue;
 				}
 				if(x==nextRedX&&y==nextRedY)continue;
-				GameField singleGameEngine = game.gameField.clone();//клонирование игры
+				GameField singleGameEngine = game.gameField.clone();//РєР»РѕРЅРёСЂРѕРІР°РЅРёРµ РёРіСЂС‹
 	
 				singleGameEngine.addMove(new Point(x,y),GameField.RED);
 				if(!singleGameEngine.canAddMove(nextRedX,nextRedY)){
@@ -549,12 +550,12 @@ public class Protocol {
 		
 	}
 
-	//проверка, возможно ли создание окружения относительно данной точки.
-	//Если точка имеет меньше двух соседей своего цвета, то окружение невозможно
+	//РїСЂРѕРІРµСЂРєР°, РІРѕР·РјРѕР¶РЅРѕ Р»Рё СЃРѕР·РґР°РЅРёРµ РѕРєСЂСѓР¶РµРЅРёСЏ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РґР°РЅРЅРѕР№ С‚РѕС‡РєРё.
+	//Р•СЃР»Рё С‚РѕС‡РєР° РёРјРµРµС‚ РјРµРЅСЊС€Рµ РґРІСѓС… СЃРѕСЃРµРґРµР№ СЃРІРѕРµРіРѕ С†РІРµС‚Р°, С‚Рѕ РѕРєСЂСѓР¶РµРЅРёРµ РЅРµРІРѕР·РјРѕР¶РЅРѕ
 	private boolean isCanMoveForSurroundSecurity(Game game,int x,int y,int sign){	
 		if(game.fieldState[x][y]!=templateDotType_EMPTY)return false;
 		
-		//если одна своя точка вокруг целевой точки, то окружение будет невозможно
+		//РµСЃР»Рё РѕРґРЅР° СЃРІРѕСЏ С‚РѕС‡РєР° РІРѕРєСЂСѓРі С†РµР»РµРІРѕР№ С‚РѕС‡РєРё, С‚Рѕ РѕРєСЂСѓР¶РµРЅРёРµ Р±СѓРґРµС‚ РЅРµРІРѕР·РјРѕР¶РЅРѕ
 		int move=0;
 		try{if(game.fieldState[x-1][y-1]==sign)move++;}catch(Exception e){}
 		try{if(game.fieldState[x][y-1]==sign)move++;}catch(Exception e){}
@@ -569,7 +570,7 @@ public class Protocol {
 		return true;
 	}
 
-	//проверка на то, закончилась ли игра
+	//РїСЂРѕРІРµСЂРєР° РЅР° С‚Рѕ, Р·Р°РєРѕРЅС‡РёР»Р°СЃСЊ Р»Рё РёРіСЂР°
 	public boolean isEndGame(Game game,int moveWin){	
 		
 		game.gameField.setTerrytoryState(game);
@@ -584,7 +585,7 @@ public class Protocol {
 			scoreWin=game.gameField.scoreRed;
 		}
 		                                                   
-		GameField gameField=game.gameField.clone();//клонирование игры
+		GameField gameField=game.gameField.clone();//РєР»РѕРЅРёСЂРѕРІР°РЅРёРµ РёРіСЂС‹
 		
 		for(int x=0;x<game.sizeX;x++){
 			for(int y=0;y<game.sizeY;y++){		
@@ -660,7 +661,7 @@ public class Protocol {
 		return false;		
 	}
 
-	//вспомогательная функция при проверке на окончание игры
+	//РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ С„СѓРЅРєС†РёСЏ РїСЂРё РїСЂРѕРІРµСЂРєРµ РЅР° РѕРєРѕРЅС‡Р°РЅРёРµ РёРіСЂС‹
 	private int getScoreForSurroundSecurity(GameField singleGameEngine,int moveType){
 		if(moveType==GameField.BLUE){
 			return singleGameEngine.scoreRed;
@@ -669,35 +670,35 @@ public class Protocol {
 		}
 	}
 	
-	//поиск цепей
+	//РїРѕРёСЃРє С†РµРїРµР№
 	public void chainsSearch(Game game){
 	
-		//массив с хранением цепей
+		//РјР°СЃСЃРёРІ СЃ С…СЂР°РЅРµРЅРёРµРј С†РµРїРµР№
 		game.fieldOfChains=new String[game.sizeX][game.sizeY];
-		for(int i=0;i<game.sizeX;i++){//массив сначала заполняется пустыми точками N
+		for(int i=0;i<game.sizeX;i++){//РјР°СЃСЃРёРІ СЃРЅР°С‡Р°Р»Р° Р·Р°РїРѕР»РЅСЏРµС‚СЃСЏ РїСѓСЃС‚С‹РјРё С‚РѕС‡РєР°РјРё N
 			for(int j=0;j<game.sizeY;j++){
 				game.fieldOfChains[i][j]="N";
 			}
 		}
 		
-		//списки красных и синих цепей
+		//СЃРїРёСЃРєРё РєСЂР°СЃРЅС‹С… Рё СЃРёРЅРёС… С†РµРїРµР№
 		game.redChains=new ArrayList<Chain>();
 		game.blueChains=new ArrayList<Chain>();
-		game.crossCount=0;//число скрестов в игре
+		game.crossCount=0;//С‡РёСЃР»Рѕ СЃРєСЂРµСЃС‚РѕРІ РІ РёРіСЂРµ
 		
-		//поиск скрестов и добавление цепей 
-		//(это первый этап добавления цепей - ищутся только близкие друг к другу точки цепи, чтобы не перепутались точки разных цепей)
+		//РїРѕРёСЃРє СЃРєСЂРµСЃС‚РѕРІ Рё РґРѕР±Р°РІР»РµРЅРёРµ С†РµРїРµР№ 
+		//(СЌС‚Рѕ РїРµСЂРІС‹Р№ СЌС‚Р°Рї РґРѕР±Р°РІР»РµРЅРёСЏ С†РµРїРµР№ - РёС‰СѓС‚СЃСЏ С‚РѕР»СЊРєРѕ Р±Р»РёР·РєРёРµ РґСЂСѓРі Рє РґСЂСѓРіСѓ С‚РѕС‡РєРё С†РµРїРё, С‡С‚РѕР±С‹ РЅРµ РїРµСЂРµРїСѓС‚Р°Р»РёСЃСЊ С‚РѕС‡РєРё СЂР°Р·РЅС‹С… С†РµРїРµР№)
 		for(int i=0;i<game.sizeX-1;i++){
 			for(int j=0;j<game.sizeY-1;j++){
 				if(game.fieldState[i][j]==templateDotType_RED&&game.fieldState[i+1][j+1]==templateDotType_RED&&game.fieldState[i+1][j]==templateDotType_BLUE&&game.fieldState[i][j+1]==templateDotType_BLUE){			
-					//найден скрест, добавляем цепи
+					//РЅР°Р№РґРµРЅ СЃРєСЂРµСЃС‚, РґРѕР±Р°РІР»СЏРµРј С†РµРїРё
 					game.crossCount++;			
 					addNewWallPoints(game,i, j,"R");
 					addNewWallPoints(game,i+1, j,"B");			
 					addNewWallPoints(game,i+1, j+1,"R");
 					addNewWallPoints(game,i, j+1,"B");			
 				}else if((game.fieldState[i][j]==templateDotType_BLUE&&game.fieldState[i+1][j+1]==templateDotType_BLUE&&game.fieldState[i+1][j]==templateDotType_RED&&game.fieldState[i][j+1]==templateDotType_RED)){
-					//найден скрест, добавляем цепи
+					//РЅР°Р№РґРµРЅ СЃРєСЂРµСЃС‚, РґРѕР±Р°РІР»СЏРµРј С†РµРїРё
 					game.crossCount++;
 					addNewWallPoints(game,i+1, j,"R");
 					addNewWallPoints(game,i, j,"B");
@@ -707,7 +708,7 @@ public class Protocol {
 			}
 		}
 		
-		//добавление точек, если нет скрестов
+		//РґРѕР±Р°РІР»РµРЅРёРµ С‚РѕС‡РµРє, РµСЃР»Рё РЅРµС‚ СЃРєСЂРµСЃС‚РѕРІ
 		if(game.crossCount==0){
 			Point point=getCentralPointForChainSearch(game,templateDotType_RED);
 			if(point!=null)addNewWallPoints(game,point.x, point.y,"R");
@@ -715,8 +716,8 @@ public class Protocol {
 			if(point!=null)addNewWallPoints(game,point.x, point.y,"B");	
 		}
 		
-		//искать близкие точки для стен и их добавление в массив
-		//(это второй этап поиска точек цепей - ищутся более отдаленные точки, чем на первом этапе)
+		//РёСЃРєР°С‚СЊ Р±Р»РёР·РєРёРµ С‚РѕС‡РєРё РґР»СЏ СЃС‚РµРЅ Рё РёС… РґРѕР±Р°РІР»РµРЅРёРµ РІ РјР°СЃСЃРёРІ
+		//(СЌС‚Рѕ РІС‚РѕСЂРѕР№ СЌС‚Р°Рї РїРѕРёСЃРєР° С‚РѕС‡РµРє С†РµРїРµР№ - РёС‰СѓС‚СЃСЏ Р±РѕР»РµРµ РѕС‚РґР°Р»РµРЅРЅС‹Рµ С‚РѕС‡РєРё, С‡РµРј РЅР° РїРµСЂРІРѕРј СЌС‚Р°РїРµ)
 		for(int i=0;i<game.blueChains.size();i++){
 			searchChainPoints2(game,game.blueChains.get(i),templateDotType_BLUE);
 		}
@@ -724,8 +725,8 @@ public class Protocol {
 			searchChainPoints2(game,game.redChains.get(i),templateDotType_RED);
 		}
 		
-		//раньше абстрактные точки искались так, сейчас они автоматически добавляются при нахождении точек по абстрактным шаблонам
-		//искать отдаленные (abstract) blue точки
+		//СЂР°РЅСЊС€Рµ Р°Р±СЃС‚СЂР°РєС‚РЅС‹Рµ С‚РѕС‡РєРё РёСЃРєР°Р»РёСЃСЊ С‚Р°Рє, СЃРµР№С‡Р°СЃ РѕРЅРё Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ РїСЂРё РЅР°С…РѕР¶РґРµРЅРёРё С‚РѕС‡РµРє РїРѕ Р°Р±СЃС‚СЂР°РєС‚РЅС‹Рј С€Р°Р±Р»РѕРЅР°Рј
+		//РёСЃРєР°С‚СЊ РѕС‚РґР°Р»РµРЅРЅС‹Рµ (abstract) blue С‚РѕС‡РєРё
 		/*for(int i=0;i<game.sizeX;i++)for(int j=0;j<game.sizeY;j++){
 			if(game.fieldOfWalls[i][j]=="N"&&game.fieldState[i][j]==templateDotTypeBLUE){
 				for(int l=3;l<20;l++){	
@@ -769,7 +770,7 @@ public class Protocol {
 			}
 		}*/
 		
-		//искать отдаленные (abstract) red точки
+		//РёСЃРєР°С‚СЊ РѕС‚РґР°Р»РµРЅРЅС‹Рµ (abstract) red С‚РѕС‡РєРё
 		/*for(int i=0;i<game.sizeX;i++)for(int j=0;j<game.sizeY;j++){
 			if(game.fieldOfWalls.get(i*game.sizeY+j).equals("N")&&game.fieldState[i][j]==templateDotTypeRED){
 				for(int l=3;l<20;l++){	
@@ -813,7 +814,7 @@ public class Protocol {
 			}
 		}*/
 		
-		//искать концы цепей
+		//РёСЃРєР°С‚СЊ РєРѕРЅС†С‹ С†РµРїРµР№
 		for(int i=0;i<game.blueChains.size();i++){
 			game.blueChains.get(i).searchChainEnd(game,game.fieldOfChains);
 		}
@@ -822,21 +823,21 @@ public class Protocol {
 		}
 	}
 	
-	//вернуть цепь, которая наиболее близка к последнему синему ходу
+	//РІРµСЂРЅСѓС‚СЊ С†РµРїСЊ, РєРѕС‚РѕСЂР°СЏ РЅР°РёР±РѕР»РµРµ Р±Р»РёР·РєР° Рє РїРѕСЃР»РµРґРЅРµРјСѓ СЃРёРЅРµРјСѓ С…РѕРґСѓ
 	public int getSmallerRedChainIdx(Game game){
 		
-		int count=0;//число красных стен около края поля
+		int count=0;//С‡РёСЃР»Рѕ РєСЂР°СЃРЅС‹С… СЃС‚РµРЅ РѕРєРѕР»Рѕ РєСЂР°СЏ РїРѕР»СЏ
 		for(int i=0;i<game.redChains.size();i++){
 			if(game.redChains.get(i).isAtSide(game))count++;
 		}
 		
-		if(count==game.redChains.size())return -1;//если все стенки около края поля
-		if(count==game.redChains.size()-1)//если все стенки кроме одной около края поля
+		if(count==game.redChains.size())return -1;//РµСЃР»Рё РІСЃРµ СЃС‚РµРЅРєРё РѕРєРѕР»Рѕ РєСЂР°СЏ РїРѕР»СЏ
+		if(count==game.redChains.size()-1)//РµСЃР»Рё РІСЃРµ СЃС‚РµРЅРєРё РєСЂРѕРјРµ РѕРґРЅРѕР№ РѕРєРѕР»Рѕ РєСЂР°СЏ РїРѕР»СЏ
 			for(int i=0;i<game.redChains.size();i++){
 				if(!game.redChains.get(i).isAtSide(game))return i;
 			}
 
-		double minLengthFromLastBlue=Double.MAX_VALUE;//конец какой стены ближе всего к последнему ходу синих (для стен не у края поля)
+		double minLengthFromLastBlue=Double.MAX_VALUE;//РєРѕРЅРµС† РєР°РєРѕР№ СЃС‚РµРЅС‹ Р±Р»РёР¶Рµ РІСЃРµРіРѕ Рє РїРѕСЃР»РµРґРЅРµРјСѓ С…РѕРґСѓ СЃРёРЅРёС… (РґР»СЏ СЃС‚РµРЅ РЅРµ Сѓ РєСЂР°СЏ РїРѕР»СЏ)
 		
 		int smaller=0;
 		for(int i=0;i<game.redChains.size();i++){
@@ -850,29 +851,29 @@ public class Protocol {
 		return smaller;
 	}
 	
-	//создаются цепи и ищутся их точки (1-й этап поиска точек цепей)
+	//СЃРѕР·РґР°СЋС‚СЃСЏ С†РµРїРё Рё РёС‰СѓС‚СЃСЏ РёС… С‚РѕС‡РєРё (1-Р№ СЌС‚Р°Рї РїРѕРёСЃРєР° С‚РѕС‡РµРє С†РµРїРµР№)
 	private void addNewWallPoints(Game game,int x,int y,String sign){	
 		if(!game.fieldOfChains[x][y].equals("N")){
 			return;
 		}
 		
-		if(sign.equals("R")){//добавление красной цепи
+		if(sign.equals("R")){//РґРѕР±Р°РІР»РµРЅРёРµ РєСЂР°СЃРЅРѕР№ С†РµРїРё
 			game.redChains.add(new Chain(game,x,y,game.redChains.size(),"R",game.fieldOfChains));
 			searchChainPoints1(game,game.redChains.get(game.redChains.size()-1),templateDotType_RED);
-		}else{//добавление синей цепи
+		}else{//РґРѕР±Р°РІР»РµРЅРёРµ СЃРёРЅРµР№ С†РµРїРё
 			game.blueChains.add(new Chain(game,x,y,game.blueChains.size(),"B",game.fieldOfChains));
 			searchChainPoints1(game,game.blueChains.get(game.blueChains.size()-1),templateDotType_BLUE);
 		}
 	}
 
-	//добавление точек, принадлежащих цепи (1-й этап поиска - ищутся только близкие друг к другу точки)
+	//РґРѕР±Р°РІР»РµРЅРёРµ С‚РѕС‡РµРє, РїСЂРёРЅР°РґР»РµР¶Р°С‰РёС… С†РµРїРё (1-Р№ СЌС‚Р°Рї РїРѕРёСЃРєР° - РёС‰СѓС‚СЃСЏ С‚РѕР»СЊРєРѕ Р±Р»РёР·РєРёРµ РґСЂСѓРі Рє РґСЂСѓРіСѓ С‚РѕС‡РєРё)
 	private void searchChainPoints1(Game game,Chain wall,int sign){
 		int antiSign;
 		if(sign==templateDotType_RED)antiSign=templateDotType_BLUE;else antiSign=templateDotType_RED;
-		//пройти существующие точки и добавить соседние
+		//РїСЂРѕР№С‚Рё СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ С‚РѕС‡РєРё Рё РґРѕР±Р°РІРёС‚СЊ СЃРѕСЃРµРґРЅРёРµ
 		for(int i=0;i<wall.points.size();i++){
 			int x=wall.points.get(i).x,y=wall.points.get(i).y;
-			//соседние точки			
+			//СЃРѕСЃРµРґРЅРёРµ С‚РѕС‡РєРё			
 			try{if(game.fieldState[x-1][y-1]==sign&&(game.fieldState[x-1][y]!=antiSign||game.fieldState[x][y-1]!=antiSign)){wall.addPoint(game,x-1,y-1,game.fieldOfChains);}}catch(Exception e){}
 			try{if(game.fieldState[x-1][y+1]==sign&&(game.fieldState[x-1][y]!=antiSign||game.fieldState[x][y+1]!=antiSign)){wall.addPoint(game,x-1,y+1,game.fieldOfChains);}}catch(Exception e){}
 			try{if(game.fieldState[x+1][y-1]==sign&&(game.fieldState[x+1][y]!=antiSign||game.fieldState[x][y-1]!=antiSign)){wall.addPoint(game,x+1,y-1,game.fieldOfChains);}}catch(Exception e){}
@@ -884,11 +885,11 @@ public class Protocol {
 		}
 	}
 	
-	//добавление точек, принадлежащих цепи (2-й этап поиска - ищутся более отдаленные друг от друга точки)
-	//закоментированные строки искали и добавляли разрывы в цепях
+	//РґРѕР±Р°РІР»РµРЅРёРµ С‚РѕС‡РµРє, РїСЂРёРЅР°РґР»РµР¶Р°С‰РёС… С†РµРїРё (2-Р№ СЌС‚Р°Рї РїРѕРёСЃРєР° - РёС‰СѓС‚СЃСЏ Р±РѕР»РµРµ РѕС‚РґР°Р»РµРЅРЅС‹Рµ РґСЂСѓРі РѕС‚ РґСЂСѓРіР° С‚РѕС‡РєРё)
+	//Р·Р°РєРѕРјРµРЅС‚РёСЂРѕРІР°РЅРЅС‹Рµ СЃС‚СЂРѕРєРё РёСЃРєР°Р»Рё Рё РґРѕР±Р°РІР»СЏР»Рё СЂР°Р·СЂС‹РІС‹ РІ С†РµРїСЏС…
 	private void searchChainPoints2(Game game,Chain wall, int sign){
 		
-		//получить противоположный знак
+		//РїРѕР»СѓС‡РёС‚СЊ РїСЂРѕС‚РёРІРѕРїРѕР»РѕР¶РЅС‹Р№ Р·РЅР°Рє
 		int antiSign;
 		if(sign==templateDotType_RED){
 			antiSign=templateDotType_BLUE;
@@ -896,11 +897,11 @@ public class Protocol {
 			antiSign=templateDotType_RED;
 		}
 		
-		//пройти существующие точки и добавить соседние
+		//РїСЂРѕР№С‚Рё СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ С‚РѕС‡РєРё Рё РґРѕР±Р°РІРёС‚СЊ СЃРѕСЃРµРґРЅРёРµ
 		for(int i=0;i<wall.points.size();i++){
 			int x=wall.points.get(i).x,y=wall.points.get(i).y;
 			
-			//соседние точки			
+			//СЃРѕСЃРµРґРЅРёРµ С‚РѕС‡РєРё			
 			try{if(game.fieldState[x-1][y-1]==sign&&(game.fieldState[x-1][y]!=antiSign||game.fieldState[x][y-1]!=antiSign)){wall.addPoint(game,x-1,y-1,game.fieldOfChains);}}catch(Exception e){}
 			try{if(game.fieldState[x-1][y+1]==sign&&(game.fieldState[x-1][y]!=antiSign||game.fieldState[x][y+1]!=antiSign)){wall.addPoint(game,x-1,y+1,game.fieldOfChains);}}catch(Exception e){}
 			try{if(game.fieldState[x+1][y-1]==sign&&(game.fieldState[x+1][y]!=antiSign||game.fieldState[x][y-1]!=antiSign)){wall.addPoint(game,x+1,y-1,game.fieldOfChains);}}catch(Exception e){}
@@ -910,17 +911,17 @@ public class Protocol {
 			try{if(game.fieldState[x-1][y]==sign){wall.addPoint(game,x-1,y,game.fieldOfChains);}}catch(Exception e){}
 			try{if(game.fieldState[x][y-1]==sign){wall.addPoint(game,x,y-1,game.fieldOfChains);}}catch(Exception e){}
 			
-			//дальние точки, удаленные на 2
+			//РґР°Р»СЊРЅРёРµ С‚РѕС‡РєРё, СѓРґР°Р»РµРЅРЅС‹Рµ РЅР° 2
 			try{if(game.fieldState[x+1][y]==templateDotType_EMPTY&&game.fieldState[x+2][y]==sign){wall.addPoint(game,x+2,y,game.fieldOfChains);/*wall.addConnection(game,x+2,y+1,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x][y+1]==templateDotType_EMPTY&&game.fieldState[x][y+2]==sign){wall.addPoint(game,x,y+2,game.fieldOfChains);/*wall.addConnection(game,x+1,y+2,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x-1][y]==templateDotType_EMPTY&&game.fieldState[x-2][y]==sign){wall.addPoint(game,x-2,y,game.fieldOfChains);/*wall.addConnection(game,x,y+1,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x][y-1]==templateDotType_EMPTY&&game.fieldState[x][y-2]==sign){wall.addPoint(game,x,y-2,game.fieldOfChains);/*wall.addConnection(game,x+1,y,game.fieldOfWalls);*/}}catch(Exception e){}	
-			//дальние точки, удаленные на 2 наискось
+			//РґР°Р»СЊРЅРёРµ С‚РѕС‡РєРё, СѓРґР°Р»РµРЅРЅС‹Рµ РЅР° 2 РЅР°РёСЃРєРѕСЃСЊ
 			try{if(game.fieldState[x+1][y+1]==templateDotType_EMPTY&&game.fieldState[x+2][y+2]==sign){wall.addPoint(game,x+2,y+2,game.fieldOfChains);/*wall.addConnection(game,x+2,y+2,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x-1][y+1]==templateDotType_EMPTY&&game.fieldState[x-2][y+2]==sign){wall.addPoint(game,x-2,y+2,game.fieldOfChains);/*wall.addConnection(game,x,y+2,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x+1][y-1]==templateDotType_EMPTY&&game.fieldState[x+2][y-2]==sign){wall.addPoint(game,x+2,y-2,game.fieldOfChains);/*wall.addConnection(game,x+2,y,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x-1][y-1]==templateDotType_EMPTY&&game.fieldState[x-2][y-2]==sign){wall.addPoint(game,x-2,y-2,game.fieldOfChains);/*wall.addConnection(game,x,y,game.fieldOfWalls);*/}}catch(Exception e){}
-			//дальние точки, удаленные на 2 конем
+			//РґР°Р»СЊРЅРёРµ С‚РѕС‡РєРё, СѓРґР°Р»РµРЅРЅС‹Рµ РЅР° 2 РєРѕРЅРµРј
 			try{if((game.fieldState[x+1][y]==templateDotType_EMPTY||game.fieldState[x+1][y-1]==templateDotType_EMPTY)&&game.fieldState[x+2][y-1]==sign){wall.addPoint(game,x+2,y-1,game.fieldOfChains);/*if(game.fieldState[x+1][y]==templateDotTypeNULL)wall.addConnection(game,x+2,y+1,game.fieldOfWalls);if(game.fieldState[x+1][y-1]==templateDotTypeNULL)wall.addConnection(game,x+2,y,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if((game.fieldState[x+1][y]==templateDotType_EMPTY||game.fieldState[x+1][y+1]==templateDotType_EMPTY)&&game.fieldState[x+2][y+1]==sign){wall.addPoint(game,x+2,y+1,game.fieldOfChains);/*if(game.fieldState[x+1][y]==templateDotTypeNULL)wall.addConnection(game,x+2,y+1,game.fieldOfWalls);if(game.fieldState[x+1][y+1]==templateDotTypeNULL)wall.addConnection(game,x+2,y+2,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if((game.fieldState[x][y+1]==templateDotType_EMPTY||game.fieldState[x+1][y+1]==templateDotType_EMPTY)&&game.fieldState[x+1][y+2]==sign){wall.addPoint(game,x+1,y+2,game.fieldOfChains);/*if(game.fieldState[x][y+1]==templateDotTypeNULL)wall.addConnection(game,x+1,y+2,game.fieldOfWalls);if(game.fieldState[x+1][y+1]==templateDotTypeNULL)wall.addConnection(game,x+2,y+2,game.fieldOfWalls);*/}}catch(Exception e){}
@@ -930,17 +931,17 @@ public class Protocol {
 			try{if((game.fieldState[x][y-1]==templateDotType_EMPTY||game.fieldState[x-1][y-1]==templateDotType_EMPTY)&&game.fieldState[x-1][y-2]==sign){wall.addPoint(game,x-1,y-2,game.fieldOfChains);/*if(game.fieldState[x][y-1]==templateDotTypeNULL)wall.addConnection(game,x+1,y,game.fieldOfWalls);if(game.fieldState[x-1][y-1]==templateDotTypeNULL)wall.addConnection(game,x,y,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if((game.fieldState[x][y-1]==templateDotType_EMPTY||game.fieldState[x+1][y-1]==templateDotType_EMPTY)&&game.fieldState[x+1][y-2]==sign){wall.addPoint(game,x+1,y-2,game.fieldOfChains);/*if(game.fieldState[x][y-1]==templateDotTypeNULL)wall.addConnection(game,x+1,y,game.fieldOfWalls);if(game.fieldState[x+1][y-1]==templateDotTypeNULL)wall.addConnection(game,x+2,y,game.fieldOfWalls);*/}}catch(Exception e){}
 		
-			//дальние точки, удаленные на 3
+			//РґР°Р»СЊРЅРёРµ С‚РѕС‡РєРё, СѓРґР°Р»РµРЅРЅС‹Рµ РЅР° 3
 			try{if(game.fieldState[x+1][y]==templateDotType_EMPTY&&game.fieldState[x+2][y]==templateDotType_EMPTY&&game.fieldState[x+3][y]==sign){wall.addPoint(game,x+3,y,game.fieldOfChains);/*wall.addConnection(game,x+3,y+1,game.fieldOfWalls);wall.addConnection(game,x+2,y+1,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x][y+1]==templateDotType_EMPTY&&game.fieldState[x][y+2]==templateDotType_EMPTY&&game.fieldState[x][y+3]==sign){wall.addPoint(game,x,y+3,game.fieldOfChains);/*wall.addConnection(game,x+1,y+3,game.fieldOfWalls);wall.addConnection(game,x+1,y+2,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x-1][y]==templateDotType_EMPTY&&game.fieldState[x-2][y]==templateDotType_EMPTY&&game.fieldState[x-3][y]==sign){wall.addPoint(game,x-3,y,game.fieldOfChains);/*wall.addConnection(game,x-1,y+1,game.fieldOfWalls);wall.addConnection(game,x,y+1,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x][y-1]==templateDotType_EMPTY&&game.fieldState[x][y-2]==templateDotType_EMPTY&&game.fieldState[x][y-3]==sign){wall.addPoint(game,x,y-3,game.fieldOfChains);/*wall.addConnection(game,x+1,y-1,game.fieldOfWalls);wall.addConnection(game,x+1,y,game.fieldOfWalls);*/}}catch(Exception e){}
-			//дальние точки, удаленные на 4
+			//РґР°Р»СЊРЅРёРµ С‚РѕС‡РєРё, СѓРґР°Р»РµРЅРЅС‹Рµ РЅР° 4
 			try{if(game.fieldState[x+1][y]==templateDotType_EMPTY&&game.fieldState[x+2][y]==templateDotType_EMPTY&&game.fieldState[x+3][y]==templateDotType_EMPTY&&game.fieldState[x+4][y]==sign){wall.addPoint(game,x+4,y,game.fieldOfChains);/*wall.addConnection(game,x+3,y+1,game.fieldOfWalls);wall.addConnection(game,x+2,y+1,game.fieldOfWalls);wall.addConnection(game,x+4,y+1,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x][y+1]==templateDotType_EMPTY&&game.fieldState[x][y+2]==templateDotType_EMPTY&&game.fieldState[x][y+3]==templateDotType_EMPTY&&game.fieldState[x][y+4]==sign){wall.addPoint(game,x,y+4,game.fieldOfChains);/*wall.addConnection(game,x+1,y+3,game.fieldOfWalls);wall.addConnection(game,x+1,y+2,game.fieldOfWalls);wall.addConnection(game,x+1,y+4,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x-1][y]==templateDotType_EMPTY&&game.fieldState[x-2][y]==templateDotType_EMPTY&&game.fieldState[x-3][y]==templateDotType_EMPTY&&game.fieldState[x-4][y]==sign){wall.addPoint(game,x-4,y,game.fieldOfChains);/*wall.addConnection(game,x-1,y+1,game.fieldOfWalls);wall.addConnection(game,x,y+1,game.fieldOfWalls);wall.addConnection(game,x-2,y+1,game.fieldOfWalls);*/}}catch(Exception e){}
 			try{if(game.fieldState[x][y-1]==templateDotType_EMPTY&&game.fieldState[x][y-2]==templateDotType_EMPTY&&game.fieldState[x][y-3]==templateDotType_EMPTY&&game.fieldState[x][y-4]==sign){wall.addPoint(game,x,y-4,game.fieldOfChains);/*wall.addConnection(game,x+1,y-1,game.fieldOfWalls);wall.addConnection(game,x+1,y,game.fieldOfWalls);wall.addConnection(game,x+1,y-2,game.fieldOfWalls);*/}}catch(Exception e){}
-			//дальние точки, удаленные на 3 конем
+			//РґР°Р»СЊРЅРёРµ С‚РѕС‡РєРё, СѓРґР°Р»РµРЅРЅС‹Рµ РЅР° 3 РєРѕРЅРµРј
 			try{if((game.fieldState[x+1][y]==templateDotType_EMPTY||game.fieldState[x+1][y-1]==templateDotType_EMPTY)&&(game.fieldState[x+2][y]==templateDotType_EMPTY||game.fieldState[x+2][y-1]==templateDotType_EMPTY)&&game.fieldState[x+3][y-1]==sign){
 				wall.addPoint(game,x+3,y-1,game.fieldOfChains);
 				//if(game.fieldState[x+1][y]==templateDotTypeNULL)wall.addConnection(game,x+2,y+1,game.fieldOfWalls);if(game.fieldState[x+1][y-1]==templateDotTypeNULL)wall.addConnection(game,x+2,y,game.fieldOfWalls);
@@ -984,26 +985,26 @@ public class Protocol {
 		}
 	}
 	
-	//раньше этот метод искал разрывы в цепях между абстрактными точками
+	//СЂР°РЅСЊС€Рµ СЌС‚РѕС‚ РјРµС‚РѕРґ РёСЃРєР°Р» СЂР°Р·СЂС‹РІС‹ РІ С†РµРїСЏС… РјРµР¶РґСѓ Р°Р±СЃС‚СЂР°РєС‚РЅС‹РјРё С‚РѕС‡РєР°РјРё
 	/*private boolean isRelatedForWallSearch(Game game,int x1,int y1,int x2,int y2,Wall wall){
 		
-		if(x1==x2){//вертикально
-			if(y1<y2){//сверху вниз
+		if(x1==x2){//РІРµСЂС‚РёРєР°Р»СЊРЅРѕ
+			if(y1<y2){//СЃРІРµСЂС…Сѓ РІРЅРёР·
 				for(int i=y1+1;i<y2;i++)if(game.fieldOfWalls[x1][i].startsWith("P")||game.fieldOfWalls[x1][i].startsWith("A")||game.fieldOfWalls[x1][i].startsWith("C"))return false;
 				for(int i=y1+1;i<y2;i++)wall.addLink(game,x1, i, game.fieldOfWalls);
 				return true;
-			}else{//снизу вверх
+			}else{//СЃРЅРёР·Сѓ РІРІРµСЂС…
 				for(int i=y1-1;i>y2;i--)if(game.fieldOfWalls[x1][i].startsWith("P")||game.fieldOfWalls[x1][i].startsWith("A")||game.fieldOfWalls[x1][i].startsWith("C"))return false;
 				for(int i=y1-1;i>y2;i--)wall.addLink(game,x1, i, game.fieldOfWalls);
 				return true;
 			}
 		}
-		else if(y1==y2){//горизонтально
-			if(x1<x2){//слева направо
+		else if(y1==y2){//РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕ
+			if(x1<x2){//СЃР»РµРІР° РЅР°РїСЂР°РІРѕ
 				for(int i=x1+1;i<x2;i++)if(game.fieldOfWalls[i][y1].startsWith("P")||game.fieldOfWalls[i][y1].startsWith("A")||game.fieldOfWalls[i][y1].startsWith("C"))return false;
 				for(int i=x1+1;i<x2;i++)wall.addLink(game,i, y1, game.fieldOfWalls);
 				return true;
-			}else{//справа налево
+			}else{//СЃРїСЂР°РІР° РЅР°Р»РµРІРѕ
 				for(int i=x1-1;i>x2;i--)if(game.fieldOfWalls[i][y1].startsWith("P")||game.fieldOfWalls[i][y1].startsWith("A")||game.fieldOfWalls[i][y1].startsWith("C"))return false;
 				for(int i=x1-1;i>x2;i--)wall.addLink(game,i, y1, game.fieldOfWalls);
 				return true;
@@ -1073,14 +1074,14 @@ public class Protocol {
 		return false;
 	}*/
 	
-	//нахождение ближайшей к центру поля точки цвета sign
+	//РЅР°С…РѕР¶РґРµРЅРёРµ Р±Р»РёР¶Р°Р№С€РµР№ Рє С†РµРЅС‚СЂСѓ РїРѕР»СЏ С‚РѕС‡РєРё С†РІРµС‚Р° sign
 	private Point getCentralPointForChainSearch(Game game,int sign){
 		int centralX=(int)(game.sizeX/2.0);
 		int centralY=(int)(game.sizeY/2.0);
 		
 		int depth=(int)(Math.max(game.sizeX, game.sizeY)/2.0);
 			
-		for(int i=0;i<=depth;i++){//нахождение крайних красных точек на поле
+		for(int i=0;i<=depth;i++){//РЅР°С…РѕР¶РґРµРЅРёРµ РєСЂР°Р№РЅРёС… РєСЂР°СЃРЅС‹С… С‚РѕС‡РµРє РЅР° РїРѕР»Рµ
 			try{if(game.fieldState[centralX-i][centralY-i]==sign)return new Point(centralX-i,centralY-i);}catch(Exception e){}
 			try{if(game.fieldState[centralX-i][centralY+i]==sign)return new Point(centralX-i,centralY+i);}catch(Exception e){}
 			try{if(game.fieldState[centralX+i][centralY-i]==sign)return new Point(centralX+i,centralY-i);}catch(Exception e){}

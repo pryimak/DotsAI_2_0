@@ -1,6 +1,6 @@
-//Класс создает пять игр одновременно (с секундной паузой между созданиями игр).
-//Это игры ИИ против рандома.
-//Цель класса - тестирование корректности одновременной игры против ИИ
+//РљР»Р°СЃСЃ СЃРѕР·РґР°РµС‚ РїСЏС‚СЊ РёРіСЂ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ (СЃ СЃРµРєСѓРЅРґРЅРѕР№ РїР°СѓР·РѕР№ РјРµР¶РґСѓ СЃРѕР·РґР°РЅРёСЏРјРё РёРіСЂ).
+//Р­С‚Рѕ РёРіСЂС‹ РР РїСЂРѕС‚РёРІ СЂР°РЅРґРѕРјР°.
+//Р¦РµР»СЊ РєР»Р°СЃСЃР° - С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕР№ РёРіСЂС‹ РїСЂРѕС‚РёРІ РР
 
 package p_DotsAI;
 
@@ -11,39 +11,39 @@ import p_DotsAI.Protocol.Game;
 import p_GUI.EngineFrame;
 
 public class DotsAI_auto implements Runnable{
-	public Protocol protocol;//объект для поиска хода ИИ в конкретной игре
-	Thread t1,t2,t3,t4,t5;//каждая игра управляется отдельным потоком
-	int gameIdx=1;//индекс игры
-	Random rand=new Random();//генератор случайных чисел
-	public byte sizeX=39,sizeY=32;//размер поля
-	int redX1=19,redY1=17,blueX1=19,blueY1=16,redX2=20,redY2=16,blueX2=20,blueY2=17;//ходы стартовой позиции
+	public Protocol protocol;//РѕР±СЉРµРєС‚ РґР»СЏ РїРѕРёСЃРєР° С…РѕРґР° РР РІ РєРѕРЅРєСЂРµС‚РЅРѕР№ РёРіСЂРµ
+	Thread t1,t2,t3,t4,t5;//РєР°Р¶РґР°СЏ РёРіСЂР° СѓРїСЂР°РІР»СЏРµС‚СЃСЏ РѕС‚РґРµР»СЊРЅС‹Рј РїРѕС‚РѕРєРѕРј
+	int gameIdx=1;//РёРЅРґРµРєСЃ РёРіСЂС‹
+	Random rand=new Random();//РіРµРЅРµСЂР°С‚РѕСЂ СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР»
+	public byte sizeX=39,sizeY=32;//СЂР°Р·РјРµСЂ РїРѕР»СЏ
+	int redX1=19,redY1=17,blueX1=19,blueY1=16,redX2=20,redY2=16,blueX2=20,blueY2=17;//С…РѕРґС‹ СЃС‚Р°СЂС‚РѕРІРѕР№ РїРѕР·РёС†РёРё
 	
 	DotsAI_auto(){
 		
 		protocol=new Protocol();		
 		
-		//создание пяти игр
+		//СЃРѕР·РґР°РЅРёРµ РїСЏС‚Рё РёРіСЂ
 		protocol.addNewGame(1,EnemyType.RANDOM,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2);
 		protocol.addNewGame(2,EnemyType.RANDOM,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2);
 		protocol.addNewGame(3,EnemyType.RANDOM,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2);
 		protocol.addNewGame(4,EnemyType.RANDOM,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2);
 		protocol.addNewGame(5,EnemyType.RANDOM,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2);
 
-		//для каждой игры создается окно
+		//РґР»СЏ РєР°Р¶РґРѕР№ РёРіСЂС‹ СЃРѕР·РґР°РµС‚СЃСЏ РѕРєРЅРѕ
 		new EngineFrame(protocol.getGame(1).gameField);
 		new EngineFrame(protocol.getGame(2).gameField);
 		new EngineFrame(protocol.getGame(3).gameField);
 		new EngineFrame(protocol.getGame(4).gameField);
 		new EngineFrame(protocol.getGame(5).gameField);
 		
-		//каждая игра управляется отдельным потоком
+		//РєР°Р¶РґР°СЏ РёРіСЂР° СѓРїСЂР°РІР»СЏРµС‚СЃСЏ РѕС‚РґРµР»СЊРЅС‹Рј РїРѕС‚РѕРєРѕРј
 		t1=new Thread(this);
 		t2=new Thread(this);
 		t3=new Thread(this);
 		t4=new Thread(this);
 		t5=new Thread(this);
 		
-		//запуск потоков
+		//Р·Р°РїСѓСЃРє РїРѕС‚РѕРєРѕРІ
 		t1.start();
 		t2.start();
 		t3.start();
@@ -55,19 +55,19 @@ public class DotsAI_auto implements Runnable{
 		int gameIdx0=gameIdx;
 		System.out.println("start game "+gameIdx0);
 		
-		//запуск игры после паузы
+		//Р·Р°РїСѓСЃРє РёРіСЂС‹ РїРѕСЃР»Рµ РїР°СѓР·С‹
 		if(gameIdx0==1){gameIdx++;}
 		else if(gameIdx0==2){gameIdx++;try{t2.sleep(1000);}catch(InterruptedException e){}}
 		else if(gameIdx0==3){gameIdx++;try{t3.sleep(2000);}catch(InterruptedException e){}}
 		else if(gameIdx0==4){gameIdx++;try{t4.sleep(3000);}catch(InterruptedException e){}}
 		else if(gameIdx0==5){gameIdx++;try{t5.sleep(4000);}catch(InterruptedException e){}}		
 		
-		Point point=protocol.getAImove(gameIdx0,10,null);//ИИ делает первый ход в игре
+		Point point=protocol.getAImove(gameIdx0,10,null);//РР РґРµР»Р°РµС‚ РїРµСЂРІС‹Р№ С…РѕРґ РІ РёРіСЂРµ
 		
-		Game game=protocol.getGame(gameIdx0);//выбор текущей игры
+		Game game=protocol.getGame(gameIdx0);//РІС‹Р±РѕСЂ С‚РµРєСѓС‰РµР№ РёРіСЂС‹
 		
 		for(;;){
-			//поиск и добавление ходов рандома
+			//РїРѕРёСЃРє Рё РґРѕР±Р°РІР»РµРЅРёРµ С…РѕРґРѕРІ СЂР°РЅРґРѕРјР°
 			byte x=-1,y=-1;
 			while(!game.gameField.canAddMove(x,y)){
 				x=(byte)(Math.abs(rand.nextInt(game.sizeX))+1);
@@ -76,12 +76,12 @@ public class DotsAI_auto implements Runnable{
 			protocol.addAIenemyMove(gameIdx0,x,y);
 			System.out.println("random move "+x+","+y);
 			
-			//поиск хода ИИ
+			//РїРѕРёСЃРє С…РѕРґР° РР
 			point=protocol.getAImove(gameIdx0,10,null);
-			//проверка окончания игры
-			if((point.x==-2&point.y==-2)|//ИИ заземлился, ИИ заканчивает игру
-					(point.x==-3&point.y==-3)|//человек заземлился, ИИ сдается
-					(point.x==-4&point.y==-4)//ИИ сдается, т.к. потерял много точек
+			//РїСЂРѕРІРµСЂРєР° РѕРєРѕРЅС‡Р°РЅРёСЏ РёРіСЂС‹
+			if((point.x==-2&point.y==-2)|//РР Р·Р°Р·РµРјР»РёР»СЃСЏ, РР Р·Р°РєР°РЅС‡РёРІР°РµС‚ РёРіСЂСѓ
+					(point.x==-3&point.y==-3)|//С‡РµР»РѕРІРµРє Р·Р°Р·РµРјР»РёР»СЃСЏ, РР СЃРґР°РµС‚СЃСЏ
+					(point.x==-4&point.y==-4)//РР СЃРґР°РµС‚СЃСЏ, С‚.Рє. РїРѕС‚РµСЂСЏР» РјРЅРѕРіРѕ С‚РѕС‡РµРє
 				){
 				break;
 			}

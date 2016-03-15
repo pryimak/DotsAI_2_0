@@ -1,5 +1,5 @@
-//Класс TemplateRotationType хранится список типов разворотов шаблона.
-//Каждый шаблон можно развернуть 8 способами.
+//РљР»Р°СЃСЃ TemplateRotationType С…СЂР°РЅРёС‚СЃСЏ СЃРїРёСЃРѕРє С‚РёРїРѕРІ СЂР°Р·РІРѕСЂРѕС‚РѕРІ С€Р°Р±Р»РѕРЅР°.
+//РљР°Р¶РґС‹Р№ С€Р°Р±Р»РѕРЅ РјРѕР¶РЅРѕ СЂР°Р·РІРµСЂРЅСѓС‚СЊ 8 СЃРїРѕСЃРѕР±Р°РјРё.
 
 package p_TemplateEngine;
 
@@ -9,7 +9,7 @@ import p_DotsAI.Protocol;
 
 public class TemplateRotationType{
 
-	//типы разворота шаблона
+	//С‚РёРїС‹ СЂР°Р·РІРѕСЂРѕС‚Р° С€Р°Р±Р»РѕРЅР°
 	public static int templateRotationTypeR0=0;
 	public static int templateRotationTypeR90=1;
 	public static int templateRotationTypeR180=2;
@@ -19,10 +19,10 @@ public class TemplateRotationType{
 	public static int templateRotationTypeGORIZONTAL90=6;
 	public static int templateRotationTypeVERTICAL90=7;
 	
-	//получить разворот шаблона "byte[] arr" по типу "int templateRotationType"
+	//РїРѕР»СѓС‡РёС‚СЊ СЂР°Р·РІРѕСЂРѕС‚ С€Р°Р±Р»РѕРЅР° "byte[] arr" РїРѕ С‚РёРїСѓ "int templateRotationType"
 	public static byte[] getTransformArray(int templateRotationType,byte[] arr) {
 		byte[] strNew=new byte[Protocol.maxSize*Protocol.maxSize];
-		if(templateRotationType==templateRotationTypeR0){//чтобы создался новый объект
+		if(templateRotationType==templateRotationTypeR0){//С‡С‚РѕР±С‹ СЃРѕР·РґР°Р»СЃСЏ РЅРѕРІС‹Р№ РѕР±СЉРµРєС‚
 			for(int i=0;i<Protocol.maxSize*Protocol.maxSize;i++){
 				strNew[i]=arr[i];
 			}
@@ -49,7 +49,7 @@ public class TemplateRotationType{
 		return arr;
 	}
 	
-	//получить разворот определенной точки "Point p" по типу "int templateRotationType"
+	//РїРѕР»СѓС‡РёС‚СЊ СЂР°Р·РІРѕСЂРѕС‚ РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ С‚РѕС‡РєРё "Point p" РїРѕ С‚РёРїСѓ "int templateRotationType"
 	public static Point getTransformPoint(int templateRotationType,Point p) {
 		if(templateRotationType==templateRotationTypeR0)return new Point(p.x,p.y);
 		if(templateRotationType==templateRotationTypeR90)return new Point(-p.y,p.x);

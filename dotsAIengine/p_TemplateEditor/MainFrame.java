@@ -1,4 +1,4 @@
-//Класс MainFrame обеспечивает графический интерфейс для редактора шаблонов
+//РљР»Р°СЃСЃ MainFrame РѕР±РµСЃРїРµС‡РёРІР°РµС‚ РіСЂР°С„РёС‡РµСЃРєРёР№ РёРЅС‚РµСЂС„РµР№СЃ РґР»СЏ СЂРµРґР°РєС‚РѕСЂР° С€Р°Р±Р»РѕРЅРѕРІ
 
 package p_TemplateEditor;
 
@@ -25,29 +25,29 @@ import p_TemplateEngine.TemplateType;
 
 public class MainFrame extends JFrame implements Runnable,MouseListener, WindowListener, MouseMotionListener{
 	
-	Thread t=new Thread(this);//поток
-	JOptionPane msg=new JOptionPane();//всплывающее сообщение
-	Pattern_AddComponent add=new Pattern_AddComponent(this.getContentPane());//для упрощенного добавления кнопок
+	Thread t=new Thread(this);//РїРѕС‚РѕРє
+	JOptionPane msg=new JOptionPane();//РІСЃРїР»С‹РІР°СЋС‰РµРµ СЃРѕРѕР±С‰РµРЅРёРµ
+	Pattern_AddComponent add=new Pattern_AddComponent(this.getContentPane());//РґР»СЏ СѓРїСЂРѕС‰РµРЅРЅРѕРіРѕ РґРѕР±Р°РІР»РµРЅРёСЏ РєРЅРѕРїРѕРє
 	
-	//различные отступы для размещения кнопок в окне программы
-	int otstupX1=140;//отступ по оси x	
-	int otstupX2=270;//отступ по оси x
-	int otstupX3=otstupX2+80;//отступ по оси x
-	int otstupY1=10;//отступ по оси y
-	int otstupY2=265;//отступ по оси y		
-	int otstupY3=otstupY1+55;//отступ по оси y
+	//СЂР°Р·Р»РёС‡РЅС‹Рµ РѕС‚СЃС‚СѓРїС‹ РґР»СЏ СЂР°Р·РјРµС‰РµРЅРёСЏ РєРЅРѕРїРѕРє РІ РѕРєРЅРµ РїСЂРѕРіСЂР°РјРјС‹
+	int otstupX1=140;//РѕС‚СЃС‚СѓРї РїРѕ РѕСЃРё x	
+	int otstupX2=270;//РѕС‚СЃС‚СѓРї РїРѕ РѕСЃРё x
+	int otstupX3=otstupX2+80;//РѕС‚СЃС‚СѓРї РїРѕ РѕСЃРё x
+	int otstupY1=10;//РѕС‚СЃС‚СѓРї РїРѕ РѕСЃРё y
+	int otstupY2=265;//РѕС‚СЃС‚СѓРї РїРѕ РѕСЃРё y		
+	int otstupY3=otstupY1+55;//РѕС‚СЃС‚СѓРї РїРѕ РѕСЃРё y
 	
-	JButton buttonSave,buttonResave,buttonDelete;//действия с базой шаблонов
-	JButton buttonInfoPanel,buttonUndo,buttonRedo,buttonRepaint;//для редактирования шаблонов
-	JButton buttonTransform,buttonType;//кнопки всплывающего меню
-	JButton buttonFirst,buttonLast,buttonPrevious,buttonNext,buttonDotIndex;//кнопки навигации по базе шаблонов
-	JButton buttonEMPTY,buttonBLUE,buttonRED,buttonANY,buttonRED_EMPTY,buttonBLUE_EMPTY,buttonLAND;//кнопки для типов точек шаблона
-	JButton buttonLeft,buttonRight,buttonTop,buttonBottom,buttonLeftTop,buttonLeftBottom,buttonRightTop,buttonRightBottom;//стрелки сдвига поля, иногда нужны при редактировании шаблонов
-	JButton button5,button7,button9,button11,button13;//кнопку устанавливают размер значимой части шаблона, полезны при создании нового шаблона, чтобы не ставить зеленые точки вручную
+	JButton buttonSave,buttonResave,buttonDelete;//РґРµР№СЃС‚РІРёСЏ СЃ Р±Р°Р·РѕР№ С€Р°Р±Р»РѕРЅРѕРІ
+	JButton buttonInfoPanel,buttonUndo,buttonRedo,buttonRepaint;//РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ С€Р°Р±Р»РѕРЅРѕРІ
+	JButton buttonTransform,buttonType;//РєРЅРѕРїРєРё РІСЃРїР»С‹РІР°СЋС‰РµРіРѕ РјРµРЅСЋ
+	JButton buttonFirst,buttonLast,buttonPrevious,buttonNext,buttonDotIndex;//РєРЅРѕРїРєРё РЅР°РІРёРіР°С†РёРё РїРѕ Р±Р°Р·Рµ С€Р°Р±Р»РѕРЅРѕРІ
+	JButton buttonEMPTY,buttonBLUE,buttonRED,buttonANY,buttonRED_EMPTY,buttonBLUE_EMPTY,buttonLAND;//РєРЅРѕРїРєРё РґР»СЏ С‚РёРїРѕРІ С‚РѕС‡РµРє С€Р°Р±Р»РѕРЅР°
+	JButton buttonLeft,buttonRight,buttonTop,buttonBottom,buttonLeftTop,buttonLeftBottom,buttonRightTop,buttonRightBottom;//СЃС‚СЂРµР»РєРё СЃРґРІРёРіР° РїРѕР»СЏ, РёРЅРѕРіРґР° РЅСѓР¶РЅС‹ РїСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё С€Р°Р±Р»РѕРЅРѕРІ
+	JButton button5,button7,button9,button11,button13;//РєРЅРѕРїРєСѓ СѓСЃС‚Р°РЅР°РІР»РёРІР°СЋС‚ СЂР°Р·РјРµСЂ Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°, РїРѕР»РµР·РЅС‹ РїСЂРё СЃРѕР·РґР°РЅРёРё РЅРѕРІРѕРіРѕ С€Р°Р±Р»РѕРЅР°, С‡С‚РѕР±С‹ РЅРµ СЃС‚Р°РІРёС‚СЊ Р·РµР»РµРЅС‹Рµ С‚РѕС‡РєРё РІСЂСѓС‡РЅСѓСЋ
 	
 	JLabel butTemplateSequenceInBase,labMoveToSide,/*labCoordinates,*/labelCurrentTemplateType;
 	
-	JPopupMenu menu_transform=new JPopupMenu("Поворот"),menu_type=new JPopupMenu("Тип");
+	JPopupMenu menu_transform=new JPopupMenu("РџРѕРІРѕСЂРѕС‚"),menu_type=new JPopupMenu("РўРёРї");
 	JButton butOpen;//menu
 	JMenuItem but90,but180,but270,butVertical,butGorizontal,butVertical90,buttonGorizontal90;//transform
 	JMenuItem templateTypeItems[];
@@ -56,59 +56,59 @@ public class MainFrame extends JFrame implements Runnable,MouseListener, WindowL
 	
 MainFrame(){
 
-	this.setIconImage(Pattern_Resources.icon);//установить иконку для окна
-	new Pattern_JFrame(this,"Dots Template Editor",false,480,290,new Color(245,245,245));//создать окно программы
+	this.setIconImage(Pattern_Resources.icon);//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РёРєРѕРЅРєСѓ РґР»СЏ РѕРєРЅР°
+	new Pattern_JFrame(this,"Dots Template Editor",false,480,290,new Color(245,245,245));//СЃРѕР·РґР°С‚СЊ РѕРєРЅРѕ РїСЂРѕРіСЂР°РјРјС‹
 	
-	//добавить обработчиков движени и нажатия мыши и действий с окном программы
+	//РґРѕР±Р°РІРёС‚СЊ РѕР±СЂР°Р±РѕС‚С‡РёРєРѕРІ РґРІРёР¶РµРЅРё Рё РЅР°Р¶Р°С‚РёСЏ РјС‹С€Рё Рё РґРµР№СЃС‚РІРёР№ СЃ РѕРєРЅРѕРј РїСЂРѕРіСЂР°РјРјС‹
 	this.addMouseListener(this);
 	this.addWindowListener(this);
 	this.addMouseMotionListener(this);
 		
-	//отображает иконку текущего типа шаблона
+	//РѕС‚РѕР±СЂР°Р¶Р°РµС‚ РёРєРѕРЅРєСѓ С‚РµРєСѓС‰РµРіРѕ С‚РёРїР° С€Р°Р±Р»РѕРЅР°
 	labelCurrentTemplateType=(JLabel)add.component("label",175+otstupX1,otstupY1+otstupY2,20,18,"sqt",null);
 	labelCurrentTemplateType.setIcon(new ImageIcon(Pattern_Resources.templateTypes+TemplateType.toString(TemplateType.templateTypeBEGIN)+".png"));
 	
-	//отменить и вернуть последнее действие при редактировании шаблона
-	buttonUndo=Pattern_Resources.getButton(add,Pattern_Resources.navigation+"undo.png",otstupX2+80,otstupY1+5,"отменить изменения");
-	buttonRedo=Pattern_Resources.getButton(add,Pattern_Resources.navigation+"redo.png",otstupX2+105,otstupY1+5,"вернуть изменения");
+	//РѕС‚РјРµРЅРёС‚СЊ Рё РІРµСЂРЅСѓС‚СЊ РїРѕСЃР»РµРґРЅРµРµ РґРµР№СЃС‚РІРёРµ РїСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё С€Р°Р±Р»РѕРЅР°
+	buttonUndo=Pattern_Resources.getButton(add,Pattern_Resources.navigation+"undo.png",otstupX2+80,otstupY1+5,"РѕС‚РјРµРЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ");
+	buttonRedo=Pattern_Resources.getButton(add,Pattern_Resources.navigation+"redo.png",otstupX2+105,otstupY1+5,"РІРµСЂРЅСѓС‚СЊ РёР·РјРµРЅРµРЅРёСЏ");
 	
-	//перерисовать шаблон, нужно только при проблемах с графикой в окне
-	buttonRepaint=Pattern_Resources.getButton(add,Pattern_Resources.navigation+"refresh.png",otstupX2+130,otstupY1+5,"обновить");
+	//РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊ С€Р°Р±Р»РѕРЅ, РЅСѓР¶РЅРѕ С‚РѕР»СЊРєРѕ РїСЂРё РїСЂРѕР±Р»РµРјР°С… СЃ РіСЂР°С„РёРєРѕР№ РІ РѕРєРЅРµ
+	buttonRepaint=Pattern_Resources.getButton(add,Pattern_Resources.navigation+"refresh.png",otstupX2+130,otstupY1+5,"РѕР±РЅРѕРІРёС‚СЊ");
 	
-	//кнопки снизу под полем
-	buttonDelete=Pattern_Resources.getButton(add,Pattern_Resources.base+"delete.png",otstupX1-17,otstupY1+otstupY2,"удалить шаблон");
+	//РєРЅРѕРїРєРё СЃРЅРёР·Сѓ РїРѕРґ РїРѕР»РµРј
+	buttonDelete=Pattern_Resources.getButton(add,Pattern_Resources.base+"delete.png",otstupX1-17,otstupY1+otstupY2,"СѓРґР°Р»РёС‚СЊ С€Р°Р±Р»РѕРЅ");
 	buttonFirst=Pattern_Resources.getButton(add,Pattern_Resources.navigation+"first.png",6+otstupX1,otstupY1+otstupY2,"");
 	buttonPrevious=Pattern_Resources.getButton(add,Pattern_Resources.navigation+"previous.png",29+otstupX1,otstupY1+otstupY2,"");
 	butTemplateSequenceInBase=(JLabel)add.component("label",54+otstupX1,otstupY1+otstupY2,40,18,"<HTML>0",null);
 	buttonNext=Pattern_Resources.getButton(add,Pattern_Resources.navigation+"next.png",89+otstupX1,otstupY1+otstupY2,"");
 	buttonLast=Pattern_Resources.getButton(add,Pattern_Resources.navigation+"last.png",112+otstupX1,otstupY1+otstupY2,"");
 
-	//открыть, сохранить и пересохранить шаблон
-	butOpen=Pattern_Resources.getButton(add,Pattern_Resources.base+"open.png",otstupX2+155,otstupY1+84,"перейти к шаблону");
-	buttonSave=Pattern_Resources.getButton(add,Pattern_Resources.base+"save.png",otstupX2+155,otstupY1+113,"сохранить как новый");
-	buttonResave=Pattern_Resources.getButton(add,Pattern_Resources.base+"resave.png",otstupX2+155,otstupY1+142,"перезаписать шаблон");
+	//РѕС‚РєСЂС‹С‚СЊ, СЃРѕС…СЂР°РЅРёС‚СЊ Рё РїРµСЂРµСЃРѕС…СЂР°РЅРёС‚СЊ С€Р°Р±Р»РѕРЅ
+	butOpen=Pattern_Resources.getButton(add,Pattern_Resources.base+"open.png",otstupX2+155,otstupY1+84,"РїРµСЂРµР№С‚Рё Рє С€Р°Р±Р»РѕРЅСѓ");
+	buttonSave=Pattern_Resources.getButton(add,Pattern_Resources.base+"save.png",otstupX2+155,otstupY1+113,"СЃРѕС…СЂР°РЅРёС‚СЊ РєР°Рє РЅРѕРІС‹Р№");
+	buttonResave=Pattern_Resources.getButton(add,Pattern_Resources.base+"resave.png",otstupX2+155,otstupY1+142,"РїРµСЂРµР·Р°РїРёСЃР°С‚СЊ С€Р°Р±Р»РѕРЅ");
 	
-	//кнопки разворота шаблона. При развороте точки дерева не поворачиваются, поэтому дерево будет хранить неправильные ходы
-	but90=Pattern_Resources.getMenuItem(Pattern_Resources.rotates+"90.png", "На 90 градусов");
-	but180=Pattern_Resources.getMenuItem(Pattern_Resources.rotates+"180.png", "На 180 градусов");
-	but270=new JMenuItem("На 270 градусов");
-	butVertical=Pattern_Resources.getMenuItem(Pattern_Resources.rotates+"vert.png", "По вертикали");
-	butGorizontal=Pattern_Resources.getMenuItem(Pattern_Resources.rotates+"gor.png", "По горизонтали");
-	butVertical90=new JMenuItem("По вертикали и на 90");
-	buttonGorizontal90=new JMenuItem("По горизонтали и на 90");
+	//РєРЅРѕРїРєРё СЂР°Р·РІРѕСЂРѕС‚Р° С€Р°Р±Р»РѕРЅР°. РџСЂРё СЂР°Р·РІРѕСЂРѕС‚Рµ С‚РѕС‡РєРё РґРµСЂРµРІР° РЅРµ РїРѕРІРѕСЂР°С‡РёРІР°СЋС‚СЃСЏ, РїРѕСЌС‚РѕРјСѓ РґРµСЂРµРІРѕ Р±СѓРґРµС‚ С…СЂР°РЅРёС‚СЊ РЅРµРїСЂР°РІРёР»СЊРЅС‹Рµ С…РѕРґС‹
+	but90=Pattern_Resources.getMenuItem(Pattern_Resources.rotates+"90.png", "РќР° 90 РіСЂР°РґСѓСЃРѕРІ");
+	but180=Pattern_Resources.getMenuItem(Pattern_Resources.rotates+"180.png", "РќР° 180 РіСЂР°РґСѓСЃРѕРІ");
+	but270=new JMenuItem("РќР° 270 РіСЂР°РґСѓСЃРѕРІ");
+	butVertical=Pattern_Resources.getMenuItem(Pattern_Resources.rotates+"vert.png", "РџРѕ РІРµСЂС‚РёРєР°Р»Рё");
+	butGorizontal=Pattern_Resources.getMenuItem(Pattern_Resources.rotates+"gor.png", "РџРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё");
+	butVertical90=new JMenuItem("РџРѕ РІРµСЂС‚РёРєР°Р»Рё Рё РЅР° 90");
+	buttonGorizontal90=new JMenuItem("РџРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё Рё РЅР° 90");
 	
-	//меню, хранящее кнопки разворота шаблона
+	//РјРµРЅСЋ, С…СЂР°РЅСЏС‰РµРµ РєРЅРѕРїРєРё СЂР°Р·РІРѕСЂРѕС‚Р° С€Р°Р±Р»РѕРЅР°
 	menu_transform.add(but90);menu_transform.add(but180);menu_transform.add(but270);menu_transform.addSeparator();
 	menu_transform.add(butVertical);menu_transform.add(butGorizontal);menu_transform.addSeparator();
 	menu_transform.add(butVertical90);menu_transform.add(buttonGorizontal90);
-	buttonTransform=Pattern_Resources.getButton(add,Pattern_Resources.rotates+"transform.png",otstupX2+80,otstupY1+127,"поворот шаблона");
+	buttonTransform=Pattern_Resources.getButton(add,Pattern_Resources.rotates+"transform.png",otstupX2+80,otstupY1+127,"РїРѕРІРѕСЂРѕС‚ С€Р°Р±Р»РѕРЅР°");
 	menu_transform.setPopupSize(180,otstupY1+180);
 	buttonTransform.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){
 		menu_transform.setLocation(MainFrame.this.getX()+400,otstupY1+MainFrame.this.getY()+30);
 		if(menu_transform.isVisible())menu_transform.setVisible(false);else menu_transform.setVisible(true);
 	}});
 	
-	//иконки типов шаблонов
+	//РёРєРѕРЅРєРё С‚РёРїРѕРІ С€Р°Р±Р»РѕРЅРѕРІ
 	templateTypeItems=new JMenuItem[TemplateType.lastIndexOfTemplateType];
 	templateTypeIcons=new ImageIcon[TemplateType.lastIndexOfTemplateType];
 	for(int i=0;i<templateTypeItems.length;i++){
@@ -119,19 +119,19 @@ MainFrame(){
 		menu_type.add(templateTypeItems[i]);
 	}
 		
-	//меню, хранящее типы шаблонов. При нажатии типа текущему шаблону устанавливается этот тип, однако требуется нажать также пересохранение шаблона 
+	//РјРµРЅСЋ, С…СЂР°РЅСЏС‰РµРµ С‚РёРїС‹ С€Р°Р±Р»РѕРЅРѕРІ. РџСЂРё РЅР°Р¶Р°С‚РёРё С‚РёРїР° С‚РµРєСѓС‰РµРјСѓ С€Р°Р±Р»РѕРЅСѓ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ СЌС‚РѕС‚ С‚РёРї, РѕРґРЅР°РєРѕ С‚СЂРµР±СѓРµС‚СЃСЏ РЅР°Р¶Р°С‚СЊ С‚Р°РєР¶Рµ РїРµСЂРµСЃРѕС…СЂР°РЅРµРЅРёРµ С€Р°Р±Р»РѕРЅР° 
 	buttonType=Pattern_Resources.getButton(add,Pattern_Resources.templateTypes+"type.png",otstupX2+155,otstupY1+5,"");
 	buttonType.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){
 		menu_type.setLocation(MainFrame.this.getX()+450,otstupY1+MainFrame.this.getY()+30);
 		if(menu_type.isVisible())menu_type.setVisible(false);else menu_type.setVisible(true);
 	}});
 	
-	//отображает текущий тип точек, которые будут ставиться на поле при редактировании шаблона
+	//РѕС‚РѕР±СЂР°Р¶Р°РµС‚ С‚РµРєСѓС‰РёР№ С‚РёРї С‚РѕС‡РµРє, РєРѕС‚РѕСЂС‹Рµ Р±СѓРґСѓС‚ СЃС‚Р°РІРёС‚СЊСЃСЏ РЅР° РїРѕР»Рµ РїСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё С€Р°Р±Р»РѕРЅР°
 	buttonDotIndex=(JButton)add.component("button",5,otstupY1,45,18,"",null);
 	buttonDotIndex.setEnabled(false);
 	buttonDotIndex.setText(""+Protocol.templateDotType_ANY);
 	
-	//кнопки типов точек
+	//РєРЅРѕРїРєРё С‚РёРїРѕРІ С‚РѕС‡РµРє
 	buttonEMPTY=Pattern_Resources.getButton(add,Pattern_Resources.dotTypes+"N.png",5,otstupY1+22,Protocol.templateDotType_EMPTY);
 	buttonANY=Pattern_Resources.getButton(add,Pattern_Resources.dotTypes+"A.png",30,otstupY1+22,Protocol.templateDotType_ANY);
 	buttonBLUE=Pattern_Resources.getButton(add,Pattern_Resources.dotTypes+"B.png",5,otstupY1+44,Protocol.templateDotType_BLUE);
@@ -140,7 +140,7 @@ MainFrame(){
 	buttonRED_EMPTY=Pattern_Resources.getButton(add,Pattern_Resources.dotTypes+"P.png",30,otstupY1+66,Protocol.templateDotType_RED_or_EMPTY);
 	buttonLAND=Pattern_Resources.getButton(add,Pattern_Resources.dotTypes+"L.png",5,otstupY1+88,Protocol.templateDotType_LAND);
 
-	//действия при нажатии кнопок типов точек
+	//РґРµР№СЃС‚РІРёСЏ РїСЂРё РЅР°Р¶Р°С‚РёРё РєРЅРѕРїРѕРє С‚РёРїРѕРІ С‚РѕС‡РµРє
 	buttonRED.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){repaintIdButton(buttonRED);}});
 	buttonRED_EMPTY.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){repaintIdButton(buttonRED_EMPTY);}});
 	buttonBLUE.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){repaintIdButton(buttonBLUE);}});
@@ -149,7 +149,7 @@ MainFrame(){
 	buttonANY.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){repaintIdButton(buttonANY);}});
 	buttonLAND.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){repaintIdButton(buttonLAND);}});
 	
-	//кнопки смещения шаблона
+	//РєРЅРѕРїРєРё СЃРјРµС‰РµРЅРёСЏ С€Р°Р±Р»РѕРЅР°
 	buttonLeftTop=Pattern_Resources.getButton(add,Pattern_Resources.arrows+"lt.png",otstupX3,otstupY3,"");
 	buttonTop=Pattern_Resources.getButton(add,Pattern_Resources.arrows+"top.png",otstupX3+25,otstupY3,"");
 	buttonRightTop=Pattern_Resources.getButton(add,Pattern_Resources.arrows+"rt.png",otstupX3+50,otstupY3,"");
@@ -161,25 +161,25 @@ MainFrame(){
 	buttonRightBottom=Pattern_Resources.getButton(add,Pattern_Resources.arrows+"rb.png",otstupX3+50,otstupY3+50,"");
 	labMoveToSide.setIcon(new ImageIcon(Pattern_Resources.arrows+"move.png"));
 	
-	//кнопки установки значимого размера шаблона
+	//РєРЅРѕРїРєРё СѓСЃС‚Р°РЅРѕРІРєРё Р·РЅР°С‡РёРјРѕРіРѕ СЂР°Р·РјРµСЂР° С€Р°Р±Р»РѕРЅР°
 	button5=Pattern_Resources.getButton(add,Pattern_Resources.frames+"5.png",210+otstupX1,otstupY1+220,"");
 	button7=Pattern_Resources.getButton(add,Pattern_Resources.frames+"7.png",230+otstupX1,otstupY1+220,"");
 	button9=Pattern_Resources.getButton(add,Pattern_Resources.frames+"9.png",250+otstupX1,otstupY1+220,"");
 	button11=Pattern_Resources.getButton(add,Pattern_Resources.frames+"11.png",270+otstupX1,otstupY1+220,"");
 	button13=Pattern_Resources.getButton(add,Pattern_Resources.frames+"13.png",290+otstupX1,otstupY1+220,"");
 	
-	//информационная панель, обычно показывает ID текущего шаблона
-	buttonInfoPanel=(JButton)add.component("button",otstupX2+80,30+otstupY1,105,20,"панель",null);
+	//РёРЅС„РѕСЂРјР°С†РёРѕРЅРЅР°СЏ РїР°РЅРµР»СЊ, РѕР±С‹С‡РЅРѕ РїРѕРєР°Р·С‹РІР°РµС‚ ID С‚РµРєСѓС‰РµРіРѕ С€Р°Р±Р»РѕРЅР°
+	buttonInfoPanel=(JButton)add.component("button",otstupX2+80,30+otstupY1,105,20,"РїР°РЅРµР»СЊ",null);
 	buttonInfoPanel.setEnabled(false);
 }
 
-//устанавливает текущий тип точек, которые будут ставиться на поле при редактировании шаблона
+//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ С‚РµРєСѓС‰РёР№ С‚РёРї С‚РѕС‡РµРє, РєРѕС‚РѕСЂС‹Рµ Р±СѓРґСѓС‚ СЃС‚Р°РІРёС‚СЊСЃСЏ РЅР° РїРѕР»Рµ РїСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё С€Р°Р±Р»РѕРЅР°
 void repaintIdButton(JButton button){
 	buttonDotIndex.setText(button.getName());
 	buttonDotIndex.setBackground(button.getBackground());
 }
 
-//данные методы необходимо добавить, хотя они не используются
+//РґР°РЅРЅС‹Рµ РјРµС‚РѕРґС‹ РЅРµРѕР±С…РѕРґРёРјРѕ РґРѕР±Р°РІРёС‚СЊ, С…РѕС‚СЏ РѕРЅРё РЅРµ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ
 public void run(){}
 public void mousePressed(MouseEvent me) {}
 public void windowActivated(WindowEvent e) {}

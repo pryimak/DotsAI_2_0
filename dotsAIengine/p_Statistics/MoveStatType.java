@@ -1,4 +1,4 @@
-//Класс MoveStatType перечисляет типы ходов по статистике
+//РљР»Р°СЃСЃ MoveStatType РїРµСЂРµС‡РёСЃР»СЏРµС‚ С‚РёРїС‹ С…РѕРґРѕРІ РїРѕ СЃС‚Р°С‚РёСЃС‚РёРєРµ
 
 package p_Statistics;
 
@@ -6,7 +6,7 @@ import p_TemplateEngine.TemplateType;
 
 public enum MoveStatType{
 	
-	//типы статистики
+	//С‚РёРїС‹ СЃС‚Р°С‚РёСЃС‚РёРєРё
 	BEGIN,
 	FINAL_RED_ATTACK,
 	CONTINUED_RED_ATTACK,
@@ -26,7 +26,7 @@ public enum MoveStatType{
 	RANDOM,
 	ERROR;
 	
-	//вернуть тип статистики по индексу
+	//РІРµСЂРЅСѓС‚СЊ С‚РёРї СЃС‚Р°С‚РёСЃС‚РёРєРё РїРѕ РёРЅРґРµРєСЃСѓ
 	public static MoveStatType getMoveStatType(int index){	
 		switch (index) {
 			case 0: return BEGIN;
@@ -50,7 +50,7 @@ public enum MoveStatType{
 		}
 	}
 	
-	//вернуть индекс типа статистики
+	//РІРµСЂРЅСѓС‚СЊ РёРЅРґРµРєСЃ С‚РёРїР° СЃС‚Р°С‚РёСЃС‚РёРєРё
 	public static int getMoveStatIndex(MoveStatType moveStatType) {
 		switch (moveStatType){
 			case BEGIN: 				return 0;
@@ -74,7 +74,7 @@ public enum MoveStatType{
 		}
 	}
 	
-//вернуть название типа хода для статистики
+//РІРµСЂРЅСѓС‚СЊ РЅР°Р·РІР°РЅРёРµ С‚РёРїР° С…РѕРґР° РґР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё
 public static String toString(MoveStatType moveStatType) {
 	switch (moveStatType) {
 		case BEGIN:					return TemplateType.getTemplateTypeName(TemplateType.templateTypeBEGIN)+" ("+TemplateType.toString(TemplateType.templateTypeBEGIN)+")";
@@ -82,11 +82,11 @@ public static String toString(MoveStatType moveStatType) {
 		case SQUARE:				return TemplateType.getTemplateTypeName(TemplateType.templateTypeSQUARE)+" ("+TemplateType.toString(TemplateType.templateTypeSQUARE)+")";
 		case WALL:					return TemplateType.getTemplateTypeName(TemplateType.templateTypeWALL)+" ("+TemplateType.toString(TemplateType.templateTypeWALL)+")";
 		case WALL_SIDE:				return TemplateType.getTemplateTypeName(TemplateType.templateTypeWALL_SIDE)+" ("+TemplateType.toString(TemplateType.templateTypeWALL_SIDE)+")";
-		case BLUE_SURROUND_SECURITY:return "защита от окружения синих";
+		case BLUE_SURROUND_SECURITY:return "Р·Р°С‰РёС‚Р° РѕС‚ РѕРєСЂСѓР¶РµРЅРёСЏ СЃРёРЅРёС…";
 		case GROUND:				return TemplateType.getTemplateTypeName(TemplateType.templateTypeGROUND)+" ("+TemplateType.toString(TemplateType.templateTypeGROUND)+")";
 		case GROUND_SIDE:			return TemplateType.getTemplateTypeName(TemplateType.templateTypeGROUND_SIDE)+" ("+TemplateType.toString(TemplateType.templateTypeGROUND_SIDE)+")";
-		case RANDOM:				return "рандом";
-		case EXPRESS_MAX_TERR_SECURITY:return "захват максимума территории";
+		case RANDOM:				return "СЂР°РЅРґРѕРј";
+		case EXPRESS_MAX_TERR_SECURITY:return "Р·Р°С…РІР°С‚ РјР°РєСЃРёРјСѓРјР° С‚РµСЂСЂРёС‚РѕСЂРёРё";
 		case FINAL_RED_ATTACK:		return TemplateType.getTemplateTypeName(TemplateType.templateTypeFINAL_RED_ATTACK)+" ("+TemplateType.toString(TemplateType.templateTypeFINAL_RED_ATTACK)+")";
 		case CONTINUED_RED_ATTACK:	return TemplateType.getTemplateTypeName(TemplateType.templateTypeCONTINUED_RED_ATTACK)+" ("+TemplateType.toString(TemplateType.templateTypeCONTINUED_RED_ATTACK)+")";
 		case WALL_DESTROY:			return TemplateType.getTemplateTypeName(TemplateType.templateTypeWALL_DESTROY)+" ("+TemplateType.toString(TemplateType.templateTypeWALL_DESTROY)+")";

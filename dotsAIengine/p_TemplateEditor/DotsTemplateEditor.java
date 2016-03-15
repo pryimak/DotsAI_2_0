@@ -1,5 +1,5 @@
-//Класс DotsTemplateEditor обеспечивает функционал редактора шаблонов.
-//Элементы графического интерфейса создаются отдельно в классе MainFrame
+//РљР»Р°СЃСЃ DotsTemplateEditor РѕР±РµСЃРїРµС‡РёРІР°РµС‚ С„СѓРЅРєС†РёРѕРЅР°Р» СЂРµРґР°РєС‚РѕСЂР° С€Р°Р±Р»РѕРЅРѕРІ.
+//Р­Р»РµРјРµРЅС‚С‹ РіСЂР°С„РёС‡РµСЃРєРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР° СЃРѕР·РґР°СЋС‚СЃСЏ РѕС‚РґРµР»СЊРЅРѕ РІ РєР»Р°СЃСЃРµ MainFrame
 
 package p_TemplateEditor;
 
@@ -23,26 +23,26 @@ import p_TreeEditor.DotsTreeEditor;
 
 public class DotsTemplateEditor extends MainFrame{
 	
-	//private Thread t=new Thread(this);//поток
-	public TemplateEngine base;//база шаблонов
+	//private Thread t=new Thread(this);//РїРѕС‚РѕРє
+	public TemplateEngine base;//Р±Р°Р·Р° С€Р°Р±Р»РѕРЅРѕРІ
 	
-	int preX=-1,preY=-1;//хранит предыдущие координаты курсора на поле
-	int baseTemplateIndex=0;//порядковый номер текущего шаблона в базе
-	Pattern_UndoRedoStrings changes=new Pattern_UndoRedoStrings();//хранит состояния поля для отмены и возвращения изменений при редактировании шаблонов
-	Template template=null;//текущий шаблон
-	public DotsTreeEditor dotsTreeEditor;//окно редактора деревьев
-	private DotsAI dotsAI;//основное окно программы с игровым полем
+	int preX=-1,preY=-1;//С…СЂР°РЅРёС‚ РїСЂРµРґС‹РґСѓС‰РёРµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РєСѓСЂСЃРѕСЂР° РЅР° РїРѕР»Рµ
+	int baseTemplateIndex=0;//РїРѕСЂСЏРґРєРѕРІС‹Р№ РЅРѕРјРµСЂ С‚РµРєСѓС‰РµРіРѕ С€Р°Р±Р»РѕРЅР° РІ Р±Р°Р·Рµ
+	Pattern_UndoRedoStrings changes=new Pattern_UndoRedoStrings();//С…СЂР°РЅРёС‚ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїРѕР»СЏ РґР»СЏ РѕС‚РјРµРЅС‹ Рё РІРѕР·РІСЂР°С‰РµРЅРёСЏ РёР·РјРµРЅРµРЅРёР№ РїСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё С€Р°Р±Р»РѕРЅРѕРІ
+	Template template=null;//С‚РµРєСѓС‰РёР№ С€Р°Р±Р»РѕРЅ
+	public DotsTreeEditor dotsTreeEditor;//РѕРєРЅРѕ СЂРµРґР°РєС‚РѕСЂР° РґРµСЂРµРІСЊРµРІ
+	private DotsAI dotsAI;//РѕСЃРЅРѕРІРЅРѕРµ РѕРєРЅРѕ РїСЂРѕРіСЂР°РјРјС‹ СЃ РёРіСЂРѕРІС‹Рј РїРѕР»РµРј
 	
-	byte[][] field;//хранит состояние поля шаблона
-	GameFieldGUI gameFieldGUI;//для рисования поля	
-	int otstupX=90,otstupY=35;//отступы для поля
+	byte[][] field;//С…СЂР°РЅРёС‚ СЃРѕСЃС‚РѕСЏРЅРёРµ РїРѕР»СЏ С€Р°Р±Р»РѕРЅР°
+	GameFieldGUI gameFieldGUI;//РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ РїРѕР»СЏ	
+	int otstupX=90,otstupY=35;//РѕС‚СЃС‚СѓРїС‹ РґР»СЏ РїРѕР»СЏ
 
-//создание редактора шаблонов
+//СЃРѕР·РґР°РЅРёРµ СЂРµРґР°РєС‚РѕСЂР° С€Р°Р±Р»РѕРЅРѕРІ
 public DotsTemplateEditor(TemplateEngine base,int moveX,int moveY,DotsAI pointsAI){
 	this.dotsAI=pointsAI;
-	this.move(moveX+pointsAI.protocol.getGame(pointsAI.gameIdx).sizeX*2-60,moveY+5);//смещение окна
+	this.move(moveX+pointsAI.protocol.getGame(pointsAI.gameIdx).sizeX*2-60,moveY+5);//СЃРјРµС‰РµРЅРёРµ РѕРєРЅР°
 		
-	//массив для хранения поля шаблона
+	//РјР°СЃСЃРёРІ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РїРѕР»СЏ С€Р°Р±Р»РѕРЅР°
 	field=new byte[Protocol.maxSize][Protocol.maxSize];
 	for(byte x=0;x<Protocol.maxSize;x++){
 		for(byte y=0;y<Protocol.maxSize;y++){
@@ -50,25 +50,25 @@ public DotsTemplateEditor(TemplateEngine base,int moveX,int moveY,DotsAI pointsA
 		}
 	}
 	
-	gameFieldGUI=new GameFieldGUI(this.getGraphics(),otstupX,otstupY);//для рисования шаблонов
-	this.base=base;//база шаблонов
-	dotsTreeEditor=new DotsTreeEditor(base);//редактор деревьев
+	gameFieldGUI=new GameFieldGUI(this.getGraphics(),otstupX,otstupY);//РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ С€Р°Р±Р»РѕРЅРѕРІ
+	this.base=base;//Р±Р°Р·Р° С€Р°Р±Р»РѕРЅРѕРІ
+	dotsTreeEditor=new DotsTreeEditor(base);//СЂРµРґР°РєС‚РѕСЂ РґРµСЂРµРІСЊРµРІ
 
-	//действия при нажатии кнопок типов шаблонов
+	//РґРµР№СЃС‚РІРёСЏ РїСЂРё РЅР°Р¶Р°С‚РёРё РєРЅРѕРїРѕРє С‚РёРїРѕРІ С€Р°Р±Р»РѕРЅРѕРІ
 	for(int i=0;i<templateTypeItems.length;i++){
 		templateTypeItems[i].setText(base.templateTypeCount[i]+" - "+templateTypeItems[i].getText());
 		templateTypeItems[i].addActionListener(getActionListener(templateTypeItems[i].getIcon(),i));
 	}
 
-	buttonActions();//действия при нажатии на различные кнопки
+	buttonActions();//РґРµР№СЃС‚РІРёСЏ РїСЂРё РЅР°Р¶Р°С‚РёРё РЅР° СЂР°Р·Р»РёС‡РЅС‹Рµ РєРЅРѕРїРєРё
 	
-	//нарисовать первый шаблон в базе
+	//РЅР°СЂРёСЃРѕРІР°С‚СЊ РїРµСЂРІС‹Р№ С€Р°Р±Р»РѕРЅ РІ Р±Р°Р·Рµ
 	baseTemplateIndex=0;
 	setBaseTemplate(0);	
 	paint();
 }
 
-//действия при нажатии кнопок типов шаблонов
+//РґРµР№СЃС‚РІРёСЏ РїСЂРё РЅР°Р¶Р°С‚РёРё РєРЅРѕРїРѕРє С‚РёРїРѕРІ С€Р°Р±Р»РѕРЅРѕРІ
 public ActionListener getActionListener(final Icon icon,final int n){
 	return new ActionListener(){public void actionPerformed(ActionEvent arg0){
 		labelCurrentTemplateType.setIcon(icon);
@@ -76,7 +76,7 @@ public ActionListener getActionListener(final Icon icon,final int n){
 	}};
 }
 
-//отобразить на поле шаблон для найденного хода ИИ
+//РѕС‚РѕР±СЂР°Р·РёС‚СЊ РЅР° РїРѕР»Рµ С€Р°Р±Р»РѕРЅ РґР»СЏ РЅР°Р№РґРµРЅРЅРѕРіРѕ С…РѕРґР° РР
 public void moveFromAI(byte[] content,int foundedNumber,int templateType){	
 	if(foundedNumber!=0){
 		setBaseTemplate(foundedNumber);
@@ -87,7 +87,7 @@ public void moveFromAI(byte[] content,int foundedNumber,int templateType){
 	}
 };
 
-//отобразить на поле шаблон из базы шаблонов
+//РѕС‚РѕР±СЂР°Р·РёС‚СЊ РЅР° РїРѕР»Рµ С€Р°Р±Р»РѕРЅ РёР· Р±Р°Р·С‹ С€Р°Р±Р»РѕРЅРѕРІ
 private void setBaseTemplate(int templateNumber){
 	while(templateNumber<0)templateNumber++;
 	while(templateNumber>base.baseOfTemplates.size()-1)templateNumber--;
@@ -106,7 +106,7 @@ private void setBaseTemplate(int templateNumber){
 	dotsTreeEditor.setTree(template);
 }
 
-//при нажатии кнопкой мыши на поле выполнить добавление в шаблон и рисование точки
+//РїСЂРё РЅР°Р¶Р°С‚РёРё РєРЅРѕРїРєРѕР№ РјС‹С€Рё РЅР° РїРѕР»Рµ РІС‹РїРѕР»РЅРёС‚СЊ РґРѕР±Р°РІР»РµРЅРёРµ РІ С€Р°Р±Р»РѕРЅ Рё СЂРёСЃРѕРІР°РЅРёРµ С‚РѕС‡РєРё
 public void mousePressed(MouseEvent me) {
 	int x=getMouseClickX(me);
 	int y=getMouseClickY(me);
@@ -119,9 +119,9 @@ public void mousePressed(MouseEvent me) {
 }
 
 public void windowClosing(WindowEvent e){}
-public void windowActivated(WindowEvent e){t=new Thread(this);t.start();}//перерисовка поля при активации окна редактора шаблонов
+public void windowActivated(WindowEvent e){t=new Thread(this);t.start();}//РїРµСЂРµСЂРёСЃРѕРІРєР° РїРѕР»СЏ РїСЂРё Р°РєС‚РёРІР°С†РёРё РѕРєРЅР° СЂРµРґР°РєС‚РѕСЂР° С€Р°Р±Р»РѕРЅРѕРІ
 
-//перерисовка поля с задержкой
+//РїРµСЂРµСЂРёСЃРѕРІРєР° РїРѕР»СЏ СЃ Р·Р°РґРµСЂР¶РєРѕР№
 public void run(){
 	try{t.sleep(500);}catch(Exception e){}
 	paint();
@@ -129,7 +129,7 @@ public void run(){
 	t.stop();
 }
 
-//изменение надписи на информационной панели
+//РёР·РјРµРЅРµРЅРёРµ РЅР°РґРїРёСЃРё РЅР° РёРЅС„РѕСЂРјР°С†РёРѕРЅРЅРѕР№ РїР°РЅРµР»Рё
 void buttonInfoPanelChange(String str){
 	buttonInfoPanel.setText(str);
 	if(str.length()<40&str.length()>5){
@@ -140,52 +140,52 @@ void buttonInfoPanelChange(String str){
 	}
 };
 
-//добавление действий при нажатии на кнопки
+//РґРѕР±Р°РІР»РµРЅРёРµ РґРµР№СЃС‚РІРёР№ РїСЂРё РЅР°Р¶Р°С‚РёРё РЅР° РєРЅРѕРїРєРё
 void buttonActions(){
 	
-	//перерисовать поле
+	//РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊ РїРѕР»Рµ
 	buttonRepaint.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {paint();}});
 	
-	//удалить шаблон из базы
+	//СѓРґР°Р»РёС‚СЊ С€Р°Р±Р»РѕРЅ РёР· Р±Р°Р·С‹
 	buttonDelete.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 		setBaseTemplate(baseTemplateIndex);
-		if(msg.showConfirmDialog(DotsTemplateEditor.this,"удалить шаблон?","удалить шаблон?",0)==0){
-			buttonInfoPanelChange("удален");
+		if(msg.showConfirmDialog(DotsTemplateEditor.this,"СѓРґР°Р»РёС‚СЊ С€Р°Р±Р»РѕРЅ?","СѓРґР°Р»РёС‚СЊ С€Р°Р±Р»РѕРЅ?",0)==0){
+			buttonInfoPanelChange("СѓРґР°Р»РµРЅ");
 			changes.insert(getContent());
 			base.deleteTemplate(baseTemplateIndex);
 			setBaseTemplate(baseTemplateIndex);
 		}
 	}});
 	
-	//добавить новый шаблон в базу
+	//РґРѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ С€Р°Р±Р»РѕРЅ РІ Р±Р°Р·Сѓ
 	buttonSave.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
-			if(base.isExistTemplateWhenNewSave(getContent(),labelCurrentTemplateType.getText()))buttonInfoPanelChange("уже есть");
+			if(base.isExistTemplateWhenNewSave(getContent(),labelCurrentTemplateType.getText()))buttonInfoPanelChange("СѓР¶Рµ РµСЃС‚СЊ");
 			else {
 				butTemplateSequenceInBase.setText("<HTML>"+base.baseOfTemplates.size());
 				baseTemplateIndex=base.baseOfTemplates.size()-1;
 				t=new Thread(DotsTemplateEditor.this);t.start();
 				setBaseTemplate(base.getBaseIndexByTemplateID(base.maxTemplateIndex));
-				buttonInfoPanelChange("добавлен");
+				buttonInfoPanelChange("РґРѕР±Р°РІР»РµРЅ");
 			}
 	}});
 	
-	//пересохранить шаблон в базе
+	//РїРµСЂРµСЃРѕС…СЂР°РЅРёС‚СЊ С€Р°Р±Р»РѕРЅ РІ Р±Р°Р·Рµ
 	buttonResave.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 		int templateIdx=base.baseOfTemplates.get(baseTemplateIndex).templateID;
-		if(base.isExistTemplateWhenResave(getContent(),baseTemplateIndex,labelCurrentTemplateType.getText()))buttonInfoPanelChange("уже есть");
+		if(base.isExistTemplateWhenResave(getContent(),baseTemplateIndex,labelCurrentTemplateType.getText()))buttonInfoPanelChange("СѓР¶Рµ РµСЃС‚СЊ");
 		else{
 			setBaseTemplate(base.getBaseIndexByTemplateID(templateIdx));
-			buttonInfoPanelChange("пересохранено");			
+			buttonInfoPanelChange("РїРµСЂРµСЃРѕС…СЂР°РЅРµРЅРѕ");			
 		}
 	}});	
 	
-	//отменить изменения на поле при редактировании шаблона
+	//РѕС‚РјРµРЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ РЅР° РїРѕР»Рµ РїСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё С€Р°Р±Р»РѕРЅР°
 	buttonUndo.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){moveByContent(changes.getUndo());}});
 	
-	//вернуть отмененные изменения на поле при редактировании шаблона
+	//РІРµСЂРЅСѓС‚СЊ РѕС‚РјРµРЅРµРЅРЅС‹Рµ РёР·РјРµРЅРµРЅРёСЏ РЅР° РїРѕР»Рµ РїСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё С€Р°Р±Р»РѕРЅР°
 	buttonRedo.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){moveByContent(changes.getRedo());}});
 	
-	//сдвиг шаблона в стороны
+	//СЃРґРІРёРі С€Р°Р±Р»РѕРЅР° РІ СЃС‚РѕСЂРѕРЅС‹
 	buttonRight.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){changes.insert(getContent());moveToSide("r");}});
 	buttonLeft.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){changes.insert(getContent());moveToSide("l");}});
 	buttonTop.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){changes.insert(getContent());moveToSide("t");}});
@@ -195,14 +195,14 @@ void buttonActions(){
 	buttonRightBottom.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){changes.insert(getContent());moveToSide("rb");}});
 	buttonLeftBottom.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){changes.insert(getContent());moveToSide("lb");}});
 	
-	//установка значимого размера шаблона
+	//СѓСЃС‚Р°РЅРѕРІРєР° Р·РЅР°С‡РёРјРѕРіРѕ СЂР°Р·РјРµСЂР° С€Р°Р±Р»РѕРЅР°
 	button5.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){changes.insert(getContent());setFieldFrame(5);}});
 	button7.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){changes.insert(getContent());setFieldFrame(7);}});
 	button9.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){changes.insert(getContent());setFieldFrame(9);}});
 	button11.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){changes.insert(getContent());setFieldFrame(11);}});
 	button13.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){changes.insert(getContent());setFieldFrame(13);}});
 	
-	//навигация по базе шаблонов
+	//РЅР°РІРёРіР°С†РёСЏ РїРѕ Р±Р°Р·Рµ С€Р°Р±Р»РѕРЅРѕРІ
 	buttonPrevious.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){try{
 		while(!TemplateType.toString(base.baseOfTemplates.get(baseTemplateIndex-1).templateType).equals(labelCurrentTemplateType.getText())){baseTemplateIndex--;}
 		setBaseTemplate(baseTemplateIndex-1);
@@ -224,14 +224,14 @@ void buttonActions(){
 		setBaseTemplate(baseTemplateIndex);
 	}});
 	
-	//открыть шаблон по ID шаблона. По умолчанию выводится ID последнего добавленного в базу шаблона
+	//РѕС‚РєСЂС‹С‚СЊ С€Р°Р±Р»РѕРЅ РїРѕ ID С€Р°Р±Р»РѕРЅР°. РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РІС‹РІРѕРґРёС‚СЃСЏ ID РїРѕСЃР»РµРґРЅРµРіРѕ РґРѕР±Р°РІР»РµРЅРЅРѕРіРѕ РІ Р±Р°Р·Сѓ С€Р°Р±Р»РѕРЅР°
 	butOpen.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0){try{
-		int i=new Integer(msg.showInputDialog("Перейти к шаблону с номером (например "+base.maxTemplateIndex+")",base.maxTemplateIndex+"")).intValue();
+		int i=new Integer(msg.showInputDialog("РџРµСЂРµР№С‚Рё Рє С€Р°Р±Р»РѕРЅСѓ СЃ РЅРѕРјРµСЂРѕРј (РЅР°РїСЂРёРјРµСЂ "+base.maxTemplateIndex+")",base.maxTemplateIndex+"")).intValue();
 		setBaseTemplate(base.getBaseIndexByTemplateID(i));
 		changes.insert(getContent());
 	}catch(Exception e){}}});
 	
-	//выполнить разворот шаблона (при этом ходы в дереве не поворачиваются, поэтому не желательно сохранять развернутый шаблон, инчае нужно редактировать дерево)
+	//РІС‹РїРѕР»РЅРёС‚СЊ СЂР°Р·РІРѕСЂРѕС‚ С€Р°Р±Р»РѕРЅР° (РїСЂРё СЌС‚РѕРј С…РѕРґС‹ РІ РґРµСЂРµРІРµ РЅРµ РїРѕРІРѕСЂР°С‡РёРІР°СЋС‚СЃСЏ, РїРѕСЌС‚РѕРјСѓ РЅРµ Р¶РµР»Р°С‚РµР»СЊРЅРѕ СЃРѕС…СЂР°РЅСЏС‚СЊ СЂР°Р·РІРµСЂРЅСѓС‚С‹Р№ С€Р°Р±Р»РѕРЅ, РёРЅС‡Р°Рµ РЅСѓР¶РЅРѕ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РґРµСЂРµРІРѕ)
 	but90.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {try{
 		moveByContent(TemplateRotationType.getTransformArray(TemplateRotationType.templateRotationTypeR90, getContent()));changes.insert(getContent());
 	}catch(Exception e){}}});
@@ -255,10 +255,10 @@ void buttonActions(){
 	}catch(Exception e){}}});
 }
 
-//при перемещении курсора мыши рисовать новый ползунок, а предыдущий закрашивать
+//РїСЂРё РїРµСЂРµРјРµС‰РµРЅРёРё РєСѓСЂСЃРѕСЂР° РјС‹С€Рё СЂРёСЃРѕРІР°С‚СЊ РЅРѕРІС‹Р№ РїРѕР»Р·СѓРЅРѕРє, Р° РїСЂРµРґС‹РґСѓС‰РёР№ Р·Р°РєСЂР°С€РёРІР°С‚СЊ
 public void mouseMoved(MouseEvent me){	
 	int x=getMouseClickX(me),y=getMouseClickY(me);
-	if(x!=preX|y!=preY){//произошло перемещение курсора
+	if(x!=preX|y!=preY){//РїСЂРѕРёР·РѕС€Р»Рѕ РїРµСЂРµРјРµС‰РµРЅРёРµ РєСѓСЂСЃРѕСЂР°
 		try{
 			if(field[preX][preY]==Protocol.templateDotType_EMPTY){
 				gameFieldGUI.clearHint(preX, preY);
@@ -274,7 +274,7 @@ public void mouseMoved(MouseEvent me){
 	}	
 }
 
-//нарисовать поле с шаблоном
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ РїРѕР»Рµ СЃ С€Р°Р±Р»РѕРЅРѕРј
 public void paint(){
 	try{	
 		gameFieldGUI.drawGameFieldArea(Protocol.maxSize,Protocol.maxSize,true);
@@ -282,7 +282,7 @@ public void paint(){
 	}catch(Exception e){}
 }
 
-//нарисовать поле с шаблоном
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ РїРѕР»Рµ СЃ С€Р°Р±Р»РѕРЅРѕРј
 void moveByContent(byte[] content){
 	for(int i=0;i<content.length;i++){
 		move(i%Protocol.maxSize,i/Protocol.maxSize,content[i]);
@@ -290,7 +290,7 @@ void moveByContent(byte[] content){
 	paint();
 }
 
-//нарисовать поле с шаблоном
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ РїРѕР»Рµ СЃ С€Р°Р±Р»РѕРЅРѕРј
 void moveByField(byte content[][]){
 	for(int i=0;i<Protocol.maxSize;i++){
 		for(int j=0;j<Protocol.maxSize;j++){
@@ -300,13 +300,13 @@ void moveByField(byte content[][]){
 	paint();
 }	
 
-//поставить точку любого типа на поле с шаблоном
+//РїРѕСЃС‚Р°РІРёС‚СЊ С‚РѕС‡РєСѓ Р»СЋР±РѕРіРѕ С‚РёРїР° РЅР° РїРѕР»Рµ СЃ С€Р°Р±Р»РѕРЅРѕРј
 public void move(int x, int y, byte moveType){
 	if((x<0)|(y<0)|(x>=Protocol.maxSize)|(y>=Protocol.maxSize)){}
 	else field[x][y]=moveType;	
 }
 
-//получить содержимое поля
+//РїРѕР»СѓС‡РёС‚СЊ СЃРѕРґРµСЂР¶РёРјРѕРµ РїРѕР»СЏ
 byte[] getContent(){
 	byte[] content=new byte[Protocol.maxSize*Protocol.maxSize];
 	int idx=0;
@@ -319,7 +319,7 @@ byte[] getContent(){
 	return content;
 }
 
-//при сдвиге шаблона в сторону
+//РїСЂРё СЃРґРІРёРіРµ С€Р°Р±Р»РѕРЅР° РІ СЃС‚РѕСЂРѕРЅСѓ
 void moveToSide(String sideName){
 	if(sideName.equalsIgnoreCase("lt")){
 		for(int i=0;i<Protocol.maxSize-1;i++){
@@ -407,10 +407,10 @@ void moveToSide(String sideName){
 		}
 	}
 	
-	moveByField(field);//перерисовать поле
+	moveByField(field);//РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊ РїРѕР»Рµ
 }
 
-//установить значимый размер поля
+//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ Р·РЅР°С‡РёРјС‹Р№ СЂР°Р·РјРµСЂ РїРѕР»СЏ
 void setFieldFrame(int size){
 	
 	if(size==13){
@@ -500,10 +500,10 @@ void setFieldFrame(int size){
 		}
 	}
 	
-	moveByField(field);//перерисовать поле
+	moveByField(field);//РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊ РїРѕР»Рµ
 }
 
-//получить координаты поля из координат пикселя при нажатии кнопки мыши
+//РїРѕР»СѓС‡РёС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРѕР»СЏ РёР· РєРѕРѕСЂРґРёРЅР°С‚ РїРёРєСЃРµР»СЏ РїСЂРё РЅР°Р¶Р°С‚РёРё РєРЅРѕРїРєРё РјС‹С€Рё
 int getMouseClickX(MouseEvent me){return (int)(((double)me.getX()-14-(double)(4*GameFieldGUI.cellSize))/(double)GameFieldGUI.cellSize);};
 int getMouseClickY(MouseEvent me){return (int)(((double)me.getY()-12-(double)(GameFieldGUI.cellSize))/(double)GameFieldGUI.cellSize);};
 

@@ -1,7 +1,7 @@
 /*
-Этот класс обеспечивает установку размеров для создаваемого окна JFrame.
-Конструктор класса принимает требуемые размеры окна в виде ширины и высоты окна int width,int height.
-Для установки размеров окна необходимо в вызывающем классе прописать код:
+Р­С‚РѕС‚ РєР»Р°СЃСЃ РѕР±РµСЃРїРµС‡РёРІР°РµС‚ СѓСЃС‚Р°РЅРѕРІРєСѓ СЂР°Р·РјРµСЂРѕРІ РґР»СЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ РѕРєРЅР° JFrame.
+РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР° РїСЂРёРЅРёРјР°РµС‚ С‚СЂРµР±СѓРµРјС‹Рµ СЂР°Р·РјРµСЂС‹ РѕРєРЅР° РІ РІРёРґРµ С€РёСЂРёРЅС‹ Рё РІС‹СЃРѕС‚С‹ РѕРєРЅР° int width,int height.
+Р”Р»СЏ СѓСЃС‚Р°РЅРѕРІРєРё СЂР°Р·РјРµСЂРѕРІ РѕРєРЅР° РЅРµРѕР±С…РѕРґРёРјРѕ РІ РІС‹Р·С‹РІР°СЋС‰РµРј РєР»Р°СЃСЃРµ РїСЂРѕРїРёСЃР°С‚СЊ РєРѕРґ:
 frame.getContentPane().setLayout(new p_GUI.C_Layout(width,height));
 */
 
@@ -12,14 +12,14 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
 
-public class Pattern_Layout implements LayoutManager {//класс
+public class Pattern_Layout implements LayoutManager {//РєР»Р°СЃСЃ
 
-	int width;//ширина окна
-	int height;//высота окна
+	int width;//С€РёСЂРёРЅР° РѕРєРЅР°
+	int height;//РІС‹СЃРѕС‚Р° РѕРєРЅР°
 
-public Pattern_Layout(int width,int height){//конструктор класса
-	this.width=width;//установить ширину, равную входному значению
-	this.height=height;//установить высоту, равную входному значению
+public Pattern_Layout(int width,int height){//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР°
+	this.width=width;//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С€РёСЂРёРЅСѓ, СЂР°РІРЅСѓСЋ РІС…РѕРґРЅРѕРјСѓ Р·РЅР°С‡РµРЅРёСЋ
+	this.height=height;//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РІС‹СЃРѕС‚Сѓ, СЂР°РІРЅСѓСЋ РІС…РѕРґРЅРѕРјСѓ Р·РЅР°С‡РµРЅРёСЋ
 }
 
 public void addLayoutComponent(String name, Component comp) {  }

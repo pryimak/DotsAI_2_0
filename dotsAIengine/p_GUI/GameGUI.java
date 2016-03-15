@@ -1,4 +1,4 @@
-//Класс обеспечивает графический интерфейс для игры
+//РљР»Р°СЃСЃ РѕР±РµСЃРїРµС‡РёРІР°РµС‚ РіСЂР°С„РёС‡РµСЃРєРёР№ РёРЅС‚РµСЂС„РµР№СЃ РґР»СЏ РёРіСЂС‹
 
 package p_GUI;
 
@@ -15,39 +15,39 @@ import p_JavaPatterns.Pattern_Resources;
 
 public class GameGUI{
 
-	AudioClip sound=null;//звук хода
-	String spc="&nbsp;&nbsp;&nbsp;";//отступ текста
-	public static int offsetX=GameFieldGUI.cellSize*2+3;//отступ поля
-	public static int offsetY=GameFieldGUI.cellSize*3+10;//отступ поля
+	AudioClip sound=null;//Р·РІСѓРє С…РѕРґР°
+	String spc="&nbsp;&nbsp;&nbsp;";//РѕС‚СЃС‚СѓРї С‚РµРєСЃС‚Р°
+	public static int offsetX=GameFieldGUI.cellSize*2+3;//РѕС‚СЃС‚СѓРї РїРѕР»СЏ
+	public static int offsetY=GameFieldGUI.cellSize*3+10;//РѕС‚СЃС‚СѓРї РїРѕР»СЏ
 	
 public GameGUI(){
-	//загрузить файл со звуком хода
+	//Р·Р°РіСЂСѓР·РёС‚СЊ С„Р°Р№Р» СЃРѕ Р·РІСѓРєРѕРј С…РѕРґР°
 	File f=new File(Pattern_Resources.gui+"move.wav");
 	try{sound=Applet.newAudioClip(f.toURL());}catch(Exception e){System.out.println("sound fails");}
 }
 
-//создание новой игры
+//СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕР№ РёРіСЂС‹
 public void newGame(DotsAI dotsAI){	
-	dotsAI.label.setText(getLabelText(dotsAI));//информация об игре в панели вверху окна	
-	dotsAI.AImovesCount=0;//число ходов ИИ
-	dotsAI.AItotalTime=0;//общее время ходов ИИ
-	dotsAI.protocol.getGame(dotsAI.gameIdx).gameField.setFieldState(dotsAI.protocol.getGame(dotsAI.gameIdx));//установить состояние поля
-	dotsAI.protocol.chainsSearch(dotsAI.protocol.getGame(dotsAI.gameIdx));//найти ветви ходов
+	dotsAI.label.setText(getLabelText(dotsAI));//РёРЅС„РѕСЂРјР°С†РёСЏ РѕР± РёРіСЂРµ РІ РїР°РЅРµР»Рё РІРІРµСЂС…Сѓ РѕРєРЅР°	
+	dotsAI.AImovesCount=0;//С‡РёСЃР»Рѕ С…РѕРґРѕРІ РР
+	dotsAI.AItotalTime=0;//РѕР±С‰РµРµ РІСЂРµРјСЏ С…РѕРґРѕРІ РР
+	dotsAI.protocol.getGame(dotsAI.gameIdx).gameField.setFieldState(dotsAI.protocol.getGame(dotsAI.gameIdx));//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ РїРѕР»СЏ
+	dotsAI.protocol.chainsSearch(dotsAI.protocol.getGame(dotsAI.gameIdx));//РЅР°Р№С‚Рё РІРµС‚РІРё С…РѕРґРѕРІ
 	
-	if(dotsAI.isPause)dotsAI.isPause=false;//закончить паузу, если она есть
+	if(dotsAI.isPause)dotsAI.isPause=false;//Р·Р°РєРѕРЅС‡РёС‚СЊ РїР°СѓР·Сѓ, РµСЃР»Рё РѕРЅР° РµСЃС‚СЊ
 	
-	gameRepaint(dotsAI,true);//перерисовать поле игры
+	gameRepaint(dotsAI,true);//РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊ РїРѕР»Рµ РёРіСЂС‹
 }
 
 public void gameRepaint(DotsAI dotsAI,boolean isRepaintTE){
-	//не играть звук хода при игре ИИ против рандома или против ИИ
+	//РЅРµ РёРіСЂР°С‚СЊ Р·РІСѓРє С…РѕРґР° РїСЂРё РёРіСЂРµ РР РїСЂРѕС‚РёРІ СЂР°РЅРґРѕРјР° РёР»Рё РїСЂРѕС‚РёРІ РР
 	if(dotsAI.protocol.getGame(dotsAI.gameIdx).enemyType!=EnemyType.RANDOM&&dotsAI.protocol.getGame(dotsAI.gameIdx).enemyType!=EnemyType.AI){
 		sound.play();	
 	}
 	
-	dotsAI.label.setText(getLabelText(dotsAI));//информация об игре в панели вверху окна
+	dotsAI.label.setText(getLabelText(dotsAI));//РёРЅС„РѕСЂРјР°С†РёСЏ РѕР± РёРіСЂРµ РІ РїР°РЅРµР»Рё РІРІРµСЂС…Сѓ РѕРєРЅР°
 	
-	//в игре против рандома или ИИ подсвечивать последний ход вертикальной и горизонтальной зелеными линиями
+	//РІ РёРіСЂРµ РїСЂРѕС‚РёРІ СЂР°РЅРґРѕРјР° РёР»Рё РР РїРѕРґСЃРІРµС‡РёРІР°С‚СЊ РїРѕСЃР»РµРґРЅРёР№ С…РѕРґ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ Р·РµР»РµРЅС‹РјРё Р»РёРЅРёСЏРјРё
 	boolean isShowLastDot=false;
 	if(dotsAI.protocol.getGame(dotsAI.gameIdx).enemyType==EnemyType.RANDOM||dotsAI.protocol.getGame(dotsAI.gameIdx).enemyType==EnemyType.AI){
 		if(dotsAI.protocol.getGame(dotsAI.gameIdx).gameField.lastDotType==GameField.RED){
@@ -55,12 +55,12 @@ public void gameRepaint(DotsAI dotsAI,boolean isRepaintTE){
 		}
 	}
 	
-	dotsAI.gameFieldGUI.drawGameField(dotsAI.protocol.getGame(dotsAI.gameIdx).gameField,false,isShowLastDot);//нарисовать поле игры
-	dotsAI.protocol.stat.paintFrame(dotsAI);//обновить окно со статистикой ходов
+	dotsAI.gameFieldGUI.drawGameField(dotsAI.protocol.getGame(dotsAI.gameIdx).gameField,false,isShowLastDot);//РЅР°СЂРёСЃРѕРІР°С‚СЊ РїРѕР»Рµ РёРіСЂС‹
+	dotsAI.protocol.stat.paintFrame(dotsAI);//РѕР±РЅРѕРІРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃС‚Р°С‚РёСЃС‚РёРєРѕР№ С…РѕРґРѕРІ
 	
 	try{
 		if(dotsAI.protocol.getGame(dotsAI.gameIdx).getMovesCount()>0&isRepaintTE&dotsAI.protocol.getGame(dotsAI.gameIdx).gameField.lastDotType==GameField.RED){
-			//нарисовать в редакторе шаблонов шаблон, по которому выполнен последний ход ИИ
+			//РЅР°СЂРёСЃРѕРІР°С‚СЊ РІ СЂРµРґР°РєС‚РѕСЂРµ С€Р°Р±Р»РѕРЅРѕРІ С€Р°Р±Р»РѕРЅ, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ РІС‹РїРѕР»РЅРµРЅ РїРѕСЃР»РµРґРЅРёР№ С…РѕРґ РР
 			dotsAI.dotsTemplateEditor.moveFromAI(
 				dotsAI.protocol.templateEngine.getTemplateByTemplateID(dotsAI.protocol.templateEngine.foundedIndex).templateContent,
 				dotsAI.protocol.templateEngine.foundedNumber,
@@ -69,19 +69,19 @@ public void gameRepaint(DotsAI dotsAI,boolean isRepaintTE){
 		}
 	}catch(Exception e){}
 	
-	dotsAI.gameFieldGUI.paintChainsDots(dotsAI);//нарисовать точки цепей (в настоящее время это концы цепей)
+	dotsAI.gameFieldGUI.paintChainsDots(dotsAI);//РЅР°СЂРёСЃРѕРІР°С‚СЊ С‚РѕС‡РєРё С†РµРїРµР№ (РІ РЅР°СЃС‚РѕСЏС‰РµРµ РІСЂРµРјСЏ СЌС‚Рѕ РєРѕРЅС†С‹ С†РµРїРµР№)
 }
 
-//информация об игре в панели вверху окна
+//РёРЅС„РѕСЂРјР°С†РёСЏ РѕР± РёРіСЂРµ РІ РїР°РЅРµР»Рё РІРІРµСЂС…Сѓ РѕРєРЅР°
 public String getLabelText(DotsAI dotsAI){try{
 	return "<HTML><FONT color=blue>"+spc+dotsAI.protocol.getGame(dotsAI.gameIdx).enemyType.toString()+"</FONT><FONT color=black> "+dotsAI.protocol.getGame(dotsAI.gameIdx).gameField.scoreBlue+" - "+dotsAI.protocol.getGame(dotsAI.gameIdx).gameField.scoreRed+
-		"</FONT><FONT color=red> "+dotsAI.protocol.appName+" "+dotsAI.protocol.appVersion+"</FONT>"+spc+"ходов <FONT color=green>"+(dotsAI.protocol.getGame(dotsAI.gameIdx).getMovesCount()+4)+"</FONT>"+spc+
+		"</FONT><FONT color=red> "+dotsAI.protocol.appName+" "+dotsAI.protocol.appVersion+"</FONT>"+spc+"С…РѕРґРѕРІ <FONT color=green>"+(dotsAI.protocol.getGame(dotsAI.gameIdx).getMovesCount()+4)+"</FONT>"+spc+
 		"AI time"+"<FONT color=green> "+
 		new BigDecimal((double)(dotsAI.AItime)/1000.0).setScale(2,RoundingMode.HALF_UP).doubleValue()+
 		"</FONT>"+spc+
 		"avg AI time"+"<FONT color=green> "+dotsAI.AIavgTime+"</FONT></HTML>";
 }catch(Exception e){
-	return "<HTML><FONT color=blue>"+spc+spc+dotsAI.protocol.getGame(dotsAI.gameIdx).enemyType.toString()+"</FONT><FONT color=black> 0 - 0</FONT><FONT color=red> "+Protocol.appName+" "+Protocol.appVersion+"</FONT>"+spc+"ход <FONT color=green>8</FONT></HTML>";
+	return "<HTML><FONT color=blue>"+spc+spc+dotsAI.protocol.getGame(dotsAI.gameIdx).enemyType.toString()+"</FONT><FONT color=black> 0 - 0</FONT><FONT color=red> "+Protocol.appName+" "+Protocol.appVersion+"</FONT>"+spc+"С…РѕРґ <FONT color=green>8</FONT></HTML>";
 }}
 
 }

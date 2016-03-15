@@ -1,9 +1,9 @@
-//Класс добавляет в главное окно программы несколько кнопок управления игрой.
-//Это кнопки:
-//- поставить игру на паузу, что полезно в игре ИИ против рандома или против ИИ
-//- отмотать игру на 1 или 5 ходов назад, что полезно при плохом ходе ИИ для возвращения с целью добавления/редактирования шаблона
-//- кнопка создания шаблона, при нажатии которой игровая ситуация на поле переносится в редактор шаблонов. При этом
-//для добавления шаблона в базу нужно нажать кнопку сохранения шаблона уже в редакторе шаблонов
+//РљР»Р°СЃСЃ РґРѕР±Р°РІР»СЏРµС‚ РІ РіР»Р°РІРЅРѕРµ РѕРєРЅРѕ РїСЂРѕРіСЂР°РјРјС‹ РЅРµСЃРєРѕР»СЊРєРѕ РєРЅРѕРїРѕРє СѓРїСЂР°РІР»РµРЅРёСЏ РёРіСЂРѕР№.
+//Р­С‚Рѕ РєРЅРѕРїРєРё:
+//- РїРѕСЃС‚Р°РІРёС‚СЊ РёРіСЂСѓ РЅР° РїР°СѓР·Сѓ, С‡С‚Рѕ РїРѕР»РµР·РЅРѕ РІ РёРіСЂРµ РР РїСЂРѕС‚РёРІ СЂР°РЅРґРѕРјР° РёР»Рё РїСЂРѕС‚РёРІ РР
+//- РѕС‚РјРѕС‚Р°С‚СЊ РёРіСЂСѓ РЅР° 1 РёР»Рё 5 С…РѕРґРѕРІ РЅР°Р·Р°Рґ, С‡С‚Рѕ РїРѕР»РµР·РЅРѕ РїСЂРё РїР»РѕС…РѕРј С…РѕРґРµ РР РґР»СЏ РІРѕР·РІСЂР°С‰РµРЅРёСЏ СЃ С†РµР»СЊСЋ РґРѕР±Р°РІР»РµРЅРёСЏ/СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ С€Р°Р±Р»РѕРЅР°
+//- РєРЅРѕРїРєР° СЃРѕР·РґР°РЅРёСЏ С€Р°Р±Р»РѕРЅР°, РїСЂРё РЅР°Р¶Р°С‚РёРё РєРѕС‚РѕСЂРѕР№ РёРіСЂРѕРІР°СЏ СЃРёС‚СѓР°С†РёСЏ РЅР° РїРѕР»Рµ РїРµСЂРµРЅРѕСЃРёС‚СЃСЏ РІ СЂРµРґР°РєС‚РѕСЂ С€Р°Р±Р»РѕРЅРѕРІ. РџСЂРё СЌС‚РѕРј
+//РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° РІ Р±Р°Р·Сѓ РЅСѓР¶РЅРѕ РЅР°Р¶Р°С‚СЊ РєРЅРѕРїРєСѓ СЃРѕС…СЂР°РЅРµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СѓР¶Рµ РІ СЂРµРґР°РєС‚РѕСЂРµ С€Р°Р±Р»РѕРЅРѕРІ
 
 package p_GUI;
 
@@ -19,7 +19,7 @@ import p_JavaPatterns.Pattern_AddComponent;
 import p_JavaPatterns.Pattern_Resources;
 import p_TemplateEngine.TemplateType;
 
-public class GameManagement{//заставка
+public class GameManagement{//Р·Р°СЃС‚Р°РІРєР°
 
 	private Pattern_AddComponent add;
 	public JMenuItem buttonBackLength1,buttonBackLength5,buttonCreateTemplate,buttonPause;
@@ -53,18 +53,18 @@ public GameManagement(DotsAI pointsAI){
 	buttonCreateTemplate.setIcon(new ImageIcon(Pattern_Resources.base+"save_small.png"));
 	buttonPause.setIcon(new ImageIcon(Pattern_Resources.navigation+"pause.png"));
 	
-	buttonBackLength1.setToolTipText("1 ход назад");
-	buttonBackLength5.setToolTipText("5 ходов назад");
-	buttonCreateTemplate.setToolTipText("Создать шаблон");
-	buttonPause.setToolTipText("Пауза при игре с рандомом");
+	buttonBackLength1.setToolTipText("1 С…РѕРґ РЅР°Р·Р°Рґ");
+	buttonBackLength5.setToolTipText("5 С…РѕРґРѕРІ РЅР°Р·Р°Рґ");
+	buttonCreateTemplate.setToolTipText("РЎРѕР·РґР°С‚СЊ С€Р°Р±Р»РѕРЅ");
+	buttonPause.setToolTipText("РџР°СѓР·Р° РїСЂРё РёРіСЂРµ СЃ СЂР°РЅРґРѕРјРѕРј");
 }
 
-//создать новый шаблон. При этом он не сохранятеся в базе, а отображается в редакторе шаблонов
+//СЃРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№ С€Р°Р±Р»РѕРЅ. РџСЂРё СЌС‚РѕРј РѕРЅ РЅРµ СЃРѕС…СЂР°РЅСЏС‚РµСЃСЏ РІ Р±Р°Р·Рµ, Р° РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ РІ СЂРµРґР°РєС‚РѕСЂРµ С€Р°Р±Р»РѕРЅРѕРІ
 private void createTemplate(){
 	JOptionPane msg=new JOptionPane();
 	try{
-		int x=new Integer(msg.showInputDialog("Введите координату X", "0"));
-		int y=new Integer(msg.showInputDialog("Введите координату Y", "0"));
+		int x=new Integer(msg.showInputDialog("Р’РІРµРґРёС‚Рµ РєРѕРѕСЂРґРёРЅР°С‚Сѓ X", "0"));
+		int y=new Integer(msg.showInputDialog("Р’РІРµРґРёС‚Рµ РєРѕРѕСЂРґРёРЅР°С‚Сѓ Y", "0"));
 		dotsAI.protocol.getGame(dotsAI.gameIdx).gameField.setFieldState(dotsAI.protocol.getGame(dotsAI.gameIdx));
 		dotsAI.dotsTemplateEditor.moveFromAI(
 				TemplateType.getContentForTemplateCreation(dotsAI.protocol.getGame(dotsAI.gameIdx),new Point(x, y),dotsAI.protocol.getGame(dotsAI.gameIdx).fieldState,TemplateType.templateTypeSQUARE),
@@ -73,13 +73,13 @@ private void createTemplate(){
 	}catch(Exception exc){}
 }
 
-//включить/выключить паузу в игре
+//РІРєР»СЋС‡РёС‚СЊ/РІС‹РєР»СЋС‡РёС‚СЊ РїР°СѓР·Сѓ РІ РёРіСЂРµ
 private void pauseGameWithRandom(){
 	if(dotsAI.isPause)dotsAI.isPause=false;
 	else dotsAI.isPause=true;
 }
 
-//отмотать игру на 1 или 5 ходов назад
+//РѕС‚РјРѕС‚Р°С‚СЊ РёРіСЂСѓ РЅР° 1 РёР»Рё 5 С…РѕРґРѕРІ РЅР°Р·Р°Рґ
 private void back(int backLength){	
 	if(dotsAI.protocol.getGame(dotsAI.gameIdx).enemyType==EnemyType.RANDOM){
 		dotsAI.protocol.getGame(dotsAI.gameIdx).enemyType=EnemyType.HUMAN;

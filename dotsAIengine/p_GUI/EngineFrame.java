@@ -7,12 +7,12 @@ import javax.swing.JFrame;
 
 import p_JavaPatterns.Pattern_JFrame;
 
-public class EngineFrame implements Runnable{//создает окно для рисования игрового поля без никаких других жлементов интерфейса
+public class EngineFrame implements Runnable{//СЃРѕР·РґР°РµС‚ РѕРєРЅРѕ РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ Р±РµР· РЅРёРєР°РєРёС… РґСЂСѓРіРёС… Р¶Р»РµРјРµРЅС‚РѕРІ РёРЅС‚РµСЂС„РµР№СЃР°
 	
 	JFrame frame=new JFrame();
 	GameField engine;
 	Thread t=new Thread(this);
-	GameFieldGUI gameFieldGUI;//рисование игрового поля
+	GameFieldGUI gameFieldGUI;//СЂРёСЃРѕРІР°РЅРёРµ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
 	
 public EngineFrame(GameField engine){
 	this.engine=engine;
@@ -20,7 +20,7 @@ public EngineFrame(GameField engine){
 	new Pattern_JFrame(frame,"",false,GameFieldGUI.cellSize*(engine.sizeX)+GameGUI.offsetX,
 			GameFieldGUI.cellSize*(engine.sizeY)+GameGUI.offsetY-20,new Color(255,255,255));	
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	gameFieldGUI=new GameFieldGUI(frame.getGraphics(),GameGUI.offsetX,GameGUI.offsetY);//рисование игрового поля
+	gameFieldGUI=new GameFieldGUI(frame.getGraphics(),GameGUI.offsetX,GameGUI.offsetY);//СЂРёСЃРѕРІР°РЅРёРµ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
 	t.start();
 }
 	

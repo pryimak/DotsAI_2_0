@@ -1,6 +1,6 @@
-//Класс TemplateView хранит отображения шаблона, т.к. каждый шаблон можно развернуть 8 способами.
-//Отображения описаны и хранятся в классе Template. Если отображение для данного шаблона совпадает
-//с добавленным ранее отображением, то новое отображение не добавляется (проверка этого происходит классе Template)
+//РљР»Р°СЃСЃ TemplateView С…СЂР°РЅРёС‚ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР°, С‚.Рє. РєР°Р¶РґС‹Р№ С€Р°Р±Р»РѕРЅ РјРѕР¶РЅРѕ СЂР°Р·РІРµСЂРЅСѓС‚СЊ 8 СЃРїРѕСЃРѕР±Р°РјРё.
+//РћС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРїРёСЃР°РЅС‹ Рё С…СЂР°РЅСЏС‚СЃСЏ РІ РєР»Р°СЃСЃРµ Template. Р•СЃР»Рё РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РґР»СЏ РґР°РЅРЅРѕРіРѕ С€Р°Р±Р»РѕРЅР° СЃРѕРІРїР°РґР°РµС‚
+//СЃ РґРѕР±Р°РІР»РµРЅРЅС‹Рј СЂР°РЅРµРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµРј, С‚Рѕ РЅРѕРІРѕРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РЅРµ РґРѕР±Р°РІР»СЏРµС‚СЃСЏ (РїСЂРѕРІРµСЂРєР° СЌС‚РѕРіРѕ РїСЂРѕРёСЃС…РѕРґРёС‚ РєР»Р°СЃСЃРµ Template)
 
 package p_TemplateEngine;
 
@@ -10,318 +10,318 @@ import p_DotsAI.Protocol.Game;
 
 public class TemplateView {
 	
-public byte[] templateContentArray;//сохраненное отображение шаблона 15х15
-public int templateRotationType;//тип разворота шаблона
-public Template template;//шаблон, которому принадлежит данное отображение
+public byte[] templateContentArray;//СЃРѕС…СЂР°РЅРµРЅРЅРѕРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ С€Р°Р±Р»РѕРЅР° 15С…15
+public int templateRotationType;//С‚РёРї СЂР°Р·РІРѕСЂРѕС‚Р° С€Р°Р±Р»РѕРЅР°
+public Template template;//С€Р°Р±Р»РѕРЅ, РєРѕС‚РѕСЂРѕРјСѓ РїСЂРёРЅР°РґР»РµР¶РёС‚ РґР°РЅРЅРѕРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ
 	
-//создаем объект отображения
+//СЃРѕР·РґР°РµРј РѕР±СЉРµРєС‚ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
 public TemplateView(Template template,int templateRotationType){
 	this.template=template;
 	this.templateRotationType=templateRotationType;
 		
-	//развернуть шаблон и получить его отображение
+	//СЂР°Р·РІРµСЂРЅСѓС‚СЊ С€Р°Р±Р»РѕРЅ Рё РїРѕР»СѓС‡РёС‚СЊ РµРіРѕ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ
 	templateContentArray=TemplateRotationType.getTransformArray(templateRotationType,template.templateContent);
 }
 	
-//сравнить отображение шаблона с игровой ситуацией на поле, 
-//в случае совпадения из дерева данного шаблона будет искаться ход (этот поиск выполняется в другом методе, а не в этом)
+//СЃСЂР°РІРЅРёС‚СЊ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР° РїРѕР»Рµ, 
+//РІ СЃР»СѓС‡Р°Рµ СЃРѕРІРїР°РґРµРЅРёСЏ РёР· РґРµСЂРµРІР° РґР°РЅРЅРѕРіРѕ С€Р°Р±Р»РѕРЅР° Р±СѓРґРµС‚ РёСЃРєР°С‚СЊСЃСЏ С…РѕРґ (СЌС‚РѕС‚ РїРѕРёСЃРє РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РІ РґСЂСѓРіРѕРј РјРµС‚РѕРґРµ, Р° РЅРµ РІ СЌС‚РѕРј)
 public boolean isEquals(Game game,Point point,byte[][] fieldState,boolean isSide,int fieldSideType){
 	try{		
-		if(!isSide){//шаблон не для края поля
-			//закомментированная строка может заменить все строки внутри данного if, но это уменьшить скорость поиска
+		if(!isSide){//С€Р°Р±Р»РѕРЅ РЅРµ РґР»СЏ РєСЂР°СЏ РїРѕР»СЏ
+			//Р·Р°РєРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРЅР°СЏ СЃС‚СЂРѕРєР° РјРѕР¶РµС‚ Р·Р°РјРµРЅРёС‚СЊ РІСЃРµ СЃС‚СЂРѕРєРё РІРЅСѓС‚СЂРё РґР°РЅРЅРѕРіРѕ if, РЅРѕ СЌС‚Рѕ СѓРјРµРЅСЊС€РёС‚СЊ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕРёСЃРєР°
 			//for(int i=0;i<Template.size*Template.size;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			
-			//поиск для размера значимой части шаблона=3
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=3
 			for(int i=6;i<9;i++){
 				for(int j=6;j<9;j++){
 					int idx=i*15+j;
 					if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,idx),templateContentArray[idx])){return false;}
 				}
 			}
-			if(template.sizeWithNotAny==3)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==3)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=5
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=5
 			for(int i=80;i<85;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=140;i<145;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=95;i<136;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=99;i<140;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==5)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==5)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=7
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=7
 			for(int i=64;i<71;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=154;i<161;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=79;i<154;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=85;i<160;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==7)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==7)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=9
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=9
 			for(int i=48;i<57;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=168;i<177;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=63;i<168;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=71;i<176;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==9)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==9)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=11
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=11
 			for(int i=32;i<43;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=182;i<193;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=47;i<182;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=57;i<192;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==11)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==11)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=13
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=13
 			for(int i=16;i<29;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=196;i<209;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=31;i<196;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=43;i<208;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==13)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==13)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=15
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=15
 			for(int i=0;i<15;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=210;i<225;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=15;i<210;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
 			for(int i=29;i<224;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolNotSide(game,point,fieldState,i),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==15)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==15)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
 		}else if(fieldSideType==TemplateFieldSideType.templateFieldSideTypeLEFT){
-			//закомментированная строка может заменить все строки внутри данного if, но это уменьшить скорость поиска
+			//Р·Р°РєРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРЅР°СЏ СЃС‚СЂРѕРєР° РјРѕР¶РµС‚ Р·Р°РјРµРЅРёС‚СЊ РІСЃРµ СЃС‚СЂРѕРєРё РІРЅСѓС‚СЂРё РґР°РЅРЅРѕРіРѕ if, РЅРѕ СЌС‚Рѕ СѓРјРµРЅСЊС€РёС‚СЊ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕРёСЃРєР°
 			//for(int i=0;i<Template.size*Template.size;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i]))return false;
 
-			//поиск для размера значимой части шаблона=3
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=3
 			for(int i=6;i<9;i++){
 				for(int j=6;j<9;j++){
 					int idx=i*15+j;
 					if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,idx,template.sizeWithNotAny),templateContentArray[idx])){return false;}
 				}
 			}
-			if(template.sizeWithNotAny==3)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==3)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=5
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=5
 			for(int i=80;i<85;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=140;i<145;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=95;i<136;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=99;i<140;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==5)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==5)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=7
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=7
 			for(int i=64;i<71;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=154;i<161;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=79;i<154;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=85;i<160;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==7)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==7)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=9
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=9
 			for(int i=48;i<57;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=168;i<177;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=63;i<168;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=71;i<176;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==9)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==9)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=11
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=11
 			for(int i=32;i<43;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=182;i<193;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=47;i<182;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=57;i<192;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==11)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==11)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=13
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=13
 			for(int i=16;i<29;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=196;i<209;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=31;i<196;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=43;i<208;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==13)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==13)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=15
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=15
 			for(int i=0;i<15;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=210;i<225;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=15;i<210;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=29;i<224;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolLeft(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==15)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==15)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
 		}else if(fieldSideType==TemplateFieldSideType.templateFieldSideTypeRIGHT){
-			//закомментированная строка может заменить все строки внутри данного if, но это уменьшить скорость поиска
+			//Р·Р°РєРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРЅР°СЏ СЃС‚СЂРѕРєР° РјРѕР¶РµС‚ Р·Р°РјРµРЅРёС‚СЊ РІСЃРµ СЃС‚СЂРѕРєРё РІРЅСѓС‚СЂРё РґР°РЅРЅРѕРіРѕ if, РЅРѕ СЌС‚Рѕ СѓРјРµРЅСЊС€РёС‚СЊ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕРёСЃРєР°
 			//for(int i=0;i<Template.size*Template.size;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i]))return false;
 			
-			//поиск для размера значимой части шаблона=3
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=3
 			for(int i=6;i<9;i++){
 				for(int j=6;j<9;j++){
 					int idx=i*15+j;
 					if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,idx,template.sizeWithNotAny),templateContentArray[idx])){return false;}
 				}
 			}
-			if(template.sizeWithNotAny==3)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==3)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=5
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=5
 			for(int i=80;i<85;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=140;i<145;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=95;i<136;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=99;i<140;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==5)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==5)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=7
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=7
 			for(int i=64;i<71;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=154;i<161;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=79;i<154;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=85;i<160;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==7)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==7)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=9
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=9
 			for(int i=48;i<57;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=168;i<177;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=63;i<168;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=71;i<176;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==9)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==9)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=11
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=11
 			for(int i=32;i<43;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=182;i<193;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=47;i<182;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=57;i<192;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==11)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==11)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=13
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=13
 			for(int i=16;i<29;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=196;i<209;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=31;i<196;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=43;i<208;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==13)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==13)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=15
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=15
 			for(int i=0;i<15;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=210;i<225;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=15;i<210;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=29;i<224;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolRight(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==15)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==15)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
 		}else if(fieldSideType==TemplateFieldSideType.templateFieldSideTypeTOP){
-			//закомментированная строка может заменить все строки внутри данного if, но это уменьшить скорость поиска
+			//Р·Р°РєРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРЅР°СЏ СЃС‚СЂРѕРєР° РјРѕР¶РµС‚ Р·Р°РјРµРЅРёС‚СЊ РІСЃРµ СЃС‚СЂРѕРєРё РІРЅСѓС‚СЂРё РґР°РЅРЅРѕРіРѕ if, РЅРѕ СЌС‚Рѕ СѓРјРµРЅСЊС€РёС‚СЊ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕРёСЃРєР°
 			//for(int i=0;i<Template.size*Template.size;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i]))return false;
 
-			//поиск для размера значимой части шаблона=3
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=3
 			for(int i=6;i<9;i++){
 				for(int j=6;j<9;j++){
 					int idx=i*15+j;
 					if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,idx,template.sizeWithNotAny),templateContentArray[idx])){return false;}
 				}
 			}
-			if(template.sizeWithNotAny==3)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==3)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=5
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=5
 			for(int i=80;i<85;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=140;i<145;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=95;i<136;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=99;i<140;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==5)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==5)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=7
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=7
 			for(int i=64;i<71;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=154;i<161;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=79;i<154;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=85;i<160;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==7)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==7)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=9
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=9
 			for(int i=48;i<57;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=168;i<177;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=63;i<168;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=71;i<176;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==9)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==9)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=11
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=11
 			for(int i=32;i<43;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=182;i<193;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=47;i<182;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=57;i<192;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==11)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==11)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=13
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=13
 			for(int i=16;i<29;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=196;i<209;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=31;i<196;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=43;i<208;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==13)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==13)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=15
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=15
 			for(int i=0;i<15;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=210;i<225;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=15;i<210;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=29;i<224;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolTop(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==15)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==15)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
 		}else if(fieldSideType==TemplateFieldSideType.templateFieldSideTypeBOTTOM){
-			//закомментированная строка может заменить все строки внутри данного if, но это уменьшить скорость поиска
+			//Р·Р°РєРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРЅР°СЏ СЃС‚СЂРѕРєР° РјРѕР¶РµС‚ Р·Р°РјРµРЅРёС‚СЊ РІСЃРµ СЃС‚СЂРѕРєРё РІРЅСѓС‚СЂРё РґР°РЅРЅРѕРіРѕ if, РЅРѕ СЌС‚Рѕ СѓРјРµРЅСЊС€РёС‚СЊ СЃРєРѕСЂРѕСЃС‚СЊ РїРѕРёСЃРєР°
 			//for(int i=0;i<Template.size*Template.size;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i]))return false;
 
-			//поиск для размера значимой части шаблона=3
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=3
 			for(int i=6;i<9;i++){
 				for(int j=6;j<9;j++){
 					int idx=i*15+j;
 					if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,idx,template.sizeWithNotAny),templateContentArray[idx])){return false;}
 				}
 			}
-			if(template.sizeWithNotAny==3)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==3)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=5
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=5
 			for(int i=80;i<85;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=140;i<145;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=95;i<136;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=99;i<140;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==5)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==5)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=7
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=7
 			for(int i=64;i<71;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=154;i<161;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=79;i<154;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=85;i<160;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==7)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==7)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=9
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=9
 			for(int i=48;i<57;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=168;i<177;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=63;i<168;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=71;i<176;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==9)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==9)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=11
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=11
 			for(int i=32;i<43;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=182;i<193;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=47;i<182;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=57;i<192;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==11)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==11)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=13
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=13
 			for(int i=16;i<29;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=196;i<209;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=31;i<196;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=43;i<208;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==13)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==13)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
-			//поиск для размера значимой части шаблона=15
+			//РїРѕРёСЃРє РґР»СЏ СЂР°Р·РјРµСЂР° Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°=15
 			for(int i=0;i<15;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=210;i<225;i++)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=15;i<210;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
 			for(int i=29;i<224;i+=15)if(!isEqualsBySymbol(TemplateType.getContentSymbolBottom(game,point,fieldState,i,template.sizeWithNotAny),templateContentArray[i])){return false;}
-			if(template.sizeWithNotAny==15)return true;//совпадение отображения шаблона с игровой ситуацией найдено, поиск окончен
+			if(template.sizeWithNotAny==15)return true;//СЃРѕРІРїР°РґРµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР°Р№РґРµРЅРѕ, РїРѕРёСЃРє РѕРєРѕРЅС‡РµРЅ
 			
 		}
 		return false;
 	}catch(Exception e){return false;}
 }
 	
-//сравнить соответствующие точку отображение шаблона с точкой игровой ситуацией на поле,
-//в случае совпадения вернуть true
+//СЃСЂР°РІРЅРёС‚СЊ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ С‚РѕС‡РєСѓ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ С€Р°Р±Р»РѕРЅР° СЃ С‚РѕС‡РєРѕР№ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РЅР° РїРѕР»Рµ,
+//РІ СЃР»СѓС‡Р°Рµ СЃРѕРІРїР°РґРµРЅРёСЏ РІРµСЂРЅСѓС‚СЊ true
 private boolean isEqualsBySymbol(byte field,byte template){
 	try{
-		if(field==template){//полное совпадение
+		if(field==template){//РїРѕР»РЅРѕРµ СЃРѕРІРїР°РґРµРЅРёРµ
 			return true;
-		}else if(template==Protocol.templateDotType_ANY){//зеленая точка ANY
+		}else if(template==Protocol.templateDotType_ANY){//Р·РµР»РµРЅР°СЏ С‚РѕС‡РєР° ANY
 			return true;
-		}else if(field==Protocol.templateDotType_RED){//красная точка
-			if(template==Protocol.templateDotType_RED_or_EMPTY)return true;//красная или пустая RED_or_EMPTY
+		}else if(field==Protocol.templateDotType_RED){//РєСЂР°СЃРЅР°СЏ С‚РѕС‡РєР°
+			if(template==Protocol.templateDotType_RED_or_EMPTY)return true;//РєСЂР°СЃРЅР°СЏ РёР»Рё РїСѓСЃС‚Р°СЏ RED_or_EMPTY
 			else return false;
-		}else if(field==Protocol.templateDotType_BLUE){//синяя точка
-			if(template==Protocol.templateDotType_BLUE_or_EMPTY)return true;//синяя или пустая BLUE_or_EMPTY
+		}else if(field==Protocol.templateDotType_BLUE){//СЃРёРЅСЏСЏ С‚РѕС‡РєР°
+			if(template==Protocol.templateDotType_BLUE_or_EMPTY)return true;//СЃРёРЅСЏСЏ РёР»Рё РїСѓСЃС‚Р°СЏ BLUE_or_EMPTY
 			else return false;
-		}else if(field==Protocol.templateDotType_EMPTY){//пустая точка
+		}else if(field==Protocol.templateDotType_EMPTY){//РїСѓСЃС‚Р°СЏ С‚РѕС‡РєР°
 			if(template==Protocol.templateDotType_RED_or_EMPTY||template==Protocol.templateDotType_BLUE_or_EMPTY)return true;
 			else return false;
 		}

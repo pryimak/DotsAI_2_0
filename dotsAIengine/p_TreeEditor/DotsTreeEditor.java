@@ -25,42 +25,42 @@ import p_TreeEngine.TreeNodeDotsTree;
 
 public class DotsTreeEditor extends MainFrame{
 	
-	JScrollPane scroll;//область прокрутки, в которой будет отображаться дерево для возможности его прокрутки вверх-вниз и влево-вправо
-	TemplateEngine base;//база шаблонов
-	public Template template;//текущий шаблон
-	public GameField gameField;//поле с отображением шаблона и ходов дерева
-	public GameFieldGUI gameFieldGUI;//рисование игрового поля
+	JScrollPane scroll;//РѕР±Р»Р°СЃС‚СЊ РїСЂРѕРєСЂСѓС‚РєРё, РІ РєРѕС‚РѕСЂРѕР№ Р±СѓРґРµС‚ РѕС‚РѕР±СЂР°Р¶Р°С‚СЊСЃСЏ РґРµСЂРµРІРѕ РґР»СЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РµРіРѕ РїСЂРѕРєСЂСѓС‚РєРё РІРІРµСЂС…-РІРЅРёР· Рё РІР»РµРІРѕ-РІРїСЂР°РІРѕ
+	TemplateEngine base;//Р±Р°Р·Р° С€Р°Р±Р»РѕРЅРѕРІ
+	public Template template;//С‚РµРєСѓС‰РёР№ С€Р°Р±Р»РѕРЅ
+	public GameField gameField;//РїРѕР»Рµ СЃ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµРј С€Р°Р±Р»РѕРЅР° Рё С…РѕРґРѕРІ РґРµСЂРµРІР°
+	public GameFieldGUI gameFieldGUI;//СЂРёСЃРѕРІР°РЅРёРµ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
 	
-	ArrayList<Point> blueDots;//добавляемые в дерево ходы человека
-	ArrayList<Point> ifMovesDots;//точки для условных ходов
-	Point redDot;//добавляемый в дерево ход ИИ
+	ArrayList<Point> blueDots;//РґРѕР±Р°РІР»СЏРµРјС‹Рµ РІ РґРµСЂРµРІРѕ С…РѕРґС‹ С‡РµР»РѕРІРµРєР°
+	ArrayList<Point> ifMovesDots;//С‚РѕС‡РєРё РґР»СЏ СѓСЃР»РѕРІРЅС‹С… С…РѕРґРѕРІ
+	Point redDot;//РґРѕР±Р°РІР»СЏРµРјС‹Р№ РІ РґРµСЂРµРІРѕ С…РѕРґ РР
 	
-	int selectedNodeId;//ID выбранного элемента дерева	
-	Tree treeOfDots;//дерево
-	TreeNodeDotsTree node;//элемент дерева
-	DefaultTreeModel treeModel;//для управления деревом
+	int selectedNodeId;//ID РІС‹Р±СЂР°РЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РґРµСЂРµРІР°	
+	Tree treeOfDots;//РґРµСЂРµРІРѕ
+	TreeNodeDotsTree node;//СЌР»РµРјРµРЅС‚ РґРµСЂРµРІР°
+	DefaultTreeModel treeModel;//РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РґРµСЂРµРІРѕРј
 	
-	boolean isAlwaysExpand=true;//раскрывать дерево ходов
-	boolean isShowChilds=false;//рисовать вложенные в элемент дерева ходы
+	boolean isAlwaysExpand=true;//СЂР°СЃРєСЂС‹РІР°С‚СЊ РґРµСЂРµРІРѕ С…РѕРґРѕРІ
+	boolean isShowChilds=false;//СЂРёСЃРѕРІР°С‚СЊ РІР»РѕР¶РµРЅРЅС‹Рµ РІ СЌР»РµРјРµРЅС‚ РґРµСЂРµРІР° С…РѕРґС‹
 	
-//создать объект редактора деревьев
+//СЃРѕР·РґР°С‚СЊ РѕР±СЉРµРєС‚ СЂРµРґР°РєС‚РѕСЂР° РґРµСЂРµРІСЊРµРІ
 public DotsTreeEditor(TemplateEngine base){
 	this.base=base;
-	addButtons();//добавить кнопки
+	addButtons();//РґРѕР±Р°РІРёС‚СЊ РєРЅРѕРїРєРё
 	
-	ArrayList<Integer> nodeIndexes=new ArrayList<Integer>();//индексы элементов дерева
+	ArrayList<Integer> nodeIndexes=new ArrayList<Integer>();//РёРЅРґРµРєСЃС‹ СЌР»РµРјРµРЅС‚РѕРІ РґРµСЂРµРІР°
 	nodeIndexes.add(new Integer(0));
-	node=new TreeNodeDotsTree("<html><id=0><font>Дерево ходов</font></html>","",0,nodeIndexes,null,null);//установить верхний элемент дерева
+	node=new TreeNodeDotsTree("<html><id=0><font>Р”РµСЂРµРІРѕ С…РѕРґРѕРІ</font></html>","",0,nodeIndexes,null,null);//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РІРµСЂС…РЅРёР№ СЌР»РµРјРµРЅС‚ РґРµСЂРµРІР°
 	treeModel=new DefaultTreeModel(node);
 	tree=new JTree(treeModel);
 	
-	//создать область прокрутки
+	//СЃРѕР·РґР°С‚СЊ РѕР±Р»Р°СЃС‚СЊ РїСЂРѕРєСЂСѓС‚РєРё
 	scroll=new JScrollPane(tree);
 	scroll.setBounds(10, 300, 510, 475);
 	super.getContentPane().add(scroll);
 	scroll.updateUI();
 	
-	//действия при выборе элемента дерева
+	//РґРµР№СЃС‚РІРёСЏ РїСЂРё РІС‹Р±РѕСЂРµ СЌР»РµРјРµРЅС‚Р° РґРµСЂРµРІР°
 	tree.addTreeSelectionListener(new TreeSelectionListener() {
 		public void valueChanged(TreeSelectionEvent s) {
 			try{
@@ -69,10 +69,10 @@ public DotsTreeEditor(TemplateEngine base){
 		}
 	});
 
-	gameFieldGUI=new GameFieldGUI(graphics,GameGUI.offsetX,GameGUI.offsetY-20);//рисование игрового поля в редакторе деревьев
+	gameFieldGUI=new GameFieldGUI(graphics,GameGUI.offsetX,GameGUI.offsetY-20);//СЂРёСЃРѕРІР°РЅРёРµ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ РІ СЂРµРґР°РєС‚РѕСЂРµ РґРµСЂРµРІСЊРµРІ
 }
 
-//установить дерево ходов в редактор деревьев и нарисовать дерево
+//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РґРµСЂРµРІРѕ С…РѕРґРѕРІ РІ СЂРµРґР°РєС‚РѕСЂ РґРµСЂРµРІСЊРµРІ Рё РЅР°СЂРёСЃРѕРІР°С‚СЊ РґРµСЂРµРІРѕ
 public void setTree(Template template){
 	selectedNodeId=0;
 	this.template=template;	
@@ -92,7 +92,7 @@ public void setTree(Template template){
 	redDot=null;
 }
 
-//обновить редактор при выборе элемента дерева
+//РѕР±РЅРѕРІРёС‚СЊ СЂРµРґР°РєС‚РѕСЂ РїСЂРё РІС‹Р±РѕСЂРµ СЌР»РµРјРµРЅС‚Р° РґРµСЂРµРІР°
 void updateOnTreeSelection(){
 	if(treeOfDots==null)return;
 	
@@ -111,30 +111,30 @@ void updateOnTreeSelection(){
 	repaintField();
 }
 
-//при нажатии мышки на игровом поле редактора деревьев
+//РїСЂРё РЅР°Р¶Р°С‚РёРё РјС‹С€РєРё РЅР° РёРіСЂРѕРІРѕРј РїРѕР»Рµ СЂРµРґР°РєС‚РѕСЂР° РґРµСЂРµРІСЊРµРІ
 public void mousePressed(MouseEvent me) {
 	byte x=getMouseClickX(me);
 	byte y=getMouseClickY(me);
-	if(buttonType.getText().equals("B")){//добавить синий ход на поле
+	if(buttonType.getText().equals("B")){//РґРѕР±Р°РІРёС‚СЊ СЃРёРЅРёР№ С…РѕРґ РЅР° РїРѕР»Рµ
 		if(gameField.canAddMove(x,y)){
 			blueDots.add(new Point(x,y));
 			if(redDot!=null){
-				if(redDot.x==x&redDot.y==y){//удалить ход ИИ при ходе человека в одну и ту же точку
+				if(redDot.x==x&redDot.y==y){//СѓРґР°Р»РёС‚СЊ С…РѕРґ РР РїСЂРё С…РѕРґРµ С‡РµР»РѕРІРµРєР° РІ РѕРґРЅСѓ Рё С‚Сѓ Р¶Рµ С‚РѕС‡РєСѓ
 					redDot=null;
 				}
 			}
-			for(int i=0;i<blueDots.size();i++){//нарисовать синие ходы на поле
+			for(int i=0;i<blueDots.size();i++){//РЅР°СЂРёСЃРѕРІР°С‚СЊ СЃРёРЅРёРµ С…РѕРґС‹ РЅР° РїРѕР»Рµ
 				gameFieldGUI.drawDot(blueDots.get(i).x, blueDots.get(i).y,gameFieldGUI.blue);
 			}
 		}
-	}if(buttonType.getText().equals("E")){//удалить синие точки при редактировании синего node
+	}if(buttonType.getText().equals("E")){//СѓРґР°Р»РёС‚СЊ СЃРёРЅРёРµ С‚РѕС‡РєРё РїСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё СЃРёРЅРµРіРѕ node
 
 		TreeNodeDotsTree selectedTreeNode=treeOfDots.node.getTreeNodeByID(selectedNodeId);
 		if(selectedTreeNode.moveType==GameField.RED)return;
 
-		boolean isNeedToClear=false;//для проверки - принадлежит ли точка к выделеному node
+		boolean isNeedToClear=false;//РґР»СЏ РїСЂРѕРІРµСЂРєРё - РїСЂРёРЅР°РґР»РµР¶РёС‚ Р»Рё С‚РѕС‡РєР° Рє РІС‹РґРµР»РµРЅРѕРјСѓ node
 		for(int i=0;i<selectedTreeNode.points.size();i++){
-			if(selectedTreeNode.points.get(i).x==(x-Protocol.maxSize/2)&selectedTreeNode.points.get(i).y==(y-Protocol.maxSize/2)){//удалить ход человека при ходе ИИ в одну и ту же точку
+			if(selectedTreeNode.points.get(i).x==(x-Protocol.maxSize/2)&selectedTreeNode.points.get(i).y==(y-Protocol.maxSize/2)){//СѓРґР°Р»РёС‚СЊ С…РѕРґ С‡РµР»РѕРІРµРєР° РїСЂРё С…РѕРґРµ РР РІ РѕРґРЅСѓ Рё С‚Сѓ Р¶Рµ С‚РѕС‡РєСѓ
 				selectedTreeNode.points.remove(i);
 				isNeedToClear=true;
 				break;
@@ -142,7 +142,7 @@ public void mousePressed(MouseEvent me) {
 		}
 		if(!isNeedToClear)return;
 
-		//обновить текст к элементу дерева
+		//РѕР±РЅРѕРІРёС‚СЊ С‚РµРєСЃС‚ Рє СЌР»РµРјРµРЅС‚Сѓ РґРµСЂРµРІР°
 		if(selectedTreeNode.points.size()>0){
 			String blueMoves="";
 			for(int i=0;i<selectedTreeNode.points.size();i++){
@@ -155,39 +155,39 @@ public void mousePressed(MouseEvent me) {
 			selectedTreeNode.setUserObject("<html><id="+selectedTreeNode.nodeId+"><font color=blue>default</font></html>");
 		}
 	
-		//обновить поле и дерево
+		//РѕР±РЅРѕРІРёС‚СЊ РїРѕР»Рµ Рё РґРµСЂРµРІРѕ
 		repaintField();
 		treeOfDots.treeModel.reload(selectedTreeNode);
 		if(isAlwaysExpand)for(int i = 0; i < tree.getRowCount(); i++)tree.expandRow(i);		
 		
-	}else if(buttonType.getText().equals("R")){//добавить красный ход на поле
+	}else if(buttonType.getText().equals("R")){//РґРѕР±Р°РІРёС‚СЊ РєСЂР°СЃРЅС‹Р№ С…РѕРґ РЅР° РїРѕР»Рµ
 		if(gameField.canAddMove(x,y)){
 			
 			if(redDot!=null)gameFieldGUI.clearDot(redDot.x, redDot.y);
 			redDot=new Point(x,y);
 			for(int i=0;i<blueDots.size();i++){
-				if(blueDots.get(i).x==x&blueDots.get(i).y==y){//удалить ход человека при ходе ИИ в одну и ту же точку
+				if(blueDots.get(i).x==x&blueDots.get(i).y==y){//СѓРґР°Р»РёС‚СЊ С…РѕРґ С‡РµР»РѕРІРµРєР° РїСЂРё С…РѕРґРµ РР РІ РѕРґРЅСѓ Рё С‚Сѓ Р¶Рµ С‚РѕС‡РєСѓ
 					blueDots.remove(i);
 				}
 			}
-			gameFieldGUI.drawDot(redDot.x, redDot.y,Color.red);//нарисовать добавленный ход
+			gameFieldGUI.drawDot(redDot.x, redDot.y,Color.red);//РЅР°СЂРёСЃРѕРІР°С‚СЊ РґРѕР±Р°РІР»РµРЅРЅС‹Р№ С…РѕРґ
 		}
-	}else if(buttonType.getText().equals("N")){//добавить пустой ход на поле
+	}else if(buttonType.getText().equals("N")){//РґРѕР±Р°РІРёС‚СЊ РїСѓСЃС‚РѕР№ С…РѕРґ РЅР° РїРѕР»Рµ
 		if(gameField.canAddMove(x,y)){
 			if(redDot!=null){
-				if(redDot.x==x&redDot.y==y){//очистить точку - удалить ход ИИ
+				if(redDot.x==x&redDot.y==y){//РѕС‡РёСЃС‚РёС‚СЊ С‚РѕС‡РєСѓ - СѓРґР°Р»РёС‚СЊ С…РѕРґ РР
 					redDot=null;
 					gameFieldGUI.drawDot(x, y,Color.white);
 				}
 			}
 			for(int i=0;i<blueDots.size();i++){
-				if(blueDots.get(i).x==x&blueDots.get(i).y==y){//очистить точку - удалить ход человека
+				if(blueDots.get(i).x==x&blueDots.get(i).y==y){//РѕС‡РёСЃС‚РёС‚СЊ С‚РѕС‡РєСѓ - СѓРґР°Р»РёС‚СЊ С…РѕРґ С‡РµР»РѕРІРµРєР°
 					blueDots.remove(i);
 					gameFieldGUI.drawDot(x, y,Color.white);
 				}
 			}			
 		}
-	}else if(buttonType.getText().equals("RA")||buttonType.getText().equals("BA")){//добавить условный ход на поле
+	}else if(buttonType.getText().equals("RA")||buttonType.getText().equals("BA")){//РґРѕР±Р°РІРёС‚СЊ СѓСЃР»РѕРІРЅС‹Р№ С…РѕРґ РЅР° РїРѕР»Рµ
 		boolean isSetToPointRed=false;
 		TreeNodeDotsTree selectedTreeNode=treeOfDots.node.getTreeNodeByID(selectedNodeId);
 		if(selectedTreeNode.moveType==GameField.RED){
@@ -210,7 +210,7 @@ public void mousePressed(MouseEvent me) {
 	}
 }
 
-//перерисовать поле
+//РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊ РїРѕР»Рµ
 void repaintField(){
 	
 	if(selectedNodeId==0){
@@ -231,7 +231,7 @@ void repaintField(){
 			}
 		}
 		
-		//сделать ходы в игровом поле для дочерних элементов
+		//СЃРґРµР»Р°С‚СЊ С…РѕРґС‹ РІ РёРіСЂРѕРІРѕРј РїРѕР»Рµ РґР»СЏ РґРѕС‡РµСЂРЅРёС… СЌР»РµРјРµРЅС‚РѕРІ
 		for(int i=listOfNodes.size()-1;i>=0;i--){
 			if(listOfNodes.get(i).moveType==GameField.RED){
 				Point p=new Point();
@@ -258,7 +258,7 @@ void repaintField(){
 		
 		gameFieldGUI.drawGameField(gameField,false);
 		
-		for(int j=0;j<listOfNodes.size();j++){//нарисовать синие квадраты когда выбор из нескольких синих ходов
+		for(int j=0;j<listOfNodes.size();j++){//РЅР°СЂРёСЃРѕРІР°С‚СЊ СЃРёРЅРёРµ РєРІР°РґСЂР°С‚С‹ РєРѕРіРґР° РІС‹Р±РѕСЂ РёР· РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРЅРёС… С…РѕРґРѕРІ
 			if(listOfNodes.get(j).moveType==GameField.BLUE&listOfNodes.get(j).points.size()>1){
 				for(int i=0;i<listOfNodes.get(j).points.size();i++){
 					gameFieldGUI.fillSquare(getGraphics(), listOfNodes.get(j).points.get(i).x+Protocol.maxSize/2, listOfNodes.get(j).points.get(i).y+Protocol.maxSize/2, Color.blue, listOfNodes.get(j).level);
@@ -266,7 +266,7 @@ void repaintField(){
 			}
 		}
 		
-		//нарисовать точки с условиями
+		//РЅР°СЂРёСЃРѕРІР°С‚СЊ С‚РѕС‡РєРё СЃ СѓСЃР»РѕРІРёСЏРјРё
 		if(selectedTreeNode.condition!=null){
 			boolean isRed=selectedTreeNode.condition.enclosureType.equals("r")?true:false;
 			for(int i=0;i<selectedTreeNode.condition.ifmoves.size();i++){
@@ -279,7 +279,7 @@ void repaintField(){
 		}
 	}
 	
-	//нарисовать квадраты с маркерами для дочерних элементов
+	//РЅР°СЂРёСЃРѕРІР°С‚СЊ РєРІР°РґСЂР°С‚С‹ СЃ РјР°СЂРєРµСЂР°РјРё РґР»СЏ РґРѕС‡РµСЂРЅРёС… СЌР»РµРјРµРЅС‚РѕРІ
 	if(isShowChilds){
 		TreeNodeDotsTree selectedTreeNode=treeOfDots.node.getTreeNodeByID(selectedNodeId);
 		for(int i=0;i<selectedTreeNode.childNodes.size();i++){
@@ -295,7 +295,7 @@ void repaintField(){
 	}
 }
 
-//добавить действия при нажатии кнопок
+//РґРѕР±Р°РІРёС‚СЊ РґРµР№СЃС‚РІРёСЏ РїСЂРё РЅР°Р¶Р°С‚РёРё РєРЅРѕРїРѕРє
 void addButtons(){
 	
 	buttonAddCondition.addActionListener(new ActionListener() {
@@ -350,7 +350,7 @@ void addButtons(){
 		public void actionPerformed(ActionEvent e) {
 			
 			if(treeOfDots==null){
-				treeOfDots=new Tree("<html><id=0><font>Дерево ходов</font></html>",template.templateID);
+				treeOfDots=new Tree("<html><id=0><font>Р”РµСЂРµРІРѕ С…РѕРґРѕРІ</font></html>",template.templateID);
 				template.tree=treeOfDots;
 				tree.setModel(treeOfDots.treeModel);
 				if(isAlwaysExpand)for(int i = 0; i < tree.getRowCount(); i ++)tree.expandRow(i);
@@ -490,7 +490,7 @@ void addButtons(){
 			int symmetryType=TreeSymmetryType.treeSymmetryTypeGORIZONTAL;
 			double symmetryBorder=0;
 			try{
-				int x=new Integer(msg.showInputDialog("<html>Введите число 0,1,2,3 - тип симметрии:<br>"
+				int x=new Integer(msg.showInputDialog("<html>Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ 0,1,2,3 - С‚РёРї СЃРёРјРјРµС‚СЂРёРё:<br>"
 						+ TreeSymmetryType.treeSymmetryTypeGORIZONTAL+" - "+TreeSymmetryType.getTreeSymmetryTypeDescription(TreeSymmetryType.treeSymmetryTypeGORIZONTAL)+"<br>"
 						+ TreeSymmetryType.treeSymmetryTypeVERTICAL+" - "+TreeSymmetryType.getTreeSymmetryTypeDescription(TreeSymmetryType.treeSymmetryTypeVERTICAL)+"<br>"
 						+ TreeSymmetryType.treeSymmetryTypeMAIN_DIAGONAL+" - "+TreeSymmetryType.getTreeSymmetryTypeDescription(TreeSymmetryType.treeSymmetryTypeMAIN_DIAGONAL)+"<br>"
@@ -500,7 +500,7 @@ void addButtons(){
 				else if(x==2)symmetryType=TreeSymmetryType.treeSymmetryTypeMAIN_DIAGONAL;
 				else if(x==3)symmetryType=TreeSymmetryType.treeSymmetryTypeSECOND_DIAGONAL;
 				
-				symmetryBorder=new Double(msg.showInputDialog("Введите смещение - число типа double", "0")).doubleValue();
+				symmetryBorder=new Double(msg.showInputDialog("Р’РІРµРґРёС‚Рµ СЃРјРµС‰РµРЅРёРµ - С‡РёСЃР»Рѕ С‚РёРїР° double", "0")).doubleValue();
 				
 				treeOfDots.symmetryType=symmetryType;
 				treeOfDots.symmetryBorder=symmetryBorder;
@@ -512,7 +512,7 @@ void addButtons(){
 	});
 }
 
-//нарисовать шаблон на поле редактора деревьев
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ С€Р°Р±Р»РѕРЅ РЅР° РїРѕР»Рµ СЂРµРґР°РєС‚РѕСЂР° РґРµСЂРµРІСЊРµРІ
 void drawTemplate(Template template){
 
 	gameField=new GameField(Protocol.maxSize,Protocol.maxSize);
@@ -529,7 +529,7 @@ void drawTemplate(Template template){
 	gameFieldGUI.drawDotsForTreeEditor(gameField,true,template);
 }
 
-//получить координаты поля из координат пикселя при нажатии кнопки мыши
+//РїРѕР»СѓС‡РёС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРѕР»СЏ РёР· РєРѕРѕСЂРґРёРЅР°С‚ РїРёРєСЃРµР»СЏ РїСЂРё РЅР°Р¶Р°С‚РёРё РєРЅРѕРїРєРё РјС‹С€Рё
 byte getMouseClickX(MouseEvent me){return (byte)(((double)me.getX()+8-GameGUI.offsetX)/(double)GameFieldGUI.cellSize);};
 byte getMouseClickY(MouseEvent me){return (byte)(((double)me.getY()+8-GameGUI.offsetY+20)/(double)GameFieldGUI.cellSize);};
 	

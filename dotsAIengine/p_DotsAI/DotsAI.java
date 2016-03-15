@@ -1,5 +1,5 @@
-//Класс DotsAI является главным классом программы, с него начинается работа программы
-//и он обеспечивает функционал главного окна программы
+//РљР»Р°СЃСЃ DotsAI СЏРІР»СЏРµС‚СЃСЏ РіР»Р°РІРЅС‹Рј РєР»Р°СЃСЃРѕРј РїСЂРѕРіСЂР°РјРјС‹, СЃ РЅРµРіРѕ РЅР°С‡РёРЅР°РµС‚СЃСЏ СЂР°Р±РѕС‚Р° РїСЂРѕРіСЂР°РјРјС‹
+//Рё РѕРЅ РѕР±РµСЃРїРµС‡РёРІР°РµС‚ С„СѓРЅРєС†РёРѕРЅР°Р» РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР° РїСЂРѕРіСЂР°РјРјС‹
 
 package p_DotsAI;
 
@@ -33,65 +33,65 @@ import p_TemplateEditor.DotsTemplateEditor;
 
 public class DotsAI extends JFrame implements Runnable,MouseListener, WindowListener, MouseMotionListener{
 	
-	public GameGUI gameGUI=new GameGUI();//вспомагательный класс для обеспечения графического интерфейса главного окна программы
-	public GameFieldGUI gameFieldGUI;//класс для рисования поля и точек
-	public DotsTemplateEditor dotsTemplateEditor=null;//редактор шаблонов
-	byte preX=0,preY=0,x,y;//точки курсора - предыдущая и текущая
-	byte moveAIx=99,moveAIy=99;//ход ИИ, вначале равен 99
-	Point point;//ход ИИ
-	public Protocol protocol;//ищет ход ИИ и хранит текущие игры
+	public GameGUI gameGUI=new GameGUI();//РІСЃРїРѕРјР°РіР°С‚РµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ РґР»СЏ РѕР±РµСЃРїРµС‡РµРЅРёСЏ РіСЂР°С„РёС‡РµСЃРєРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР° РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР° РїСЂРѕРіСЂР°РјРјС‹
+	public GameFieldGUI gameFieldGUI;//РєР»Р°СЃСЃ РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ РїРѕР»СЏ Рё С‚РѕС‡РµРє
+	public DotsTemplateEditor dotsTemplateEditor=null;//СЂРµРґР°РєС‚РѕСЂ С€Р°Р±Р»РѕРЅРѕРІ
+	byte preX=0,preY=0,x,y;//С‚РѕС‡РєРё РєСѓСЂСЃРѕСЂР° - РїСЂРµРґС‹РґСѓС‰Р°СЏ Рё С‚РµРєСѓС‰Р°СЏ
+	byte moveAIx=99,moveAIy=99;//С…РѕРґ РР, РІРЅР°С‡Р°Р»Рµ СЂР°РІРµРЅ 99
+	Point point;//С…РѕРґ РР
+	public Protocol protocol;//РёС‰РµС‚ С…РѕРґ РР Рё С…СЂР°РЅРёС‚ С‚РµРєСѓС‰РёРµ РёРіСЂС‹
 	
-	//переменные для определения времени
+	//РїРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ РІСЂРµРјРµРЅРё
 	long start;
 	public long AItime;
 	public int AImovesCount,AItotalTime;
 	public double AIavgTime;
 	
-	public boolean isPause=false;//есть ли пауза в игре
-	Random rand=new Random();//генератор случайных чисел
-	public JLabel label=new JLabel();//метка с информацией
-	public JLabel labelCoordinates=new JLabel();//метка с координатами
+	public boolean isPause=false;//РµСЃС‚СЊ Р»Рё РїР°СѓР·Р° РІ РёРіСЂРµ
+	Random rand=new Random();//РіРµРЅРµСЂР°С‚РѕСЂ СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР»
+	public JLabel label=new JLabel();//РјРµС‚РєР° СЃ РёРЅС„РѕСЂРјР°С†РёРµР№
+	public JLabel labelCoordinates=new JLabel();//РјРµС‚РєР° СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё
 	
-	public JMenuItem itemNewAIvsHuman,itemNewAIvsRandom,itemNewAIvsAI,itemOpenGame,itemSaveGame,itemAboutGame;//элементы меню
-	public Thread t=new Thread(this);//поток, управляющий ходом игры
-	public byte sizeX=39,sizeY=32;//размер поля
-	int redX1=18,redY1=16,blueX1=18,blueY1=15,redX2=19,redY2=15,blueX2=19,blueY2=16;//ходы стартовой позиции
-	public int gameIdx=0;//индекс игры против ИИ
+	public JMenuItem itemNewAIvsHuman,itemNewAIvsRandom,itemNewAIvsAI,itemOpenGame,itemSaveGame,itemAboutGame;//СЌР»РµРјРµРЅС‚С‹ РјРµРЅСЋ
+	public Thread t=new Thread(this);//РїРѕС‚РѕРє, СѓРїСЂР°РІР»СЏСЋС‰РёР№ С…РѕРґРѕРј РёРіСЂС‹
+	public byte sizeX=39,sizeY=32;//СЂР°Р·РјРµСЂ РїРѕР»СЏ
+	int redX1=18,redY1=16,blueX1=18,blueY1=15,redX2=19,redY2=15,blueX2=19,blueY2=16;//С…РѕРґС‹ СЃС‚Р°СЂС‚РѕРІРѕР№ РїРѕР·РёС†РёРё
+	public int gameIdx=0;//РёРЅРґРµРєСЃ РёРіСЂС‹ РїСЂРѕС‚РёРІ РР
 	
 public DotsAI(){
 	
-	//вывод информации о программе
+	//РІС‹РІРѕРґ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РїСЂРѕРіСЂР°РјРјРµ
 	AboutGameFrame aboutGameFrame=new AboutGameFrame();
-	aboutGameFrame.frame.setTitle("Загрузка. Подождите около 10 секунд...");
+	aboutGameFrame.frame.setTitle("Р—Р°РіСЂСѓР·РєР°. РџРѕРґРѕР¶РґРёС‚Рµ РѕРєРѕР»Рѕ 10 СЃРµРєСѓРЅРґ...");
 	
-	protocol=new Protocol();//основной класс хранения игр и поиска ходов ИИ
+	protocol=new Protocol();//РѕСЃРЅРѕРІРЅРѕР№ РєР»Р°СЃСЃ С…СЂР°РЅРµРЅРёСЏ РёРіСЂ Рё РїРѕРёСЃРєР° С…РѕРґРѕРІ РР
 	
-	protocol.addNewGame(++gameIdx,EnemyType.HUMAN,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2);//создание новой игры
+	protocol.addNewGame(++gameIdx,EnemyType.HUMAN,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2);//СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕР№ РёРіСЂС‹
 	
-	//создание главного окна программы
+	//СЃРѕР·РґР°РЅРёРµ РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР° РїСЂРѕРіСЂР°РјРјС‹
 	new Pattern_JFrame(this,Protocol.appName+" "+Protocol.appVersion,false,GameFieldGUI.cellSize*(protocol.getGame(gameIdx).sizeX+1)+GameGUI.offsetX-25,
 			GameFieldGUI.cellSize*(protocol.getGame(gameIdx).sizeY+1)+GameGUI.offsetY-35,new Color(255,255,255));
 	
-	gameFieldGUI=new GameFieldGUI(this.getGraphics(),GameGUI.offsetX,GameGUI.offsetY);//для рисования поля и точек
+	gameFieldGUI=new GameFieldGUI(this.getGraphics(),GameGUI.offsetX,GameGUI.offsetY);//РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ РїРѕР»СЏ Рё С‚РѕС‡РµРє
 	
-	this.setIconImage(Pattern_Resources.icon);//добавление иконки для окна
+	this.setIconImage(Pattern_Resources.icon);//РґРѕР±Р°РІР»РµРЅРёРµ РёРєРѕРЅРєРё РґР»СЏ РѕРєРЅР°
 	
-	//для обработки событий нажатия и перемещения курсора, а также событий с окном программы
+	//РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕР±С‹С‚РёР№ РЅР°Р¶Р°С‚РёСЏ Рё РїРµСЂРµРјРµС‰РµРЅРёСЏ РєСѓСЂСЃРѕСЂР°, Р° С‚Р°РєР¶Рµ СЃРѕР±С‹С‚РёР№ СЃ РѕРєРЅРѕРј РїСЂРѕРіСЂР°РјРјС‹
 	this.addMouseListener(this);
 	this.addWindowListener(this);
 	this.addMouseMotionListener(this);
 	
-	//создание меню
+	//СЃРѕР·РґР°РЅРёРµ РјРµРЅСЋ
 	JMenuBar menu=new JMenuBar();
-	JMenu item=new JMenu("Файл");
-	itemNewAIvsHuman=new JMenuItem("Новая игра AI vs Human");
-	itemNewAIvsAI=new JMenuItem("Новая игра AI vs AI");
-	itemNewAIvsRandom=new JMenuItem("Новая игра AI vs Random");
-	itemOpenGame=new JMenuItem("Открыть игру");
-	itemSaveGame=new JMenuItem("Сохранить игру");
-	itemAboutGame=new JMenuItem("О программе");
+	JMenu item=new JMenu("Р¤Р°Р№Р»");
+	itemNewAIvsHuman=new JMenuItem("РќРѕРІР°СЏ РёРіСЂР° AI vs Human");
+	itemNewAIvsAI=new JMenuItem("РќРѕРІР°СЏ РёРіСЂР° AI vs AI");
+	itemNewAIvsRandom=new JMenuItem("РќРѕРІР°СЏ РёРіСЂР° AI vs Random");
+	itemOpenGame=new JMenuItem("РћС‚РєСЂС‹С‚СЊ РёРіСЂСѓ");
+	itemSaveGame=new JMenuItem("РЎРѕС…СЂР°РЅРёС‚СЊ РёРіСЂСѓ");
+	itemAboutGame=new JMenuItem("Рћ РїСЂРѕРіСЂР°РјРјРµ");
 	
-	//добавление элементов в меню
+	//РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ РІ РјРµРЅСЋ
 	menu.add(item);
 	item.add(itemNewAIvsHuman);
 	item.add(itemNewAIvsAI);
@@ -105,26 +105,26 @@ public DotsAI(){
 	menu.add(labelCoordinates);
 	this.setJMenuBar(menu);
 	
-	aboutGameFrame.frame.dispose();//закрыть окно с информацией о программе
+	aboutGameFrame.frame.dispose();//Р·Р°РєСЂС‹С‚СЊ РѕРєРЅРѕ СЃ РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ РїСЂРѕРіСЂР°РјРјРµ
 	
-	this.move(DotsAI.this.getX(), DotsAI.this.getY()-150);//сдвинуть главное окно программы
+	this.move(DotsAI.this.getX(), DotsAI.this.getY()-150);//СЃРґРІРёРЅСѓС‚СЊ РіР»Р°РІРЅРѕРµ РѕРєРЅРѕ РїСЂРѕРіСЂР°РјРјС‹
 	
-	//создать редактор шаблонов
+	//СЃРѕР·РґР°С‚СЊ СЂРµРґР°РєС‚РѕСЂ С€Р°Р±Р»РѕРЅРѕРІ
 	dotsTemplateEditor=new DotsTemplateEditor(protocol.templateEngine,DotsAI.this.getX(),DotsAI.this.getY()+DotsAI.this.getHeight(),this);
 	dotsTemplateEditor.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	
-	gameGUI.newGame(this);//дополнительный графический интерфейс
+	gameGUI.newGame(this);//РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Р№ РіСЂР°С„РёС‡РµСЃРєРёР№ РёРЅС‚РµСЂС„РµР№СЃ
 	
-	//добавление кнопок управления игрой
+	//РґРѕР±Р°РІР»РµРЅРёРµ РєРЅРѕРїРѕРє СѓРїСЂР°РІР»РµРЅРёСЏ РёРіСЂРѕР№
 	GameManagement gameManagementFrame=new GameManagement(this);
 	menu.add(gameManagementFrame.buttonPause);
 	menu.add(gameManagementFrame.buttonBackLength1);
 	menu.add(gameManagementFrame.buttonBackLength5);
 	menu.add(gameManagementFrame.buttonCreateTemplate);
 	
-	aiMove(null);//сделать первый ход ИИ
+	aiMove(null);//СЃРґРµР»Р°С‚СЊ РїРµСЂРІС‹Р№ С…РѕРґ РР
 	
-	//по нажатию меню вывести окно с информацией об игре
+	//РїРѕ РЅР°Р¶Р°С‚РёСЋ РјРµРЅСЋ РІС‹РІРµСЃС‚Рё РѕРєРЅРѕ СЃ РёРЅС„РѕСЂРјР°С†РёРµР№ РѕР± РёРіСЂРµ
 	itemAboutGame.addMouseListener(new MouseListener() {
 		public void mouseClicked(MouseEvent arg0) {}
 		public void mouseEntered(MouseEvent arg0) {}
@@ -133,7 +133,7 @@ public DotsAI(){
 		public void mouseReleased(MouseEvent arg0) {}
 	});
 	
-	//по нажатию меню открыть список сохраненных игр с возможностью загрузить игру
+	//РїРѕ РЅР°Р¶Р°С‚РёСЋ РјРµРЅСЋ РѕС‚РєСЂС‹С‚СЊ СЃРїРёСЃРѕРє СЃРѕС…СЂР°РЅРµРЅРЅС‹С… РёРіСЂ СЃ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊСЋ Р·Р°РіСЂСѓР·РёС‚СЊ РёРіСЂСѓ
 	itemOpenGame.addMouseListener(new MouseListener() {
 		public void mouseClicked(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}
@@ -147,7 +147,7 @@ public DotsAI(){
 		public void mouseEntered(MouseEvent e) {}
 	});
 	
-	//по нажатию меню сохранить текущую игру
+	//РїРѕ РЅР°Р¶Р°С‚РёСЋ РјРµРЅСЋ СЃРѕС…СЂР°РЅРёС‚СЊ С‚РµРєСѓС‰СѓСЋ РёРіСЂСѓ
 	itemSaveGame.addMouseListener(new MouseListener() {
 		public void mouseClicked(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}
@@ -158,12 +158,12 @@ public DotsAI(){
 		public void mouseEntered(MouseEvent e) {}
 	});
 	
-	//по нажатию меню начать новую игру человека с ИИ
+	//РїРѕ РЅР°Р¶Р°С‚РёСЋ РјРµРЅСЋ РЅР°С‡Р°С‚СЊ РЅРѕРІСѓСЋ РёРіСЂСѓ С‡РµР»РѕРІРµРєР° СЃ РР
 	itemNewAIvsHuman.addMouseListener(new MouseListener() {	
 		public void mouseClicked(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}
 		public void mousePressed(MouseEvent e) {
-			//создать новую игру и сделать первый ход ИИ
+			//СЃРѕР·РґР°С‚СЊ РЅРѕРІСѓСЋ РёРіСЂСѓ Рё СЃРґРµР»Р°С‚СЊ РїРµСЂРІС‹Р№ С…РѕРґ РР
 			t.stop();
 			protocol.addNewGame(++gameIdx,EnemyType.HUMAN,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2);
 			gameGUI.newGame(DotsAI.this);
@@ -174,12 +174,12 @@ public DotsAI(){
 		public void mouseExited(MouseEvent e) {}
 		public void mouseEntered(MouseEvent e) {}});
 
-	//по нажатию меню начать новую игру рандома с ИИ
+	//РїРѕ РЅР°Р¶Р°С‚РёСЋ РјРµРЅСЋ РЅР°С‡Р°С‚СЊ РЅРѕРІСѓСЋ РёРіСЂСѓ СЂР°РЅРґРѕРјР° СЃ РР
 	itemNewAIvsRandom.addMouseListener(new MouseListener(){	
 		public void mouseClicked(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}
 		public void mousePressed(MouseEvent e) {
-			//создать новую игру
+			//СЃРѕР·РґР°С‚СЊ РЅРѕРІСѓСЋ РёРіСЂСѓ
 			t.stop();
 			protocol.addNewGame(++gameIdx,EnemyType.RANDOM,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2);
 			gameGUI.newGame(DotsAI.this);
@@ -189,12 +189,12 @@ public DotsAI(){
 		public void mouseExited(MouseEvent e) {}
 		public void mouseEntered(MouseEvent e) {}});
 	
-	//по нажатию меню начать новую игру ИИ с ИИ
+	//РїРѕ РЅР°Р¶Р°С‚РёСЋ РјРµРЅСЋ РЅР°С‡Р°С‚СЊ РЅРѕРІСѓСЋ РёРіСЂСѓ РР СЃ РР
 	itemNewAIvsAI.addMouseListener(new MouseListener(){	
 		public void mouseClicked(MouseEvent e) {}
 		public void mouseReleased(MouseEvent e) {}
 		public void mousePressed(MouseEvent e) {
-			//создать две игры для каждого ИИ
+			//СЃРѕР·РґР°С‚СЊ РґРІРµ РёРіСЂС‹ РґР»СЏ РєР°Р¶РґРѕРіРѕ РР
 			t.stop();
 			protocol.addNewGame(++gameIdx,EnemyType.AI,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2);
 			protocol.addNewGame(-gameIdx,EnemyType.AI,sizeX,sizeY,blueX1,blueY1,redX1,redY1,blueX2,blueY2,redX2,redY2);
@@ -206,13 +206,13 @@ public DotsAI(){
 		public void mouseEntered(MouseEvent e) {}});
 }
 
-//по нажатию мыши сделать ход человека и найти ответный ход ИИ
+//РїРѕ РЅР°Р¶Р°С‚РёСЋ РјС‹С€Рё СЃРґРµР»Р°С‚СЊ С…РѕРґ С‡РµР»РѕРІРµРєР° Рё РЅР°Р№С‚Рё РѕС‚РІРµС‚РЅС‹Р№ С…РѕРґ РР
 public void mousePressed(MouseEvent me){
 	x=getMouseClickX(me);
 	y=getMouseClickY(me);
 	if(protocol.getGame(gameIdx).gameField.canAddMove(x,y)&protocol.getGame(gameIdx).enemyType==EnemyType.HUMAN&(protocol.getGame(gameIdx).gameField.lastDotType==GameField.RED|protocol.getGame(gameIdx).getMovesCount()==0)){
-		AIenemyMove(x,y);//сделать ход человека
-		aiMove(null);//найти ответный ход ИИ
+		AIenemyMove(x,y);//СЃРґРµР»Р°С‚СЊ С…РѕРґ С‡РµР»РѕРІРµРєР°
+		aiMove(null);//РЅР°Р№С‚Рё РѕС‚РІРµС‚РЅС‹Р№ С…РѕРґ РР
 	}
 }
 
@@ -222,15 +222,15 @@ public void windowActivated(WindowEvent e){
 	t.start();
 }
 
-public void windowClosing(WindowEvent e){//при закрытии окна автоматически сохранить базу шаблонов
+public void windowClosing(WindowEvent e){//РїСЂРё Р·Р°РєСЂС‹С‚РёРё РѕРєРЅР° Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё СЃРѕС…СЂР°РЅРёС‚СЊ Р±Р°Р·Сѓ С€Р°Р±Р»РѕРЅРѕРІ
 	protocol.templateEngine.saveTemplateBase();
 }
 
-public static void main(String[] args){//начать выполнение программы
+public static void main(String[] args){//РЅР°С‡Р°С‚СЊ РІС‹РїРѕР»РЅРµРЅРёРµ РїСЂРѕРіСЂР°РјРјС‹
 	new DotsAI();
 }
 
-//автоматическое управление игрой ИИ против ИИ и ИИ против рандома
+//Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ СѓРїСЂР°РІР»РµРЅРёРµ РёРіСЂРѕР№ РР РїСЂРѕС‚РёРІ РР Рё РР РїСЂРѕС‚РёРІ СЂР°РЅРґРѕРјР°
 public void run(){try{	
 	try{t.sleep(500);}catch(Exception e){}
 
@@ -242,24 +242,24 @@ public void run(){try{
 			
 			aiMove(null);
 			
-			if(protocol.getGame(gameIdx).enemyType==EnemyType.RANDOM){//если игра против рандома, найти случайный ход
+			if(protocol.getGame(gameIdx).enemyType==EnemyType.RANDOM){//РµСЃР»Рё РёРіСЂР° РїСЂРѕС‚РёРІ СЂР°РЅРґРѕРјР°, РЅР°Р№С‚Рё СЃР»СѓС‡Р°Р№РЅС‹Р№ С…РѕРґ
 				while(!protocol.getGame(gameIdx).gameField.canAddMove(moveAIx,moveAIy)){
 					moveAIx=(byte) rand.nextInt(protocol.getGame(gameIdx).sizeX);
 					moveAIy=(byte) rand.nextInt(protocol.getGame(gameIdx).sizeY);
 				}
-			}else if(protocol.getGame(gameIdx).enemyType==EnemyType.AI){//если игра против ИИ, найти ход второго ИИ
+			}else if(protocol.getGame(gameIdx).enemyType==EnemyType.AI){//РµСЃР»Рё РёРіСЂР° РїСЂРѕС‚РёРІ РР, РЅР°Р№С‚Рё С…РѕРґ РІС‚РѕСЂРѕРіРѕ РР
 				protocol.addAIenemyMove(-gameIdx,point.x,point.y);
 				Point p=protocol.getAImove(-gameIdx,10,null);
 				moveAIx=(byte) p.x;
 				moveAIy=(byte) p.y;
 			}
-			AIenemyMove(moveAIx,moveAIy);//сделать ход соперника ИИ
+			AIenemyMove(moveAIx,moveAIy);//СЃРґРµР»Р°С‚СЊ С…РѕРґ СЃРѕРїРµСЂРЅРёРєР° РР
 
-			//проверка на завершение игры - сдачей или заземлением
+			//РїСЂРѕРІРµСЂРєР° РЅР° Р·Р°РІРµСЂС€РµРЅРёРµ РёРіСЂС‹ - СЃРґР°С‡РµР№ РёР»Рё Р·Р°Р·РµРјР»РµРЅРёРµРј
 			if((protocol.getGame(gameIdx).lastAimove.x==-2&protocol.getGame(gameIdx).lastAimove.y==-2)|(protocol.getGame(gameIdx).lastAimove.x==-3&protocol.getGame(gameIdx).lastAimove.y==-3)|(protocol.getGame(gameIdx).lastAimove.x==-4&protocol.getGame(gameIdx).lastAimove.y==-4)){
 				break;
 			}
-			//завершить игру если сделано слишком много ходов
+			//Р·Р°РІРµСЂС€РёС‚СЊ РёРіСЂСѓ РµСЃР»Рё СЃРґРµР»Р°РЅРѕ СЃР»РёС€РєРѕРј РјРЅРѕРіРѕ С…РѕРґРѕРІ
 			if(protocol.getGame(gameIdx).getMovesCount()>(protocol.getGame(gameIdx).sizeX*protocol.getGame(gameIdx).sizeY-100)){
 				break;
 			}
@@ -269,10 +269,10 @@ public void run(){try{
 	t.stop();
 }catch(Exception e){}}
 
-//выполнить ход ИИ и проверить игру на завершение
+//РІС‹РїРѕР»РЅРёС‚СЊ С…РѕРґ РР Рё РїСЂРѕРІРµСЂРёС‚СЊ РёРіСЂСѓ РЅР° Р·Р°РІРµСЂС€РµРЅРёРµ
 public void aiMove(Point recommendedMove){	
 	
-	//найти ход ИИ и замерять время
+	//РЅР°Р№С‚Рё С…РѕРґ РР Рё Р·Р°РјРµСЂСЏС‚СЊ РІСЂРµРјСЏ
 	start=System.currentTimeMillis();
 	point=protocol.getAImove(gameIdx,10,recommendedMove);
 	AItime=System.currentTimeMillis()-start;
@@ -280,16 +280,16 @@ public void aiMove(Point recommendedMove){
 	AImovesCount++;
 	AIavgTime = new BigDecimal(AItotalTime/(double)AImovesCount/1000.0).setScale(2, RoundingMode.HALF_UP).doubleValue();
 	
-	//проверить игру на завершение
+	//РїСЂРѕРІРµСЂРёС‚СЊ РёРіСЂСѓ РЅР° Р·Р°РІРµСЂС€РµРЅРёРµ
 	boolean isGameEnd=false;
-	if((point.x==-2&point.y==-2)|//ИИ заземлился, ИИ заканчивает игру
-			(point.x==-3&point.y==-3)|//человек заземлился, ИИ сдается
-			(point.x==-4&point.y==-4)//ИИ сдается, т.к. потерял много точек
+	if((point.x==-2&point.y==-2)|//РР Р·Р°Р·РµРјР»РёР»СЃСЏ, РР Р·Р°РєР°РЅС‡РёРІР°РµС‚ РёРіСЂСѓ
+			(point.x==-3&point.y==-3)|//С‡РµР»РѕРІРµРє Р·Р°Р·РµРјР»РёР»СЃСЏ, РР СЃРґР°РµС‚СЃСЏ
+			(point.x==-4&point.y==-4)//РР СЃРґР°РµС‚СЃСЏ, С‚.Рє. РїРѕС‚РµСЂСЏР» РјРЅРѕРіРѕ С‚РѕС‡РµРє
 		){
 		isGameEnd=true;
 	}
 	
-	//если игра завершена, то пустые места на поле заполняются точками проигравшего
+	//РµСЃР»Рё РёРіСЂР° Р·Р°РІРµСЂС€РµРЅР°, С‚Рѕ РїСѓСЃС‚С‹Рµ РјРµСЃС‚Р° РЅР° РїРѕР»Рµ Р·Р°РїРѕР»РЅСЏСЋС‚СЃСЏ С‚РѕС‡РєР°РјРё РїСЂРѕРёРіСЂР°РІС€РµРіРѕ
 	if(isGameEnd){
 		protocol.getGame(gameIdx).gameField.setTerrytoryState(protocol.getGame(gameIdx));
 		for(int moveAIx1=0;moveAIx1<protocol.getGame(gameIdx).sizeX;moveAIx1++){for(int moveAIy1=0;moveAIy1<protocol.getGame(gameIdx).sizeY;moveAIy1++){
@@ -305,22 +305,22 @@ public void aiMove(Point recommendedMove){
 		DotsAI.this.label.setText(gameGUI.getLabelText(DotsAI.this));		
 	}
 	
-	gameGUI.gameRepaint(DotsAI.this,true);//перерисовать игру
+	gameGUI.gameRepaint(DotsAI.this,true);//РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊ РёРіСЂСѓ
 	
-	//удалить игру при ее завершении
+	//СѓРґР°Р»РёС‚СЊ РёРіСЂСѓ РїСЂРё РµРµ Р·Р°РІРµСЂС€РµРЅРёРё
 	if(isGameEnd){
 		protocol.deleteGame(gameIdx);
 		System.out.println("delete game "+gameIdx);
 	}
 }
 
-//сделать ход соперника ИИ и перерисовать поле игры
+//СЃРґРµР»Р°С‚СЊ С…РѕРґ СЃРѕРїРµСЂРЅРёРєР° РР Рё РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊ РїРѕР»Рµ РёРіСЂС‹
 public void AIenemyMove(int x,int y){
 	protocol.addAIenemyMove(gameIdx,x,y);
 	gameGUI.gameRepaint(DotsAI.this,true);
 }
 
-//подсветить курсор на текущей позиции и закрасить на предыдущей
+//РїРѕРґСЃРІРµС‚РёС‚СЊ РєСѓСЂСЃРѕСЂ РЅР° С‚РµРєСѓС‰РµР№ РїРѕР·РёС†РёРё Рё Р·Р°РєСЂР°СЃРёС‚СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РµР№
 public void mouseMoved(MouseEvent me){try{
 	if(getMouseClickX(me)!=preX|getMouseClickY(me)!=preY){
 		if(protocol.getGame(gameIdx).gameField.canAddMove(preX, preY)){
@@ -334,7 +334,7 @@ public void mouseMoved(MouseEvent me){try{
 	}
 }catch(Exception e){}}
 
-//получить список ходов в игре в виде строки для последующего сохранения
+//РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє С…РѕРґРѕРІ РІ РёРіСЂРµ РІ РІРёРґРµ СЃС‚СЂРѕРєРё РґР»СЏ РїРѕСЃР»РµРґСѓСЋС‰РµРіРѕ СЃРѕС…СЂР°РЅРµРЅРёСЏ
 public String getGameMoves(){
 	String moves="";
 	for(int i=0;i<protocol.getGame(gameIdx).movesMas.length;i++){
@@ -344,18 +344,18 @@ public String getGameMoves(){
 	return moves;
 }
 
-//выполнить ходы в игре при загрузке из файла или отмене ходов
+//РІС‹РїРѕР»РЅРёС‚СЊ С…РѕРґС‹ РІ РёРіСЂРµ РїСЂРё Р·Р°РіСЂСѓР·РєРµ РёР· С„Р°Р№Р»Р° РёР»Рё РѕС‚РјРµРЅРµ С…РѕРґРѕРІ
 public void setGameMoves(String moves,int back){
 	protocol.addNewGame(++gameIdx,EnemyType.HUMAN,sizeX,sizeY,redX1,redY1,blueX1,blueY1,redX2,redY2,blueX2,blueY2);
 	gameGUI.newGame(DotsAI.this);
 	
-	//определить сколько всего ходов было сделано
+	//РѕРїСЂРµРґРµР»РёС‚СЊ СЃРєРѕР»СЊРєРѕ РІСЃРµРіРѕ С…РѕРґРѕРІ Р±С‹Р»Рѕ СЃРґРµР»Р°РЅРѕ
 	int totalMoves=0;
 	for(int i=0;i<moves.length();i++){
 		if(moves.substring(i, i+1).equals(";"))totalMoves++;
 	}
 	
-	//найти и выполнить ходы
+	//РЅР°Р№С‚Рё Рё РІС‹РїРѕР»РЅРёС‚СЊ С…РѕРґС‹
 	int move=0;
 	boolean isLastAiMove=false;
 	for(int i=0;i<moves.length();i++){
@@ -388,11 +388,11 @@ public void setGameMoves(String moves,int back){
 	if(!isLastAiMove)aiMove(null);
 }
 
-//получить координаты поля из координат пикселя при нажатии кнопки мыши
+//РїРѕР»СѓС‡РёС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРѕР»СЏ РёР· РєРѕРѕСЂРґРёРЅР°С‚ РїРёРєСЃРµР»СЏ РїСЂРё РЅР°Р¶Р°С‚РёРё РєРЅРѕРїРєРё РјС‹С€Рё
 byte getMouseClickX(MouseEvent me){return (byte)(((double)me.getX()+8-GameGUI.offsetX)/(double)GameFieldGUI.cellSize);};
 byte getMouseClickY(MouseEvent me){return (byte)(((double)me.getY()+8-GameGUI.offsetY)/(double)GameFieldGUI.cellSize);};
 
-//неиспользуемые методы, которые необходимо было добавить
+//РЅРµРёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ РјРµС‚РѕРґС‹, РєРѕС‚РѕСЂС‹Рµ РЅРµРѕР±С…РѕРґРёРјРѕ Р±С‹Р»Рѕ РґРѕР±Р°РІРёС‚СЊ
 public void windowClosed(WindowEvent e) {}
 public void windowDeactivated(WindowEvent e) {}
 public void windowDeiconified(WindowEvent e) {}

@@ -1,6 +1,6 @@
-//Класс TemplateType описывает типы шаблонов и их характеристики.
-//Поиск хода ИИ всегда выполняется по шаблонам определенного типа, затем по шаблонам следующего типа и т.д.
-//Вопрос стоит только в определении порядка использования типов шаблонов
+//РљР»Р°СЃСЃ TemplateType РѕРїРёСЃС‹РІР°РµС‚ С‚РёРїС‹ С€Р°Р±Р»РѕРЅРѕРІ Рё РёС… С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё.
+//РџРѕРёСЃРє С…РѕРґР° РР РІСЃРµРіРґР° РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РїРѕ С€Р°Р±Р»РѕРЅР°Рј РѕРїСЂРµРґРµР»РµРЅРЅРѕРіРѕ С‚РёРїР°, Р·Р°С‚РµРј РїРѕ С€Р°Р±Р»РѕРЅР°Рј СЃР»РµРґСѓСЋС‰РµРіРѕ С‚РёРїР° Рё С‚.Рґ.
+//Р’РѕРїСЂРѕСЃ СЃС‚РѕРёС‚ С‚РѕР»СЊРєРѕ РІ РѕРїСЂРµРґРµР»РµРЅРёРё РїРѕСЂСЏРґРєР° РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РёРїРѕРІ С€Р°Р±Р»РѕРЅРѕРІ
 
 package p_TemplateEngine;
 
@@ -13,7 +13,7 @@ import p_Statistics.MoveStatType;
 
 public class TemplateType{
 	
-	//типы шаблонов
+	//С‚РёРїС‹ С€Р°Р±Р»РѕРЅРѕРІ
 	public static int templateTypeBEGIN=0;
 	public static int templateTypeSQUARE_SIDE=1;
 	public static int templateTypeSQUARE=2;
@@ -30,7 +30,7 @@ public class TemplateType{
 	public static int templateTypeGROUND=13;	
 	public static int lastIndexOfTemplateType=14;
 
-//аббревиатура шаблона для хранения в базе
+//Р°Р±Р±СЂРµРІРёР°С‚СѓСЂР° С€Р°Р±Р»РѕРЅР° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РІ Р±Р°Р·Рµ
 public static String toString(int type) {
 	if(type==templateTypeSQUARE_SIDE)return "sst";
 	if(type==templateTypeSQUARE)return "sqt";
@@ -49,26 +49,26 @@ public static String toString(int type) {
 	return "err";
 }
 
-//имя шаблона для отображения в графическом интерфейсе
+//РёРјСЏ С€Р°Р±Р»РѕРЅР° РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІ РіСЂР°С„РёС‡РµСЃРєРѕРј РёРЅС‚РµСЂС„РµР№СЃРµ
 public static String getTemplateTypeName(int type) {
-	if(type==templateTypeSQUARE_SIDE)return "Квадрат у края";
-	if(type==templateTypeSQUARE)return "Квадратный шаблон";
-	if(type==templateTypeWALL)return "Стенка";
-	if(type==templateTypeWALL_SIDE)return "Стенка у края";
-	if(type==templateTypeWALL_DESTROY)return "Разрыв стен синих";
-	if(type==templateTypeFINAL_RED_ATTACK)return "Атака красных - завершение";
-	if(type==templateTypeCONTINUED_RED_ATTACK)return "Атака красных - в прогрессе";
-	if(type==templateTypeGROUND_SIDE)return "Заземление у края";
-	if(type==templateTypeGROUND)return "Заземление красных";
-	if(type==templateTypeBEGIN)return "Начало игры";
-	if(type==templateTypeGLOBAL_ATTACK)return "Глобальная атака";
-	if(type==templateTypeGLOBAL_DESTROY)return "Глобальная защита";
-	if(type==templateTypeABSTRACT_DEFENSE_WALL)return "Абстрактная защитная стена";
-	if(type==templateTypeABSTRACT_ATTACK_WALL)return "Абстрактная атакующая стена";
+	if(type==templateTypeSQUARE_SIDE)return "РљРІР°РґСЂР°С‚ Сѓ РєСЂР°СЏ";
+	if(type==templateTypeSQUARE)return "РљРІР°РґСЂР°С‚РЅС‹Р№ С€Р°Р±Р»РѕРЅ";
+	if(type==templateTypeWALL)return "РЎС‚РµРЅРєР°";
+	if(type==templateTypeWALL_SIDE)return "РЎС‚РµРЅРєР° Сѓ РєСЂР°СЏ";
+	if(type==templateTypeWALL_DESTROY)return "Р Р°Р·СЂС‹РІ СЃС‚РµРЅ СЃРёРЅРёС…";
+	if(type==templateTypeFINAL_RED_ATTACK)return "РђС‚Р°РєР° РєСЂР°СЃРЅС‹С… - Р·Р°РІРµСЂС€РµРЅРёРµ";
+	if(type==templateTypeCONTINUED_RED_ATTACK)return "РђС‚Р°РєР° РєСЂР°СЃРЅС‹С… - РІ РїСЂРѕРіСЂРµСЃСЃРµ";
+	if(type==templateTypeGROUND_SIDE)return "Р—Р°Р·РµРјР»РµРЅРёРµ Сѓ РєСЂР°СЏ";
+	if(type==templateTypeGROUND)return "Р—Р°Р·РµРјР»РµРЅРёРµ РєСЂР°СЃРЅС‹С…";
+	if(type==templateTypeBEGIN)return "РќР°С‡Р°Р»Рѕ РёРіСЂС‹";
+	if(type==templateTypeGLOBAL_ATTACK)return "Р“Р»РѕР±Р°Р»СЊРЅР°СЏ Р°С‚Р°РєР°";
+	if(type==templateTypeGLOBAL_DESTROY)return "Р“Р»РѕР±Р°Р»СЊРЅР°СЏ Р·Р°С‰РёС‚Р°";
+	if(type==templateTypeABSTRACT_DEFENSE_WALL)return "РђР±СЃС‚СЂР°РєС‚РЅР°СЏ Р·Р°С‰РёС‚РЅР°СЏ СЃС‚РµРЅР°";
+	if(type==templateTypeABSTRACT_ATTACK_WALL)return "РђР±СЃС‚СЂР°РєС‚РЅР°СЏ Р°С‚Р°РєСѓСЋС‰Р°СЏ СЃС‚РµРЅР°";
 	return "err";
 }
 
-//тип хода в статистике игры
+//С‚РёРї С…РѕРґР° РІ СЃС‚Р°С‚РёСЃС‚РёРєРµ РёРіСЂС‹
 public static MoveStatType getMoveStatType(int type){
 	if(type==templateTypeSQUARE_SIDE)return MoveStatType.SQUARE_SIDE;
 	if(type==templateTypeSQUARE)return MoveStatType.SQUARE;
@@ -87,10 +87,10 @@ public static MoveStatType getMoveStatType(int type){
 	return null;
 }
 
-//рисунок - иконка шаблона
+//СЂРёСЃСѓРЅРѕРє - РёРєРѕРЅРєР° С€Р°Р±Р»РѕРЅР°
 public static ImageIcon getImageIcon(int type) {return new ImageIcon(Pattern_Resources.templateTypes+toString(type)+".png");}
 
-//тип шаблона для статистики игры
+//С‚РёРї С€Р°Р±Р»РѕРЅР° РґР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё РёРіСЂС‹
 public static int getTemplateType(MoveStatType type){
 	if(type==MoveStatType.SQUARE_SIDE)return templateTypeSQUARE_SIDE;
 	if(type==MoveStatType.SQUARE)return templateTypeSQUARE;
@@ -109,7 +109,7 @@ public static int getTemplateType(MoveStatType type){
 	return lastIndexOfTemplateType;
 }
 
-//боковой (специально для описания ситуаций у края поля) или нет тип шаблона
+//Р±РѕРєРѕРІРѕР№ (СЃРїРµС†РёР°Р»СЊРЅРѕ РґР»СЏ РѕРїРёСЃР°РЅРёСЏ СЃРёС‚СѓР°С†РёР№ Сѓ РєСЂР°СЏ РїРѕР»СЏ) РёР»Рё РЅРµС‚ С‚РёРї С€Р°Р±Р»РѕРЅР°
 public static boolean isSide(int type){
 	if(type==templateTypeBEGIN)return false;
 	if(type==templateTypeSQUARE_SIDE)return true;		
@@ -129,7 +129,7 @@ public static boolean isSide(int type){
 	return true;
 }
 
-//проход по базе шаблонов с начала (наиболее детальные шаблоны с минимумом зеленых точек) или с конца (наименее детальные шаблоны)
+//РїСЂРѕС…РѕРґ РїРѕ Р±Р°Р·Рµ С€Р°Р±Р»РѕРЅРѕРІ СЃ РЅР°С‡Р°Р»Р° (РЅР°РёР±РѕР»РµРµ РґРµС‚Р°Р»СЊРЅС‹Рµ С€Р°Р±Р»РѕРЅС‹ СЃ РјРёРЅРёРјСѓРјРѕРј Р·РµР»РµРЅС‹С… С‚РѕС‡РµРє) РёР»Рё СЃ РєРѕРЅС†Р° (РЅР°РёРјРµРЅРµРµ РґРµС‚Р°Р»СЊРЅС‹Рµ С€Р°Р±Р»РѕРЅС‹)
 public static boolean isTemplateBaseSearchFromStartIdx(int type){
 	if(type==templateTypeBEGIN)return false;
 	if(type==templateTypeSQUARE_SIDE)return false;		
@@ -149,7 +149,7 @@ public static boolean isTemplateBaseSearchFromStartIdx(int type){
 	return true;
 }
 
-//получить тип шаблона
+//РїРѕР»СѓС‡РёС‚СЊ С‚РёРї С€Р°Р±Р»РѕРЅР°
 public static int getTemplateType(String str){
 	if(str.equals(toString(templateTypeBEGIN)))return templateTypeBEGIN;
 	if(str.equals(toString(templateTypeSQUARE_SIDE)))return templateTypeSQUARE_SIDE;
@@ -168,7 +168,7 @@ public static int getTemplateType(String str){
 	return lastIndexOfTemplateType;
 }
 
-//получить содержимое из игровой ситуации для создания нового шаблона
+//РїРѕР»СѓС‡РёС‚СЊ СЃРѕРґРµСЂР¶РёРјРѕРµ РёР· РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРё РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ С€Р°Р±Р»РѕРЅР°
 public static byte[] getContentForTemplateCreation(Game game,Point p,byte[][] fieldState,int type){
 	try{
 		byte[] content=new byte[Protocol.maxSize*Protocol.maxSize];	
@@ -178,7 +178,7 @@ public static byte[] getContentForTemplateCreation(Game game,Point p,byte[][] fi
 				try{
 					content[idx]=fieldState[i+p.x-Protocol.maxSize/2][j+p.y-Protocol.maxSize/2];
 					idx++;
-				}catch(Exception e){//если шаблон выходит за край поля, то ставить зеленую точку
+				}catch(Exception e){//РµСЃР»Рё С€Р°Р±Р»РѕРЅ РІС‹С…РѕРґРёС‚ Р·Р° РєСЂР°Р№ РїРѕР»СЏ, С‚Рѕ СЃС‚Р°РІРёС‚СЊ Р·РµР»РµРЅСѓСЋ С‚РѕС‡РєСѓ
 					content[idx]=Protocol.templateDotType_ANY;
 					idx++;
 				}
@@ -188,59 +188,59 @@ public static byte[] getContentForTemplateCreation(Game game,Point p,byte[][] fi
 	}catch(Exception e){return null;}
 }
 
-//возвращает символ из шаблона для определенной точки (для небокового типа шаблона)
+//РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРёРјРІРѕР» РёР· С€Р°Р±Р»РѕРЅР° РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ С‚РѕС‡РєРё (РґР»СЏ РЅРµР±РѕРєРѕРІРѕРіРѕ С‚РёРїР° С€Р°Р±Р»РѕРЅР°)
 public static byte getContentSymbolNotSide(Game game,Point p,byte[][] fieldState,int i){
 	try{
 		return fieldState[i%Protocol.maxSize+p.x-Protocol.maxSize/2][i/Protocol.maxSize+p.y-Protocol.maxSize/2];
-	}catch(Exception e){//если шаблон выходит за край поля, то ставить зеленую точку
+	}catch(Exception e){//РµСЃР»Рё С€Р°Р±Р»РѕРЅ РІС‹С…РѕРґРёС‚ Р·Р° РєСЂР°Р№ РїРѕР»СЏ, С‚Рѕ СЃС‚Р°РІРёС‚СЊ Р·РµР»РµРЅСѓСЋ С‚РѕС‡РєСѓ
 		return Protocol.templateDotType_ANY;
 	}
 }
 
-//возвращает символ из шаблона для определенной точки (для шаблона, применяемого справа на границе поля)
+//РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРёРјРІРѕР» РёР· С€Р°Р±Р»РѕРЅР° РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ С‚РѕС‡РєРё (РґР»СЏ С€Р°Р±Р»РѕРЅР°, РїСЂРёРјРµРЅСЏРµРјРѕРіРѕ СЃРїСЂР°РІР° РЅР° РіСЂР°РЅРёС†Рµ РїРѕР»СЏ)
 public static byte getContentSymbolRight(Game game,Point p,byte[][] fieldState,int i,int tSize){		
 	if(i%Protocol.maxSize==Protocol.maxSize-(Protocol.maxSize-tSize)/2-1){
-		return Protocol.templateDotType_LAND;//непосредственно граница поля отмечается точкой типа LAND
+		return Protocol.templateDotType_LAND;//РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РіСЂР°РЅРёС†Р° РїРѕР»СЏ РѕС‚РјРµС‡Р°РµС‚СЃСЏ С‚РѕС‡РєРѕР№ С‚РёРїР° LAND
 	}
 	try{
 		return fieldState[game.sizeX-tSize+i%Protocol.maxSize-(Protocol.maxSize-tSize)/2+1][i/Protocol.maxSize+p.y-Protocol.maxSize/2];
-	}catch(Exception e){//если шаблон выходит за край поля, то ставить зеленую точку
+	}catch(Exception e){//РµСЃР»Рё С€Р°Р±Р»РѕРЅ РІС‹С…РѕРґРёС‚ Р·Р° РєСЂР°Р№ РїРѕР»СЏ, С‚Рѕ СЃС‚Р°РІРёС‚СЊ Р·РµР»РµРЅСѓСЋ С‚РѕС‡РєСѓ
 		return Protocol.templateDotType_ANY;
 	}
 }
 
-//возвращает символ из шаблона для определенной точки (для шаблона, применяемого слева на границе поля)
+//РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРёРјРІРѕР» РёР· С€Р°Р±Р»РѕРЅР° РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ С‚РѕС‡РєРё (РґР»СЏ С€Р°Р±Р»РѕРЅР°, РїСЂРёРјРµРЅСЏРµРјРѕРіРѕ СЃР»РµРІР° РЅР° РіСЂР°РЅРёС†Рµ РїРѕР»СЏ)
 public static byte getContentSymbolLeft(Game game,Point p,byte[][] fieldState,int i,int tSize){	
 	if(i%Protocol.maxSize==(Protocol.maxSize-tSize)/2){
-		return Protocol.templateDotType_LAND;//непосредственно граница поля отмечается точкой типа LAND
+		return Protocol.templateDotType_LAND;//РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РіСЂР°РЅРёС†Р° РїРѕР»СЏ РѕС‚РјРµС‡Р°РµС‚СЃСЏ С‚РѕС‡РєРѕР№ С‚РёРїР° LAND
 	}
 	try{
 		return fieldState[i%Protocol.maxSize-(Protocol.maxSize-tSize)/2-1][i/Protocol.maxSize+p.y-Protocol.maxSize/2];
-	}catch(Exception e){//если шаблон выходит за край поля, то ставить зеленую точку
+	}catch(Exception e){//РµСЃР»Рё С€Р°Р±Р»РѕРЅ РІС‹С…РѕРґРёС‚ Р·Р° РєСЂР°Р№ РїРѕР»СЏ, С‚Рѕ СЃС‚Р°РІРёС‚СЊ Р·РµР»РµРЅСѓСЋ С‚РѕС‡РєСѓ
 		return Protocol.templateDotType_ANY;
 	}
 }
 
-//возвращает символ из шаблона для определенной точки (для шаблона, применяемого снизу на границе поля)
+//РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРёРјРІРѕР» РёР· С€Р°Р±Р»РѕРЅР° РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ С‚РѕС‡РєРё (РґР»СЏ С€Р°Р±Р»РѕРЅР°, РїСЂРёРјРµРЅСЏРµРјРѕРіРѕ СЃРЅРёР·Сѓ РЅР° РіСЂР°РЅРёС†Рµ РїРѕР»СЏ)
 public static byte getContentSymbolBottom(Game game,Point p,byte[][] fieldState,int i,int tSize){	
 	if(i/Protocol.maxSize==Protocol.maxSize-(Protocol.maxSize-tSize)/2-1){
-		return Protocol.templateDotType_LAND;//непосредственно граница поля отмечается точкой типа LAND
+		return Protocol.templateDotType_LAND;//РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РіСЂР°РЅРёС†Р° РїРѕР»СЏ РѕС‚РјРµС‡Р°РµС‚СЃСЏ С‚РѕС‡РєРѕР№ С‚РёРїР° LAND
 	}
 	try{
 		return fieldState[i%Protocol.maxSize+p.x-Protocol.maxSize/2][game.sizeY-tSize+i/Protocol.maxSize-(Protocol.maxSize-tSize)/2+1];
-	}catch(Exception e){//если шаблон выходит за край поля, то ставить зеленую точку
+	}catch(Exception e){//РµСЃР»Рё С€Р°Р±Р»РѕРЅ РІС‹С…РѕРґРёС‚ Р·Р° РєСЂР°Р№ РїРѕР»СЏ, С‚Рѕ СЃС‚Р°РІРёС‚СЊ Р·РµР»РµРЅСѓСЋ С‚РѕС‡РєСѓ
 		return Protocol.templateDotType_ANY;
 	}
 }
 
-//возвращает символ из шаблона для определенной точки (для шаблона, применяемого сверху на границе поля)
+//РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРёРјРІРѕР» РёР· С€Р°Р±Р»РѕРЅР° РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ С‚РѕС‡РєРё (РґР»СЏ С€Р°Р±Р»РѕРЅР°, РїСЂРёРјРµРЅСЏРµРјРѕРіРѕ СЃРІРµСЂС…Сѓ РЅР° РіСЂР°РЅРёС†Рµ РїРѕР»СЏ)
 public static byte getContentSymbolTop(Game game,Point p,byte[][] fieldState,int i,int tSize){
 	if(i/Protocol.maxSize==(Protocol.maxSize-tSize)/2){
-		return Protocol.templateDotType_LAND;//непосредственно граница поля отмечается точкой типа LAND
+		return Protocol.templateDotType_LAND;//РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РіСЂР°РЅРёС†Р° РїРѕР»СЏ РѕС‚РјРµС‡Р°РµС‚СЃСЏ С‚РѕС‡РєРѕР№ С‚РёРїР° LAND
 	}
 	try{
 		return fieldState[i%Protocol.maxSize+p.x-Protocol.maxSize/2][i/Protocol.maxSize-(Protocol.maxSize-tSize)/2-1];
-	}catch(Exception e){//если шаблон выходит за край поля, то ставить зеленую точку
+	}catch(Exception e){//РµСЃР»Рё С€Р°Р±Р»РѕРЅ РІС‹С…РѕРґРёС‚ Р·Р° РєСЂР°Р№ РїРѕР»СЏ, С‚Рѕ СЃС‚Р°РІРёС‚СЊ Р·РµР»РµРЅСѓСЋ С‚РѕС‡РєСѓ
 		return Protocol.templateDotType_ANY;
 	}
 }

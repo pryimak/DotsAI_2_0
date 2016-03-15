@@ -1,4 +1,4 @@
-//Класс GameFieldGUI обеспечивает рисование игрового поля, точек, окружений и дополнительных элементов для редакторов шаблонов и деревьев
+//РљР»Р°СЃСЃ GameFieldGUI РѕР±РµСЃРїРµС‡РёРІР°РµС‚ СЂРёСЃРѕРІР°РЅРёРµ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ, С‚РѕС‡РµРє, РѕРєСЂСѓР¶РµРЅРёР№ Рё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ РґР»СЏ СЂРµРґР°РєС‚РѕСЂРѕРІ С€Р°Р±Р»РѕРЅРѕРІ Рё РґРµСЂРµРІСЊРµРІ
 
 package p_GUI;
 
@@ -15,13 +15,13 @@ import p_TemplateEngine.Template;
 
 public class GameFieldGUI{
 	
-	public static int cellSize=17;//ширина клетки поля
-	public static int dotRadius=5;//радиус точки
+	public static int cellSize=17;//С€РёСЂРёРЅР° РєР»РµС‚РєРё РїРѕР»СЏ
+	public static int dotRadius=5;//СЂР°РґРёСѓСЃ С‚РѕС‡РєРё
 
-	public Color blue=new Color(0,102,204);//цвет точек синего игрока
-	Color gray=new Color(223,223,223);//цвет сетки поля
+	public Color blue=new Color(0,102,204);//С†РІРµС‚ С‚РѕС‡РµРє СЃРёРЅРµРіРѕ РёРіСЂРѕРєР°
+	Color gray=new Color(223,223,223);//С†РІРµС‚ СЃРµС‚РєРё РїРѕР»СЏ
 	
-	int offsetX,offsetY;//отступы
+	int offsetX,offsetY;//РѕС‚СЃС‚СѓРїС‹
 	Graphics g;
 	
 public GameFieldGUI(Graphics g,int offsetX,int offsetY){
@@ -30,18 +30,18 @@ public GameFieldGUI(Graphics g,int offsetX,int offsetY){
 	this.offsetY=offsetY;
 }
 
-//рисование области поля и координат без рисования точек на поле
+//СЂРёСЃРѕРІР°РЅРёРµ РѕР±Р»Р°СЃС‚Рё РїРѕР»СЏ Рё РєРѕРѕСЂРґРёРЅР°С‚ Р±РµР· СЂРёСЃРѕРІР°РЅРёСЏ С‚РѕС‡РµРє РЅР° РїРѕР»Рµ
 public void drawGameFieldArea(GameField gameField,boolean isNumberingFromCenter){
 	drawGameFieldArea(gameField.sizeX,gameField.sizeY,isNumberingFromCenter);
 }
 
-//рисование области поля и координат без рисования точек на поле
+//СЂРёСЃРѕРІР°РЅРёРµ РѕР±Р»Р°СЃС‚Рё РїРѕР»СЏ Рё РєРѕРѕСЂРґРёРЅР°С‚ Р±РµР· СЂРёСЃРѕРІР°РЅРёСЏ С‚РѕС‡РµРє РЅР° РїРѕР»Рµ
 public void drawGameFieldArea(int sizeX,int sizeY,boolean isNumberingFromCenter){
-	//закрашивание области поля
+	//Р·Р°РєСЂР°С€РёРІР°РЅРёРµ РѕР±Р»Р°СЃС‚Рё РїРѕР»СЏ
 	g.setColor(Color.white);
 	g.fillRect(offsetX-cellSize-12, offsetY-cellSize/2, (sizeX+2)*cellSize-7, (sizeY+1)*cellSize-3);
 
-	//рисование сетки поля
+	//СЂРёСЃРѕРІР°РЅРёРµ СЃРµС‚РєРё РїРѕР»СЏ
 	g.setColor(gray);
 	for(int i=0;i<sizeX;i++){
 		g.fillRect(i*cellSize+offsetX, offsetY, 1, (sizeY-1)*cellSize);
@@ -52,7 +52,7 @@ public void drawGameFieldArea(int sizeX,int sizeY,boolean isNumberingFromCenter)
 	
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
 	
-	//рисование координат
+	//СЂРёСЃРѕРІР°РЅРёРµ РєРѕРѕСЂРґРёРЅР°С‚
 	g.setColor(Color.black);
 	g.setFont(new Font("verdana",9,9));
 	for(int i=0;i<sizeX;i++){
@@ -73,14 +73,14 @@ public void drawGameFieldArea(int sizeX,int sizeY,boolean isNumberingFromCenter)
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
 }
 
-//рисование поля
-public void drawGameField(GameField gameField,boolean isNumberingFromCenter,boolean isShowLastDot){//рисование поля	
+//СЂРёСЃРѕРІР°РЅРёРµ РїРѕР»СЏ
+public void drawGameField(GameField gameField,boolean isNumberingFromCenter,boolean isShowLastDot){//СЂРёСЃРѕРІР°РЅРёРµ РїРѕР»СЏ	
 	drawGameFieldArea(gameField,isNumberingFromCenter);
 	drawGameField(gameField,isShowLastDot);	
 }
 
-//нарисовать точки шаблона в редакторе деревьев
-public void drawDotsForTreeEditor(GameField gameField,boolean isNumberingFromCenter,Template template){//рисование поля	
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ С‚РѕС‡РєРё С€Р°Р±Р»РѕРЅР° РІ СЂРµРґР°РєС‚РѕСЂРµ РґРµСЂРµРІСЊРµРІ
+public void drawDotsForTreeEditor(GameField gameField,boolean isNumberingFromCenter,Template template){//СЂРёСЃРѕРІР°РЅРёРµ РїРѕР»СЏ	
 	drawGameFieldArea(gameField,isNumberingFromCenter);
 	
 	for(int i=0;i<template.templateContent.length;i++){
@@ -108,15 +108,15 @@ public void drawDotsForTreeEditor(GameField gameField,boolean isNumberingFromCen
 	
 	drawGameField(gameField,false);
 	
-	drawTemplateFrame(template);//нарисовать квадратную область для шаблона
+	drawTemplateFrame(template);//РЅР°СЂРёСЃРѕРІР°С‚СЊ РєРІР°РґСЂР°С‚РЅСѓСЋ РѕР±Р»Р°СЃС‚СЊ РґР»СЏ С€Р°Р±Р»РѕРЅР°
 }
 
-//рисование поля
+//СЂРёСЃРѕРІР°РЅРёРµ РїРѕР»СЏ
 public void drawGameField(GameField gameField,boolean isShowLastDot){
 	
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
 	
-	//рисование точек поля
+	//СЂРёСЃРѕРІР°РЅРёРµ С‚РѕС‡РµРє РїРѕР»СЏ
 	for(int i=0;i<gameField.sizeX;i++){
 		for(int j=0;j<gameField.sizeY;j++){
 			if(gameField.gameField[i][j]>0){
@@ -127,15 +127,15 @@ public void drawGameField(GameField gameField,boolean isShowLastDot){
 		}
 	}
 	
-	//рисование окружений
+	//СЂРёСЃРѕРІР°РЅРёРµ РѕРєСЂСѓР¶РµРЅРёР№
 	drawPolygons(gameField.redEnclosures,Color.red,new Color(255,0,0,70));
 	drawPolygons(gameField.blueEnclosures,blue,new Color(0,102,204,70));
 	
-	//рисование последнего хода
+	//СЂРёСЃРѕРІР°РЅРёРµ РїРѕСЃР»РµРґРЅРµРіРѕ С…РѕРґР°
 	g.setColor(Color.white);
 	g.fillRect(gameField.lastDot.x*cellSize+offsetX-2, gameField.lastDot.y*cellSize+offsetY-2, 4, 4);
 	
-	//выделение линиями последнего хода
+	//РІС‹РґРµР»РµРЅРёРµ Р»РёРЅРёСЏРјРё РїРѕСЃР»РµРґРЅРµРіРѕ С…РѕРґР°
 	if(isShowLastDot){
 		g.setColor(Color.green);
 		g.drawLine(gameField.lastDot.x*cellSize+offsetX-2, offsetY, gameField.lastDot.x*cellSize+offsetX-2, offsetY+gameField.sizeY*cellSize);
@@ -145,7 +145,7 @@ public void drawGameField(GameField gameField,boolean isShowLastDot){
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
 }
 
-//нарисовать области окружения
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ РѕР±Р»Р°СЃС‚Рё РѕРєСЂСѓР¶РµРЅРёСЏ
 public void drawPolygons(ArrayList<Polygon> surr,Color c,Color c1){
 	for(int i=0;i<surr.size();i++){
 		int[] x=new int[surr.get(i).xpoints.length];
@@ -164,7 +164,7 @@ public void drawPolygons(ArrayList<Polygon> surr,Color c,Color c1){
 	}
 }
 
-//нарисовать точки концов цепей
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ С‚РѕС‡РєРё РєРѕРЅС†РѕРІ С†РµРїРµР№
 public void paintChainsDots(DotsAI dotsAI){try{
 	for(int i=0;i<dotsAI.protocol.getGame(dotsAI.gameIdx).redChains.size();i++){		
 		drawDot(dotsAI.protocol.getGame(dotsAI.gameIdx).redChains.get(i).chainEndX, dotsAI.protocol.getGame(dotsAI.gameIdx).redChains.get(i).chainEndY*cellSize,Color.black,dotRadius-2);
@@ -181,7 +181,7 @@ public void paintChainsDots(DotsAI dotsAI){try{
 	}
 }catch(Exception e){}}
 
-//нарисовать закрашенный квадрат
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ Р·Р°РєСЂР°С€РµРЅРЅС‹Р№ РєРІР°РґСЂР°С‚
 public void fillSquare(Graphics graphics,int x,int y,Color color,int level){
 	graphics.setColor(color);
 	graphics.fillRect(x*cellSize+offsetX-dotRadius, y*cellSize+offsetY-dotRadius, dotRadius*2, dotRadius*2);
@@ -190,7 +190,7 @@ public void fillSquare(Graphics graphics,int x,int y,Color color,int level){
 	graphics.drawString(level+"", x*cellSize+offsetX-dotRadius+2 + (((level+"").length()==1)?1:-3), y*cellSize+offsetY+dotRadius-1);
 }
 
-//нарисовать рамку квадрата
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ СЂР°РјРєСѓ РєРІР°РґСЂР°С‚Р°
 public void drawSquare(Graphics graphics,int x,int y,Color color,int level){
 	graphics.setColor(Color.white);
 	graphics.fillRect(x*cellSize+offsetX-dotRadius, y*cellSize+offsetY-dotRadius, dotRadius*2, dotRadius*2);
@@ -200,12 +200,12 @@ public void drawSquare(Graphics graphics,int x,int y,Color color,int level){
 	graphics.drawString(level+"", x*cellSize+offsetX-dotRadius+2 + (((level+"").length()==1)?1:-3), y*cellSize+offsetY+dotRadius-1);
 }
 
-//нарисовать точку
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ С‚РѕС‡РєСѓ
 public void drawDot(int x,int y){	
 	g.fillOval(x*cellSize+offsetX-dotRadius, y*cellSize+offsetY-dotRadius, dotRadius*2, dotRadius*2);	
 }
 
-//нарисовать точку
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ С‚РѕС‡РєСѓ
 public void drawDot(int x,int y,Color color){
 	g.setColor(color);
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
@@ -213,7 +213,7 @@ public void drawDot(int x,int y,Color color){
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
 }
 
-//стереть точку
+//СЃС‚РµСЂРµС‚СЊ С‚РѕС‡РєСѓ
 public void clearDot(int x,int y){
 	g.setColor(Color.white);
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
@@ -221,7 +221,7 @@ public void clearDot(int x,int y){
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
 }
 
-//нарисовать точку
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ С‚РѕС‡РєСѓ
 public void drawDot(int x,int y,Color color,int size){
 	g.setColor(color);
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
@@ -229,13 +229,13 @@ public void drawDot(int x,int y,Color color,int size){
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
 }
 
-//нарисовать точку границы поля
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ С‚РѕС‡РєСѓ РіСЂР°РЅРёС†С‹ РїРѕР»СЏ
 public void drawLandDot(int x,int y){
 	g.setColor(Color.black);
 	g.fillRect(x*cellSize+offsetX-cellSize/2, y*cellSize+offsetY-cellSize/2, cellSize, cellSize);
 }
 
-//нарисовать точки условных ходов
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ С‚РѕС‡РєРё СѓСЃР»РѕРІРЅС‹С… С…РѕРґРѕРІ
 public void drawAttackDot(boolean isRed,int x,int y){
 	if(isRed)g.setColor(Color.red);
 	else g.setColor(blue);
@@ -248,7 +248,7 @@ public void drawAttackDot(boolean isRed,int x,int y){
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
 }
 
-//нарисовать точки шаблона в редакторе шаблонов
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ С‚РѕС‡РєРё С€Р°Р±Р»РѕРЅР° РІ СЂРµРґР°РєС‚РѕСЂРµ С€Р°Р±Р»РѕРЅРѕРІ
 public void drawDotsForTemplateEditor(byte field[][],Template template){
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
 	for(int x=0;x<Protocol.maxSize;x++){
@@ -269,28 +269,28 @@ public void drawDotsForTemplateEditor(byte field[][],Template template){
 	}
 	((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
 	
-	drawTemplateFrame(template);//нарисовать квадратную область для шаблона
+	drawTemplateFrame(template);//РЅР°СЂРёСЃРѕРІР°С‚СЊ РєРІР°РґСЂР°С‚РЅСѓСЋ РѕР±Р»Р°СЃС‚СЊ РґР»СЏ С€Р°Р±Р»РѕРЅР°
 }
 
-//стереть ползунок курсора
+//СЃС‚РµСЂРµС‚СЊ РїРѕР»Р·СѓРЅРѕРє РєСѓСЂСЃРѕСЂР°
 public void clearHint(int x,int y){
 	g.setColor(Color.white);
 	g.drawOval(x*cellSize+offsetX-3, y*cellSize+offsetY-3, 6, 6);
 }
 
-//нарисовать ползунок курсора
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ РїРѕР»Р·СѓРЅРѕРє РєСѓСЂСЃРѕСЂР°
 public void drawHint(int x,int y){
 	g.setColor(Color.black);
 	g.drawOval(x*cellSize+offsetX-3, y*cellSize+offsetY-3, 6, 6);
 }
 
-//нарисовать рамки в редакторе шаблонов - рамку для центральной точки и рамку для значимой части шаблона
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ СЂР°РјРєРё РІ СЂРµРґР°РєС‚РѕСЂРµ С€Р°Р±Р»РѕРЅРѕРІ - СЂР°РјРєСѓ РґР»СЏ С†РµРЅС‚СЂР°Р»СЊРЅРѕР№ С‚РѕС‡РєРё Рё СЂР°РјРєСѓ РґР»СЏ Р·РЅР°С‡РёРјРѕР№ С‡Р°СЃС‚Рё С€Р°Р±Р»РѕРЅР°
 private void drawTemplateFrame(Template template){
-	//подкрасить центральную точку
+	//РїРѕРґРєСЂР°СЃРёС‚СЊ С†РµРЅС‚СЂР°Р»СЊРЅСѓСЋ С‚РѕС‡РєСѓ
 	g.setColor(new Color(0,0,0,100));
 	g.drawRect(Protocol.maxSize/2*cellSize+offsetX-dotRadius-2, Protocol.maxSize/2*cellSize+offsetY-dotRadius-2, dotRadius*2+3, dotRadius*2+3);
 	
-	//нарисовать квадратную область для шаблона
+	//РЅР°СЂРёСЃРѕРІР°С‚СЊ РєРІР°РґСЂР°С‚РЅСѓСЋ РѕР±Р»Р°СЃС‚СЊ РґР»СЏ С€Р°Р±Р»РѕРЅР°
 	g.setColor(new Color(0,0,0,100));
 	g.drawRect((Protocol.maxSize-template.sizeWithNotAny)/2*cellSize+offsetX-dotRadius-3, (Protocol.maxSize-template.sizeWithNotAny)/2*cellSize+offsetY-dotRadius-3, template.sizeWithNotAny*cellSize, template.sizeWithNotAny*cellSize);
 }

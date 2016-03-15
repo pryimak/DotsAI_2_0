@@ -2,7 +2,7 @@ package p_DotsAI;
 
 public enum EnemyType{
 	
-	RANDOM,HUMAN,AI;//аббревиатура типа соперника, против которого играет ИИ
+	RANDOM,HUMAN,AI;//Р°Р±Р±СЂРµРІРёР°С‚СѓСЂР° С‚РёРїР° СЃРѕРїРµСЂРЅРёРєР°, РїСЂРѕС‚РёРІ РєРѕС‚РѕСЂРѕРіРѕ РёРіСЂР°РµС‚ РР
 
 public String toString() {
 	switch (this) {

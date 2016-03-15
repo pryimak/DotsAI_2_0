@@ -9,7 +9,7 @@ import p_JavaPatterns.Pattern_AddComponent;
 import p_JavaPatterns.Pattern_JFrame;
 import p_JavaPatterns.Pattern_Resources;
 
-public class AboutGameFrame{//создается окно, которое отображает информацию о программе
+public class AboutGameFrame{//СЃРѕР·РґР°РµС‚СЃСЏ РѕРєРЅРѕ, РєРѕС‚РѕСЂРѕРµ РѕС‚РѕР±СЂР°Р¶Р°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РїСЂРѕРіСЂР°РјРјРµ
 
 	public JFrame frame=new JFrame();
 	Pattern_AddComponent add=new Pattern_AddComponent(frame.getContentPane());
@@ -18,18 +18,18 @@ public class AboutGameFrame{//создается окно, которое отображает информацию о пр
 	
 public AboutGameFrame(){	
 
-	new Pattern_JFrame(frame, "О программе "+Protocol.appName+" версия "+Protocol.appVersion, false, 550, 199, null);
+	new Pattern_JFrame(frame, "Рћ РїСЂРѕРіСЂР°РјРјРµ "+Protocol.appName+" РІРµСЂСЃРёСЏ "+Protocol.appVersion, false, 550, 199, null);
 	frame.setIconImage(Pattern_Resources.icon);
 	frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	frame.setAlwaysOnTop(true);
-	frame.getContentPane().add(appImage);//фоновый рисунок
-	appImage.setBounds(0,-5, 250, 205);//размеры фонового рисунка	
+	frame.getContentPane().add(appImage);//С„РѕРЅРѕРІС‹Р№ СЂРёСЃСѓРЅРѕРє
+	appImage.setBounds(0,-5, 250, 205);//СЂР°Р·РјРµСЂС‹ С„РѕРЅРѕРІРѕРіРѕ СЂРёСЃСѓРЅРєР°	
 	
-	JLabel info=(JLabel)add.component("label",255, -1, 300, 195,"<html><font size=3>Программа для игры в точки против ИИ<br><br><font size=5>"+
+	JLabel info=(JLabel)add.component("label",255, -1, 300, 195,"<html><font size=3>РџСЂРѕРіСЂР°РјРјР° РґР»СЏ РёРіСЂС‹ РІ С‚РѕС‡РєРё РїСЂРѕС‚РёРІ РР<br><br><font size=5>"+
 			Protocol.appName+"<font size=3><br><i>Dots Artificial Intelligence</i><br><br>" +
-			" версия "+Protocol.appVersion+" от "+Protocol.appDate+
+			" РІРµСЂСЃРёСЏ "+Protocol.appVersion+" РѕС‚ "+Protocol.appDate+
 			"<br><br><font color=blue><u>http://playdots.ru/dotsai</u></font>"+
-			"<br><br><br>"+Protocol.appAuthor,null);
+			"<br><br>"+Protocol.appLicense+"<br>"+Protocol.appAuthor,null);
 	info.setBackground(Color.white);
 }
 

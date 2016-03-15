@@ -1,15 +1,15 @@
-/*Этот класс добавляет в контейнер элементы интерфейса, чтобы их потом можно было отображать
- * в окне JFrame
+/*Р­С‚РѕС‚ РєР»Р°СЃСЃ РґРѕР±Р°РІР»СЏРµС‚ РІ РєРѕРЅС‚РµР№РЅРµСЂ СЌР»РµРјРµРЅС‚С‹ РёРЅС‚РµСЂС„РµР№СЃР°, С‡С‚РѕР±С‹ РёС… РїРѕС‚РѕРј РјРѕР¶РЅРѕ Р±С‹Р»Рѕ РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ
+ * РІ РѕРєРЅРµ JFrame
  *
- * Конструктор класса принимает в качестве параметра котейнер, в котором
- * будут отображены создаваемые элементы интерфейса
+ * РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР° РїСЂРёРЅРёРјР°РµС‚ РІ РєР°С‡РµСЃС‚РІРµ РїР°СЂР°РјРµС‚СЂР° РєРѕС‚РµР№РЅРµСЂ, РІ РєРѕС‚РѕСЂРѕРј
+ * Р±СѓРґСѓС‚ РѕС‚РѕР±СЂР°Р¶РµРЅС‹ СЃРѕР·РґР°РІР°РµРјС‹Рµ СЌР»РµРјРµРЅС‚С‹ РёРЅС‚РµСЂС„РµР№СЃР°
  *
  *
- *В вызывающем классе необходимо прописать код
+ *Р’ РІС‹Р·С‹РІР°СЋС‰РµРј РєР»Р°СЃСЃРµ РЅРµРѕР±С…РѕРґРёРјРѕ РїСЂРѕРїРёСЃР°С‚СЊ РєРѕРґ
  *
  *C_AddComponent add=new C_AddComponent(frame.getContentPane());
  *
- *Примеры элементов:
+ *РџСЂРёРјРµСЂС‹ СЌР»РµРјРµРЅС‚РѕРІ:
  *	JButton butAdd=add.buttonSpecial("butAdd",10,765,actionAdd);
 	JButton butDelete=add.buttonSpecial("butDelete",120,765,actionDelete);
 	JButton butClose=add.buttonSpecial("butClose",500,765,null);
@@ -41,71 +41,71 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.event.CaretListener;
 
-public class Pattern_AddComponent {//класс
+public class Pattern_AddComponent {//РєР»Р°СЃСЃ
 
-	Container con;//контейнер
-	JOptionPane msg=new JOptionPane();//создать форму сообщения
+	Container con;//РєРѕРЅС‚РµР№РЅРµСЂ
+	JOptionPane msg=new JOptionPane();//СЃРѕР·РґР°С‚СЊ С„РѕСЂРјСѓ СЃРѕРѕР±С‰РµРЅРёСЏ
 
-public Pattern_AddComponent(Container con){//конструктор
-		this.con=con;//установить контейнер
+public Pattern_AddComponent(Container con){//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+		this.con=con;//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РєРѕРЅС‚РµР№РЅРµСЂ
 	}
 
-//создать элемент интерфейса
+//СЃРѕР·РґР°С‚СЊ СЌР»РµРјРµРЅС‚ РёРЅС‚РµСЂС„РµР№СЃР°
 public Component component(String strCom,int x,int y,int width,int height,
 		String strText,EventListener listener){
 
-	//объявить элемент
+	//РѕР±СЉСЏРІРёС‚СЊ СЌР»РµРјРµРЅС‚
 	Component com=null;
 
-	List list = null;//объявить список
-	JLabel label=null;//объявить метку
-	JButton button=null;//объявить кнопку
-	JTextField field=null;//объявить текстовое поле
-	JFileChooser fc=null;//объявить окно выбора файла
-	Checkbox chk=null;//объявить радиокнопку
+	List list = null;//РѕР±СЉСЏРІРёС‚СЊ СЃРїРёСЃРѕРє
+	JLabel label=null;//РѕР±СЉСЏРІРёС‚СЊ РјРµС‚РєСѓ
+	JButton button=null;//РѕР±СЉСЏРІРёС‚СЊ РєРЅРѕРїРєСѓ
+	JTextField field=null;//РѕР±СЉСЏРІРёС‚СЊ С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ
+	JFileChooser fc=null;//РѕР±СЉСЏРІРёС‚СЊ РѕРєРЅРѕ РІС‹Р±РѕСЂР° С„Р°Р№Р»Р°
+	Checkbox chk=null;//РѕР±СЉСЏРІРёС‚СЊ СЂР°РґРёРѕРєРЅРѕРїРєСѓ
 	JMenuItem jMenuItem=null;
 
-	if(strCom.equalsIgnoreCase("checkbox")){//если необходима радиокнопка
+	if(strCom.equalsIgnoreCase("checkbox")){//РµСЃР»Рё РЅРµРѕР±С…РѕРґРёРјР° СЂР°РґРёРѕРєРЅРѕРїРєР°
 		chk=new Checkbox();chk.addItemListener((ItemListener)listener);chk.setLabel(strText);
-		com=chk;com.setBounds(x, y, width, height);//добавить и установить размеры элемента
+		com=chk;com.setBounds(x, y, width, height);//РґРѕР±Р°РІРёС‚СЊ Рё СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЂР°Р·РјРµСЂС‹ СЌР»РµРјРµРЅС‚Р°
 		}
-	if(strCom.equalsIgnoreCase("list")){//если необходим список
+	if(strCom.equalsIgnoreCase("list")){//РµСЃР»Рё РЅРµРѕР±С…РѕРґРёРј СЃРїРёСЃРѕРє
 		list=new List();list.addItemListener((ItemListener)listener);com=list;
-		com.setBounds(x, y, width, height);//добавить и установить размеры элемента
+		com.setBounds(x, y, width, height);//РґРѕР±Р°РІРёС‚СЊ Рё СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЂР°Р·РјРµСЂС‹ СЌР»РµРјРµРЅС‚Р°
 		}
-	//если необходима метка
+	//РµСЃР»Рё РЅРµРѕР±С…РѕРґРёРјР° РјРµС‚РєР°
 	if(strCom.equalsIgnoreCase("label")){label=new JLabel();label.setText(strText);com=label;
-		com.setBounds(x, y, width, height);//добавить и установить размеры элемента
+		com.setBounds(x, y, width, height);//РґРѕР±Р°РІРёС‚СЊ Рё СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЂР°Р·РјРµСЂС‹ СЌР»РµРјРµРЅС‚Р°
 		}
-	//если необходима кнопка
+	//РµСЃР»Рё РЅРµРѕР±С…РѕРґРёРјР° РєРЅРѕРїРєР°
 	if(strCom.equalsIgnoreCase("button")){button=new JButton();button.setText(strText);
 		button.setCursor(new Cursor(12));button.addActionListener((ActionListener)listener);
-		com=button;com.setBounds(x, y, width, height);//добавить и установить размеры элемента
+		com=button;com.setBounds(x, y, width, height);//РґРѕР±Р°РІРёС‚СЊ Рё СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЂР°Р·РјРµСЂС‹ СЌР»РµРјРµРЅС‚Р°
 		}
-	//если необходим jmenuitem
+	//РµСЃР»Рё РЅРµРѕР±С…РѕРґРёРј jmenuitem
 		if(strCom.equalsIgnoreCase("jmenuitem")){jMenuItem=new JMenuItem();jMenuItem.setText(strText);
 			jMenuItem.setCursor(new Cursor(12));jMenuItem.addActionListener((ActionListener)listener);
-			com=jMenuItem;//добавить элемент
+			com=jMenuItem;//РґРѕР±Р°РІРёС‚СЊ СЌР»РµРјРµРЅС‚
 			}
-	//если необходимо текстовое поле
+	//РµСЃР»Рё РЅРµРѕР±С…РѕРґРёРјРѕ С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ
 	if(strCom.equalsIgnoreCase("field")){field=new JTextField();field.setText(strText);
 		field.addCaretListener((CaretListener)listener);com=field;
-		com.setBounds(x, y, width, height);//добавить и установить размеры элемента
+		com.setBounds(x, y, width, height);//РґРѕР±Р°РІРёС‚СЊ Рё СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЂР°Р·РјРµСЂС‹ СЌР»РµРјРµРЅС‚Р°
 		}
-	//если необходимо окно выбора файла
+	//РµСЃР»Рё РЅРµРѕР±С…РѕРґРёРјРѕ РѕРєРЅРѕ РІС‹Р±РѕСЂР° С„Р°Р№Р»Р°
 	if(strCom.equalsIgnoreCase("fileChooser")){fc=new JFileChooser();
 		fc.addActionListener((ActionListener)listener);com=fc;
 		}
 
-	//если такой strCom не предусмотрен, вывести собщение об ошибке
+	//РµСЃР»Рё С‚Р°РєРѕР№ strCom РЅРµ РїСЂРµРґСѓСЃРјРѕС‚СЂРµРЅ, РІС‹РІРµСЃС‚Рё СЃРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ
 	if(com==null){msg.showMessageDialog(con,"<HTML><FONT size=5 color=red>" +
-			"Ошибка создания компонента "+strCom+"!<BR>Метод не предусматривает" +
-					"<BR>создание данного компонента");return null;}//ничего не вернуть
+			"РћС€РёР±РєР° СЃРѕР·РґР°РЅРёСЏ РєРѕРјРїРѕРЅРµРЅС‚Р° "+strCom+"!<BR>РњРµС‚РѕРґ РЅРµ РїСЂРµРґСѓСЃРјР°С‚СЂРёРІР°РµС‚" +
+					"<BR>СЃРѕР·РґР°РЅРёРµ РґР°РЅРЅРѕРіРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°");return null;}//РЅРёС‡РµРіРѕ РЅРµ РІРµСЂРЅСѓС‚СЊ
 
-	con.add(com);//com.setBounds(x, y, width, height);//добавить и установить размеры элемента
-	com.requestFocus();//установить фокус, чтобы элемент выводился на форму, а не скрывался
+	con.add(com);//com.setBounds(x, y, width, height);//РґРѕР±Р°РІРёС‚СЊ Рё СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЂР°Р·РјРµСЂС‹ СЌР»РµРјРµРЅС‚Р°
+	com.requestFocus();//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С„РѕРєСѓСЃ, С‡С‚РѕР±С‹ СЌР»РµРјРµРЅС‚ РІС‹РІРѕРґРёР»СЃСЏ РЅР° С„РѕСЂРјСѓ, Р° РЅРµ СЃРєСЂС‹РІР°Р»СЃСЏ
 
-	return com;//вернуть элемент
+	return com;//РІРµСЂРЅСѓС‚СЊ СЌР»РµРјРµРЅС‚
 }
 
 }

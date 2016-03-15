@@ -1,5 +1,5 @@
-//Класс TemplateEngine управляет базой игровых ситуаций (шаблонов и деревьев).
-//Здесь выполняется инициализация, сохранение, обновление базы, удаление шаблонов и поиск шаблона для хода ИИ.
+//РљР»Р°СЃСЃ TemplateEngine СѓРїСЂР°РІР»СЏРµС‚ Р±Р°Р·РѕР№ РёРіСЂРѕРІС‹С… СЃРёС‚СѓР°С†РёР№ (С€Р°Р±Р»РѕРЅРѕРІ Рё РґРµСЂРµРІСЊРµРІ).
+//Р—РґРµСЃСЊ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ, СЃРѕС…СЂР°РЅРµРЅРёРµ, РѕР±РЅРѕРІР»РµРЅРёРµ Р±Р°Р·С‹, СѓРґР°Р»РµРЅРёРµ С€Р°Р±Р»РѕРЅРѕРІ Рё РїРѕРёСЃРє С€Р°Р±Р»РѕРЅР° РґР»СЏ С…РѕРґР° РР.
 
 package p_TemplateEngine;
 
@@ -12,21 +12,21 @@ import p_JavaPatterns.Pattern_ReadAndWriteFile;
 
 public class TemplateEngine{
 	
-public ArrayList<Template> baseOfTemplates;//база игровых ситуаций (шаблонов и деревьев)
-public int maxTemplateIndex;//максимальный индекс шаблона в базе
-private Pattern_ReadAndWriteFile file;//класс чтения и записи файлов
-private String templateFileName;//имя файла базы игровых ситуаций
-public int[] templateTypeCount;//массив с числом шаблонов каждого типа
+public ArrayList<Template> baseOfTemplates;//Р±Р°Р·Р° РёРіСЂРѕРІС‹С… СЃРёС‚СѓР°С†РёР№ (С€Р°Р±Р»РѕРЅРѕРІ Рё РґРµСЂРµРІСЊРµРІ)
+public int maxTemplateIndex;//РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РёРЅРґРµРєСЃ С€Р°Р±Р»РѕРЅР° РІ Р±Р°Р·Рµ
+private Pattern_ReadAndWriteFile file;//РєР»Р°СЃСЃ С‡С‚РµРЅРёСЏ Рё Р·Р°РїРёСЃРё С„Р°Р№Р»РѕРІ
+private String templateFileName;//РёРјСЏ С„Р°Р№Р»Р° Р±Р°Р·С‹ РёРіСЂРѕРІС‹С… СЃРёС‚СѓР°С†РёР№
+public int[] templateTypeCount;//РјР°СЃСЃРёРІ СЃ С‡РёСЃР»РѕРј С€Р°Р±Р»РѕРЅРѕРІ РєР°Р¶РґРѕРіРѕ С‚РёРїР°
 
-//Параметры найденного шаблона для его отображения в редакторе шаблонов
-public int foundedNumber;//порядковый номер шаблона в базе
-public int foundedIndex;//индекс шаблона
-public int foundedTemplateType;//тип шаблона
+//РџР°СЂР°РјРµС‚СЂС‹ РЅР°Р№РґРµРЅРЅРѕРіРѕ С€Р°Р±Р»РѕРЅР° РґР»СЏ РµРіРѕ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІ СЂРµРґР°РєС‚РѕСЂРµ С€Р°Р±Р»РѕРЅРѕРІ
+public int foundedNumber;//РїРѕСЂСЏРґРєРѕРІС‹Р№ РЅРѕРјРµСЂ С€Р°Р±Р»РѕРЅР° РІ Р±Р°Р·Рµ
+public int foundedIndex;//РёРЅРґРµРєСЃ С€Р°Р±Р»РѕРЅР°
+public int foundedTemplateType;//С‚РёРї С€Р°Р±Р»РѕРЅР°
 
-//Конструктор класса загружает и обрабатывает базу игровых ситуаций из файла
+//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєР»Р°СЃСЃР° Р·Р°РіСЂСѓР¶Р°РµС‚ Рё РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚ Р±Р°Р·Сѓ РёРіСЂРѕРІС‹С… СЃРёС‚СѓР°С†РёР№ РёР· С„Р°Р№Р»Р°
 public TemplateEngine(){
 	
-	//инициализация переменных
+	//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРµСЂРµРјРµРЅРЅС‹С…
 	templateFileName="dotsAIresources//templateBase.txt";	
 	file=new Pattern_ReadAndWriteFile();
 	maxTemplateIndex=0;		
@@ -37,53 +37,53 @@ public TemplateEngine(){
 		templateTypeCount[i]=0;
 	}
 	
-	String str=file.ReadTxtFile(templateFileName);//прочитать файл базы
-	baseOfTemplates=new ArrayList<Template>();//создать список для хранения базы	
+	String str=file.ReadTxtFile(templateFileName);//РїСЂРѕС‡РёС‚Р°С‚СЊ С„Р°Р№Р» Р±Р°Р·С‹
+	baseOfTemplates=new ArrayList<Template>();//СЃРѕР·РґР°С‚СЊ СЃРїРёСЃРѕРє РґР»СЏ С…СЂР°РЅРµРЅРёСЏ Р±Р°Р·С‹	
 	
-	while(str.length()>0){//парсить весь файл, в каждой итерации while обрабатывается один шаблон
-		int idx=str.indexOf("</"+TML.template+">")+TML.template.length()+3;//получить последний символ, описывающий один шаблон
-		String strTemplate=str.substring(0,idx);//прочесть текст шаблона
-		Template t=new Template(strTemplate);//создать объект шаблона	
-		baseOfTemplates.add(t);//добавить шаблон в список шаблонов
+	while(str.length()>0){//РїР°СЂСЃРёС‚СЊ РІРµСЃСЊ С„Р°Р№Р», РІ РєР°Р¶РґРѕР№ РёС‚РµСЂР°С†РёРё while РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚СЃСЏ РѕРґРёРЅ С€Р°Р±Р»РѕРЅ
+		int idx=str.indexOf("</"+TML.template+">")+TML.template.length()+3;//РїРѕР»СѓС‡РёС‚СЊ РїРѕСЃР»РµРґРЅРёР№ СЃРёРјРІРѕР», РѕРїРёСЃС‹РІР°СЋС‰РёР№ РѕРґРёРЅ С€Р°Р±Р»РѕРЅ
+		String strTemplate=str.substring(0,idx);//РїСЂРѕС‡РµСЃС‚СЊ С‚РµРєСЃС‚ С€Р°Р±Р»РѕРЅР°
+		Template t=new Template(strTemplate);//СЃРѕР·РґР°С‚СЊ РѕР±СЉРµРєС‚ С€Р°Р±Р»РѕРЅР°	
+		baseOfTemplates.add(t);//РґРѕР±Р°РІРёС‚СЊ С€Р°Р±Р»РѕРЅ РІ СЃРїРёСЃРѕРє С€Р°Р±Р»РѕРЅРѕРІ
 		
-		//обновить число шаблонов, деревьев и число шаблонов каждого типа
+		//РѕР±РЅРѕРІРёС‚СЊ С‡РёСЃР»Рѕ С€Р°Р±Р»РѕРЅРѕРІ, РґРµСЂРµРІСЊРµРІ Рё С‡РёСЃР»Рѕ С€Р°Р±Р»РѕРЅРѕРІ РєР°Р¶РґРѕРіРѕ С‚РёРїР°
 		templateCount++;
 		if(t.tree!=null){
 			treeCount++;		
 		}
 		templateTypeCount[t.templateType]++;
 		
-		str=str.substring(idx);//удалить текст обработанного шаблона, остается текст необработанных шаблонов
+		str=str.substring(idx);//СѓРґР°Р»РёС‚СЊ С‚РµРєСЃС‚ РѕР±СЂР°Р±РѕС‚Р°РЅРЅРѕРіРѕ С€Р°Р±Р»РѕРЅР°, РѕСЃС‚Р°РµС‚СЃСЏ С‚РµРєСЃС‚ РЅРµРѕР±СЂР°Р±РѕС‚Р°РЅРЅС‹С… С€Р°Р±Р»РѕРЅРѕРІ
 	}	
 		
-	foundedNumber=0;//порядковый номер шаблона в базе
-	foundedIndex=0;//индекс шаблона
-	foundedTemplateType=TemplateType.templateTypeBEGIN;//тип шаблона BEGIN, т.к. вначале игры ИИ делает ход по этому шаблону
+	foundedNumber=0;//РїРѕСЂСЏРґРєРѕРІС‹Р№ РЅРѕРјРµСЂ С€Р°Р±Р»РѕРЅР° РІ Р±Р°Р·Рµ
+	foundedIndex=0;//РёРЅРґРµРєСЃ С€Р°Р±Р»РѕРЅР°
+	foundedTemplateType=TemplateType.templateTypeBEGIN;//С‚РёРї С€Р°Р±Р»РѕРЅР° BEGIN, С‚.Рє. РІРЅР°С‡Р°Р»Рµ РёРіСЂС‹ РР РґРµР»Р°РµС‚ С…РѕРґ РїРѕ СЌС‚РѕРјСѓ С€Р°Р±Р»РѕРЅСѓ
 	
-	for(int i=0;i<baseOfTemplates.size();i++){//найти максимальный индекс шаблона
+	for(int i=0;i<baseOfTemplates.size();i++){//РЅР°Р№С‚Рё РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РёРЅРґРµРєСЃ С€Р°Р±Р»РѕРЅР°
 		if(baseOfTemplates.get(i).templateID>maxTemplateIndex){
 			maxTemplateIndex=baseOfTemplates.get(i).templateID;
 		}			
 	}
 	
-	//вывести в консоль информацию об обработаной базе
-	System.out.println("число шаблонов = "+templateCount);
-	System.out.println("число деревьев = "+treeCount);
-	System.out.println("максимальный индекс шаблона = "+maxTemplateIndex);
+	//РІС‹РІРµСЃС‚Рё РІ РєРѕРЅСЃРѕР»СЊ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЂР°Р±РѕС‚Р°РЅРѕР№ Р±Р°Р·Рµ
+	System.out.println("С‡РёСЃР»Рѕ С€Р°Р±Р»РѕРЅРѕРІ = "+templateCount);
+	System.out.println("С‡РёСЃР»Рѕ РґРµСЂРµРІСЊРµРІ = "+treeCount);
+	System.out.println("РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РёРЅРґРµРєСЃ С€Р°Р±Р»РѕРЅР° = "+maxTemplateIndex);
 	System.out.println("------------------------------------------------------------");
 }
 
-//Метод сохраняет базу игровых ситаций
+//РњРµС‚РѕРґ СЃРѕС…СЂР°РЅСЏРµС‚ Р±Р°Р·Сѓ РёРіСЂРѕРІС‹С… СЃРёС‚Р°С†РёР№
 public void saveTemplateBase(){
-	ArrayList<Template> newBase=new ArrayList<Template>();//список для хранения сохраняемой базы
+	ArrayList<Template> newBase=new ArrayList<Template>();//СЃРїРёСЃРѕРє РґР»СЏ С…СЂР°РЅРµРЅРёСЏ СЃРѕС…СЂР°РЅСЏРµРјРѕР№ Р±Р°Р·С‹
 	
-	for(int k=0;k<baseOfTemplates.size();k++){//для каждого шаблона найти число ANY (зеленых) точек
+	for(int k=0;k<baseOfTemplates.size();k++){//РґР»СЏ РєР°Р¶РґРѕРіРѕ С€Р°Р±Р»РѕРЅР° РЅР°Р№С‚Рё С‡РёСЃР»Рѕ ANY (Р·РµР»РµРЅС‹С…) С‚РѕС‡РµРє
 		baseOfTemplates.get(k).setANYDotsCount();
 	}
 	
-	//обновить базу с учетом числа ANY точек, т.е. выполняется сортировка по числу таких точек,
-	//вначале в новую базу записываются самые подробные шаблоны (с минимумом ANY точек).
-	//Сортировка выполняется, т.к. поиск шаблона для хода ИИ происходит начиная с самых подробных шаблонов.
+	//РѕР±РЅРѕРІРёС‚СЊ Р±Р°Р·Сѓ СЃ СѓС‡РµС‚РѕРј С‡РёСЃР»Р° ANY С‚РѕС‡РµРє, С‚.Рµ. РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ СЃРѕСЂС‚РёСЂРѕРІРєР° РїРѕ С‡РёСЃР»Сѓ С‚Р°РєРёС… С‚РѕС‡РµРє,
+	//РІРЅР°С‡Р°Р»Рµ РІ РЅРѕРІСѓСЋ Р±Р°Р·Сѓ Р·Р°РїРёСЃС‹РІР°СЋС‚СЃСЏ СЃР°РјС‹Рµ РїРѕРґСЂРѕР±РЅС‹Рµ С€Р°Р±Р»РѕРЅС‹ (СЃ РјРёРЅРёРјСѓРјРѕРј ANY С‚РѕС‡РµРє).
+	//РЎРѕСЂС‚РёСЂРѕРІРєР° РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ, С‚.Рє. РїРѕРёСЃРє С€Р°Р±Р»РѕРЅР° РґР»СЏ С…РѕРґР° РР РїСЂРѕРёСЃС…РѕРґРёС‚ РЅР°С‡РёРЅР°СЏ СЃ СЃР°РјС‹С… РїРѕРґСЂРѕР±РЅС‹С… С€Р°Р±Р»РѕРЅРѕРІ.
 	String str="";
 	for(int k=Protocol.maxSize*Protocol.maxSize;k>=0;k--){
 		for(int i=0;i<baseOfTemplates.size();i++){
@@ -95,29 +95,29 @@ public void saveTemplateBase(){
 			newBase.add(new Template(newTemplate));
 		}
 	}
-	//база обновляется, как файл базы, так и список объектов в программе
+	//Р±Р°Р·Р° РѕР±РЅРѕРІР»СЏРµС‚СЃСЏ, РєР°Рє С„Р°Р№Р» Р±Р°Р·С‹, С‚Р°Рє Рё СЃРїРёСЃРѕРє РѕР±СЉРµРєС‚РѕРІ РІ РїСЂРѕРіСЂР°РјРјРµ
 	file.WriteTxtFile(templateFileName,str);
 	baseOfTemplates=newBase;
 	
 	System.out.println("template base saved");
 }
 
-//Метод переводит объект шаблона в текст согласно кодировке шаблона для последующего сохранения в файл
+//РњРµС‚РѕРґ РїРµСЂРµРІРѕРґРёС‚ РѕР±СЉРµРєС‚ С€Р°Р±Р»РѕРЅР° РІ С‚РµРєСЃС‚ СЃРѕРіР»Р°СЃРЅРѕ РєРѕРґРёСЂРѕРІРєРµ С€Р°Р±Р»РѕРЅР° РґР»СЏ РїРѕСЃР»РµРґСѓСЋС‰РµРіРѕ СЃРѕС…СЂР°РЅРµРЅРёСЏ РІ С„Р°Р№Р»
 private String templateToString(Template t){
 	String s="";
 	s+="<"+TML.template+">";
-	s+="<"+TML.id+":"+t.templateID+">";//индекс шаблона
-	s+="<"+TML.type+":"+TemplateType.toString(t.templateType)+">";//тип шаблона
-	s+="<"+TML.content+":"+arrayToString(t.templateContent)+">";//ситуация на поле без логики
+	s+="<"+TML.id+":"+t.templateID+">";//РёРЅРґРµРєСЃ С€Р°Р±Р»РѕРЅР°
+	s+="<"+TML.type+":"+TemplateType.toString(t.templateType)+">";//С‚РёРї С€Р°Р±Р»РѕРЅР°
+	s+="<"+TML.content+":"+arrayToString(t.templateContent)+">";//СЃРёС‚СѓР°С†РёСЏ РЅР° РїРѕР»Рµ Р±РµР· Р»РѕРіРёРєРё
 	
 	s+="<"+TML.tree+">";
 	try{
 		if(t.tree.symmetryType!=-1){
-			s=s+t.tree.getSymmetryTypeString();//тип симметрии дерева
+			s=s+t.tree.getSymmetryTypeString();//С‚РёРї СЃРёРјРјРµС‚СЂРёРё РґРµСЂРµРІР°
 		}
-		s=s+t.tree.node.getString();//тест дерева
+		s=s+t.tree.node.getString();//С‚РµСЃС‚ РґРµСЂРµРІР°
 	}catch(Exception e){
-		s=s+"<1b:default></1b>";//при создании нового шаблона у него нет дерева, поэтому обрабатывается исключение, в котором создается дерево
+		s=s+"<1b:default></1b>";//РїСЂРё СЃРѕР·РґР°РЅРёРё РЅРѕРІРѕРіРѕ С€Р°Р±Р»РѕРЅР° Сѓ РЅРµРіРѕ РЅРµС‚ РґРµСЂРµРІР°, РїРѕСЌС‚РѕРјСѓ РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚СЃСЏ РёСЃРєР»СЋС‡РµРЅРёРµ, РІ РєРѕС‚РѕСЂРѕРј СЃРѕР·РґР°РµС‚СЃСЏ РґРµСЂРµРІРѕ
 	}
 	
 	s+="</"+TML.tree+">";	
@@ -125,10 +125,10 @@ private String templateToString(Template t){
 	return s;
 }
 
-//Метод проверяет, существует ли в базе шаблон при сохранении нового шаблона.
-//Если шаблона нет, то в этом методе он добавляется в базу
+//РњРµС‚РѕРґ РїСЂРѕРІРµСЂСЏРµС‚, СЃСѓС‰РµСЃС‚РІСѓРµС‚ Р»Рё РІ Р±Р°Р·Рµ С€Р°Р±Р»РѕРЅ РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё РЅРѕРІРѕРіРѕ С€Р°Р±Р»РѕРЅР°.
+//Р•СЃР»Рё С€Р°Р±Р»РѕРЅР° РЅРµС‚, С‚Рѕ РІ СЌС‚РѕРј РјРµС‚РѕРґРµ РѕРЅ РґРѕР±Р°РІР»СЏРµС‚СЃСЏ РІ Р±Р°Р·Сѓ
 public boolean isExistTemplateWhenNewSave(byte[] content,String type){
-	if(isExistTemplateView(content)){//Если шаблон уже существует, то он не добавляется в базу
+	if(isExistTemplateView(content)){//Р•СЃР»Рё С€Р°Р±Р»РѕРЅ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚, С‚Рѕ РѕРЅ РЅРµ РґРѕР±Р°РІР»СЏРµС‚СЃСЏ РІ Р±Р°Р·Сѓ
 		return true;
 	}
 	
@@ -149,11 +149,11 @@ public boolean isExistTemplateWhenNewSave(byte[] content,String type){
 	return false;
 }	
 
-//Метод проверяет, существует ли в базе шаблон при пересохранении (после редактирования) существующего шаблона.
-//Если редактированный шаблон уникален, то в этом методе он заменяется в базе.
-//При этом templateIndexInBase является порядковым номером хранения шаблона в базе, а не индексом (уникальным кодом) шаблона
+//РњРµС‚РѕРґ РїСЂРѕРІРµСЂСЏРµС‚, СЃСѓС‰РµСЃС‚РІСѓРµС‚ Р»Рё РІ Р±Р°Р·Рµ С€Р°Р±Р»РѕРЅ РїСЂРё РїРµСЂРµСЃРѕС…СЂР°РЅРµРЅРёРё (РїРѕСЃР»Рµ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ) СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ С€Р°Р±Р»РѕРЅР°.
+//Р•СЃР»Рё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРЅС‹Р№ С€Р°Р±Р»РѕРЅ СѓРЅРёРєР°Р»РµРЅ, С‚Рѕ РІ СЌС‚РѕРј РјРµС‚РѕРґРµ РѕРЅ Р·Р°РјРµРЅСЏРµС‚СЃСЏ РІ Р±Р°Р·Рµ.
+//РџСЂРё СЌС‚РѕРј templateIndexInBase СЏРІР»СЏРµС‚СЃСЏ РїРѕСЂСЏРґРєРѕРІС‹Рј РЅРѕРјРµСЂРѕРј С…СЂР°РЅРµРЅРёСЏ С€Р°Р±Р»РѕРЅР° РІ Р±Р°Р·Рµ, Р° РЅРµ РёРЅРґРµРєСЃРѕРј (СѓРЅРёРєР°Р»СЊРЅС‹Рј РєРѕРґРѕРј) С€Р°Р±Р»РѕРЅР°
 public boolean isExistTemplateWhenResave(byte[] content,int templateIndexInBase,String type){
-	if(isExistTemplateView(content)){//Если шаблон уже существует, то его пересохранения не происходит.
+	if(isExistTemplateView(content)){//Р•СЃР»Рё С€Р°Р±Р»РѕРЅ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚, С‚Рѕ РµРіРѕ РїРµСЂРµСЃРѕС…СЂР°РЅРµРЅРёСЏ РЅРµ РїСЂРѕРёСЃС…РѕРґРёС‚.
 		return true;
 	}
 	
@@ -181,7 +181,7 @@ public boolean isExistTemplateWhenResave(byte[] content,int templateIndexInBase,
 	return false;
 }
 
-//используется в DotsTemplateEditor для поиска совпадений в базе при сохранении новых шаблонов или пересохранении
+//РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ DotsTemplateEditor РґР»СЏ РїРѕРёСЃРєР° СЃРѕРІРїР°РґРµРЅРёР№ РІ Р±Р°Р·Рµ РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё РЅРѕРІС‹С… С€Р°Р±Р»РѕРЅРѕРІ РёР»Рё РїРµСЂРµСЃРѕС…СЂР°РЅРµРЅРёРё
 private boolean isExistTemplateView(byte[] content){
 	for(int j=0;j<baseOfTemplates.size();j++){
 		for(int i=0;i<baseOfTemplates.get(j).templateView.size();i++){
@@ -193,31 +193,31 @@ private boolean isExistTemplateView(byte[] content){
 				count++;
 			}
 			if(count==Protocol.maxSize*Protocol.maxSize){
-				return true;//вариант в базе есть
+				return true;//РІР°СЂРёР°РЅС‚ РІ Р±Р°Р·Рµ РµСЃС‚СЊ
 			}
 		}
 	}
 	return false;
 }
 
-//поиск шаблона для поиска хода для списка точек ArrayList<Point> point
+//РїРѕРёСЃРє С€Р°Р±Р»РѕРЅР° РґР»СЏ РїРѕРёСЃРєР° С…РѕРґР° РґР»СЏ СЃРїРёСЃРєР° С‚РѕС‡РµРє ArrayList<Point> point
 public boolean isMoveIfEqualsLikeAreaByPointList(Protocol protocol,Game game,int templateType,ArrayList<Point> pointList,byte[][] fieldState,Point recommendedMove){
 	for(int i=0;i<baseOfTemplates.size();i++){
 		try{
-			//определяется, проходить ли по списку шаблонов в обратном порядке.
-			//Для некоторых типов шаблонов нужен поиск в обратном порядке, т.е. не с самых подробных шаблонов 
-			//с минимумом ANY точек (как для большинства типов шаблонов), а поиск с наименее подробных шаблонов
+			//РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ, РїСЂРѕС…РѕРґРёС‚СЊ Р»Рё РїРѕ СЃРїРёСЃРєСѓ С€Р°Р±Р»РѕРЅРѕРІ РІ РѕР±СЂР°С‚РЅРѕРј РїРѕСЂСЏРґРєРµ.
+			//Р”Р»СЏ РЅРµРєРѕС‚РѕСЂС‹С… С‚РёРїРѕРІ С€Р°Р±Р»РѕРЅРѕРІ РЅСѓР¶РµРЅ РїРѕРёСЃРє РІ РѕР±СЂР°С‚РЅРѕРј РїРѕСЂСЏРґРєРµ, С‚.Рµ. РЅРµ СЃ СЃР°РјС‹С… РїРѕРґСЂРѕР±РЅС‹С… С€Р°Р±Р»РѕРЅРѕРІ 
+			//СЃ РјРёРЅРёРјСѓРјРѕРј ANY С‚РѕС‡РµРє (РєР°Рє РґР»СЏ Р±РѕР»СЊС€РёРЅСЃС‚РІР° С‚РёРїРѕРІ С€Р°Р±Р»РѕРЅРѕРІ), Р° РїРѕРёСЃРє СЃ РЅР°РёРјРµРЅРµРµ РїРѕРґСЂРѕР±РЅС‹С… С€Р°Р±Р»РѕРЅРѕРІ
 			int idx=TemplateType.isTemplateBaseSearchFromStartIdx(templateType)?i:(baseOfTemplates.size()-1-i);
 			
-			//поиск выполняется только для шаблонов одного типа, поэтому при несовпадени типа переходим к следующему шаблону
+			//РїРѕРёСЃРє РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РґР»СЏ С€Р°Р±Р»РѕРЅРѕРІ РѕРґРЅРѕРіРѕ С‚РёРїР°, РїРѕСЌС‚РѕРјСѓ РїСЂРё РЅРµСЃРѕРІРїР°РґРµРЅРё С‚РёРїР° РїРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґСѓСЋС‰РµРјСѓ С€Р°Р±Р»РѕРЅСѓ
 			if(baseOfTemplates.get(idx).templateType!=templateType){
 				continue;
 			}
 			
-			//поиск совпадения шаблона с игровой ситуацией для списка точек.
-			//Если совпадение найдено, в методе isMoveIfEqualsLikeAreaByPointList выполняется поиск хода ИИ
+			//РїРѕРёСЃРє СЃРѕРІРїР°РґРµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РґР»СЏ СЃРїРёСЃРєР° С‚РѕС‡РµРє.
+			//Р•СЃР»Рё СЃРѕРІРїР°РґРµРЅРёРµ РЅР°Р№РґРµРЅРѕ, РІ РјРµС‚РѕРґРµ isMoveIfEqualsLikeAreaByPointList РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РїРѕРёСЃРє С…РѕРґР° РР
 			if(baseOfTemplates.get(idx).isMoveIfEqualsLikeAreaByPointList(protocol,game,pointList,fieldState,templateType,recommendedMove)){
-				//если совпадение есть, запоминаем найденный шаблон
+				//РµСЃР»Рё СЃРѕРІРїР°РґРµРЅРёРµ РµСЃС‚СЊ, Р·Р°РїРѕРјРёРЅР°РµРј РЅР°Р№РґРµРЅРЅС‹Р№ С€Р°Р±Р»РѕРЅ
 				foundedNumber=idx;
 				foundedIndex=baseOfTemplates.get(idx).templateID;					
 				foundedTemplateType=templateType;
@@ -228,24 +228,24 @@ public boolean isMoveIfEqualsLikeAreaByPointList(Protocol protocol,Game game,int
 	return false;
 }
 
-//поиск шаблона для поиска хода для одной точки Point point
+//РїРѕРёСЃРє С€Р°Р±Р»РѕРЅР° РґР»СЏ РїРѕРёСЃРєР° С…РѕРґР° РґР»СЏ РѕРґРЅРѕР№ С‚РѕС‡РєРё Point point
 public boolean isMoveIfEqualsLikeAreaByPoint(Protocol protocol,Game game,int templateType,Point point,byte[][] fieldState,Point recommendedMove){
 	for(int i=0;i<baseOfTemplates.size();i++){try{
 		
-		//определяется, проходить ли по списку шаблонов в обратном порядке.
-		//Для некоторых типов шаблонов нужен поиск в обратном порядке, т.е. не с самых подробных шаблонов 
-		//с минимумом ANY точек (как для большинства типов шаблонов), а поиск с наименее подробных шаблонов
+		//РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ, РїСЂРѕС…РѕРґРёС‚СЊ Р»Рё РїРѕ СЃРїРёСЃРєСѓ С€Р°Р±Р»РѕРЅРѕРІ РІ РѕР±СЂР°С‚РЅРѕРј РїРѕСЂСЏРґРєРµ.
+		//Р”Р»СЏ РЅРµРєРѕС‚РѕСЂС‹С… С‚РёРїРѕРІ С€Р°Р±Р»РѕРЅРѕРІ РЅСѓР¶РµРЅ РїРѕРёСЃРє РІ РѕР±СЂР°С‚РЅРѕРј РїРѕСЂСЏРґРєРµ, С‚.Рµ. РЅРµ СЃ СЃР°РјС‹С… РїРѕРґСЂРѕР±РЅС‹С… С€Р°Р±Р»РѕРЅРѕРІ 
+		//СЃ РјРёРЅРёРјСѓРјРѕРј ANY С‚РѕС‡РµРє (РєР°Рє РґР»СЏ Р±РѕР»СЊС€РёРЅСЃС‚РІР° С‚РёРїРѕРІ С€Р°Р±Р»РѕРЅРѕРІ), Р° РїРѕРёСЃРє СЃ РЅР°РёРјРµРЅРµРµ РїРѕРґСЂРѕР±РЅС‹С… С€Р°Р±Р»РѕРЅРѕРІ
 		int idx=TemplateType.isTemplateBaseSearchFromStartIdx(templateType)?i:(baseOfTemplates.size()-1-i);
 		
-		//поиск выполняется только для шаблонов одного типа, поэтому при несовпадени типа переходим к следующему шаблону
+		//РїРѕРёСЃРє РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РґР»СЏ С€Р°Р±Р»РѕРЅРѕРІ РѕРґРЅРѕРіРѕ С‚РёРїР°, РїРѕСЌС‚РѕРјСѓ РїСЂРё РЅРµСЃРѕРІРїР°РґРµРЅРё С‚РёРїР° РїРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґСѓСЋС‰РµРјСѓ С€Р°Р±Р»РѕРЅСѓ
 		if(baseOfTemplates.get(idx).templateType!=templateType){
 			continue;
 		}
 		
-		//поиск совпадения шаблона с игровой ситуацией для одной точки.
-		//Если совпадение найдено, в методе isMoveIfEqualsLikeAreaByPointList выполняется поиск хода ИИ
+		//РїРѕРёСЃРє СЃРѕРІРїР°РґРµРЅРёСЏ С€Р°Р±Р»РѕРЅР° СЃ РёРіСЂРѕРІРѕР№ СЃРёС‚СѓР°С†РёРµР№ РґР»СЏ РѕРґРЅРѕР№ С‚РѕС‡РєРё.
+		//Р•СЃР»Рё СЃРѕРІРїР°РґРµРЅРёРµ РЅР°Р№РґРµРЅРѕ, РІ РјРµС‚РѕРґРµ isMoveIfEqualsLikeAreaByPointList РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РїРѕРёСЃРє С…РѕРґР° РР
 		if(baseOfTemplates.get(idx).isMoveIfEqualsLikeAreaByPoint(protocol,game,point,fieldState,templateType,recommendedMove)){
-			//если совпадение есть, запоминаем найденный шаблон
+			//РµСЃР»Рё СЃРѕРІРїР°РґРµРЅРёРµ РµСЃС‚СЊ, Р·Р°РїРѕРјРёРЅР°РµРј РЅР°Р№РґРµРЅРЅС‹Р№ С€Р°Р±Р»РѕРЅ
 			foundedNumber=idx;
 			foundedIndex=baseOfTemplates.get(idx).templateID;
 			foundedTemplateType=templateType;
@@ -255,13 +255,13 @@ public boolean isMoveIfEqualsLikeAreaByPoint(Protocol protocol,Game game,int tem
 	return false;
 }
 
-//Метод удаляет шаблон из базы и пересохраняет базу
+//РњРµС‚РѕРґ СѓРґР°Р»СЏРµС‚ С€Р°Р±Р»РѕРЅ РёР· Р±Р°Р·С‹ Рё РїРµСЂРµСЃРѕС…СЂР°РЅСЏРµС‚ Р±Р°Р·Сѓ
 public void deleteTemplate(int index){
 	baseOfTemplates.remove(index);
 	saveTemplateBase();
 }
 
-//Метод ищет и возвращает шаблон по его ID
+//РњРµС‚РѕРґ РёС‰РµС‚ Рё РІРѕР·РІСЂР°С‰Р°РµС‚ С€Р°Р±Р»РѕРЅ РїРѕ РµРіРѕ ID
 public Template getTemplateByTemplateID(int templateID){
 	for(int i=0;i<baseOfTemplates.size();i++){
 		if(baseOfTemplates.get(i).templateID==templateID){
@@ -271,7 +271,7 @@ public Template getTemplateByTemplateID(int templateID){
 	return null;
 }
 
-//Метод ищет и возвращает индекс шаблона в базе по его ID
+//РњРµС‚РѕРґ РёС‰РµС‚ Рё РІРѕР·РІСЂР°С‰Р°РµС‚ РёРЅРґРµРєСЃ С€Р°Р±Р»РѕРЅР° РІ Р±Р°Р·Рµ РїРѕ РµРіРѕ ID
 public int getBaseIndexByTemplateID(int templateID){
 	for(int i=0;i<baseOfTemplates.size();i++){
 		if(baseOfTemplates.get(i).templateID==templateID){
@@ -281,7 +281,7 @@ public int getBaseIndexByTemplateID(int templateID){
 	return baseOfTemplates.size();
 }
 
-//Метод переводит контент шаблона из массива в строку
+//РњРµС‚РѕРґ РїРµСЂРµРІРѕРґРёС‚ РєРѕРЅС‚РµРЅС‚ С€Р°Р±Р»РѕРЅР° РёР· РјР°СЃСЃРёРІР° РІ СЃС‚СЂРѕРєСѓ
 private String arrayToString(byte[] arr){
 	String s="";
 	for(int i=0;i<arr.length;i++){

@@ -1,6 +1,6 @@
-//Класс StatisticsFrame выводит в окно статистику использования алгоритмов ИИ.
-//В основном отображается статистика использования различных типов шаблонов.
-//Кроме типов шаблонов отображается число ходов по рандому, число ходов по BSS точкам и число ходов по максимизации захваченной территории
+//РљР»Р°СЃСЃ StatisticsFrame РІС‹РІРѕРґРёС‚ РІ РѕРєРЅРѕ СЃС‚Р°С‚РёСЃС‚РёРєСѓ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ Р°Р»РіРѕСЂРёС‚РјРѕРІ РР.
+//Р’ РѕСЃРЅРѕРІРЅРѕРј РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ СЃС‚Р°С‚РёСЃС‚РёРєР° РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СЂР°Р·Р»РёС‡РЅС‹С… С‚РёРїРѕРІ С€Р°Р±Р»РѕРЅРѕРІ.
+//РљСЂРѕРјРµ С‚РёРїРѕРІ С€Р°Р±Р»РѕРЅРѕРІ РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ С‡РёСЃР»Рѕ С…РѕРґРѕРІ РїРѕ СЂР°РЅРґРѕРјСѓ, С‡РёСЃР»Рѕ С…РѕРґРѕРІ РїРѕ BSS С‚РѕС‡РєР°Рј Рё С‡РёСЃР»Рѕ С…РѕРґРѕРІ РїРѕ РјР°РєСЃРёРјРёР·Р°С†РёРё Р·Р°С…РІР°С‡РµРЅРЅРѕР№ С‚РµСЂСЂРёС‚РѕСЂРёРё
 
 package p_Statistics;
 
@@ -22,8 +22,8 @@ public class StatisticsFrame{
 	
 	public JFrame frame;
 	int max=0;
-	int sumOfMoveStat;//всего ходов
-	int sumOfMoveStatTemplates;//всего ходов по шаблонам (включая макросы, исключая EXPRESS_SURROUND и RANDOM)
+	int sumOfMoveStat;//РІСЃРµРіРѕ С…РѕРґРѕРІ
+	int sumOfMoveStatTemplates;//РІСЃРµРіРѕ С…РѕРґРѕРІ РїРѕ С€Р°Р±Р»РѕРЅР°Рј (РІРєР»СЋС‡Р°СЏ РјР°РєСЂРѕСЃС‹, РёСЃРєР»СЋС‡Р°СЏ EXPRESS_SURROUND Рё RANDOM)
 	public MoveStatCount moveStatMas=new MoveStatCount();
 	BufferedImage images[];
 	int Y=30;
@@ -33,7 +33,7 @@ public class StatisticsFrame{
 		
 public StatisticsFrame(){
 	frame=new JFrame();
-	new Pattern_JFrame(frame, "Статистика ИИ", false, barWidth+60, 53+moveStatMas.getMoveStatLength()*barHeight, Color.white);
+	new Pattern_JFrame(frame, "РЎС‚Р°С‚РёСЃС‚РёРєР° РР", false, barWidth+60, 53+moveStatMas.getMoveStatLength()*barHeight, Color.white);
 	frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	frame.move(frame.getX()-510,frame.getY()-25);
 	frame.setIconImage(Pattern_Resources.icon);
@@ -50,7 +50,7 @@ public StatisticsFrame(){
 	}
 }
 
-//очистить статистику ходов
+//РѕС‡РёСЃС‚РёС‚СЊ СЃС‚Р°С‚РёСЃС‚РёРєСѓ С…РѕРґРѕРІ
 public void clearStat(){
 	max=0;
 	sumOfMoveStat=0;
@@ -61,7 +61,7 @@ public void clearStat(){
 	moveStatMas.moveStatMax=0;
 }
 
-//нарисовать окно со статистикой
+//РЅР°СЂРёСЃРѕРІР°С‚СЊ РѕРєРЅРѕ СЃРѕ СЃС‚Р°С‚РёСЃС‚РёРєРѕР№
 public void paintFrame(DotsAI pointsAI){
 
 	Graphics g=frame.getGraphics();	
@@ -94,7 +94,7 @@ public void paintFrame(DotsAI pointsAI){
 	g.fillRect(10, Y+barHeight*moveStatMas.getMoveStatLength(), barWidth+55, 13);
 	g.fillRect(10, Y+16+barHeight*moveStatMas.getMoveStatLength(), barWidth+55, 13);
 	g.setColor(Color.black);
-	g.drawString("Последний ход ИИ:      "+pointsAI.protocol.getGame(pointsAI.gameIdx).moveAI.x+";"+pointsAI.protocol.getGame(pointsAI.gameIdx).moveAI.y, 15, Y+11+barHeight*moveStatMas.getMoveStatLength());	
+	g.drawString("РџРѕСЃР»РµРґРЅРёР№ С…РѕРґ РР:      "+pointsAI.protocol.getGame(pointsAI.gameIdx).moveAI.x+";"+pointsAI.protocol.getGame(pointsAI.gameIdx).moveAI.y, 15, Y+11+barHeight*moveStatMas.getMoveStatLength());	
 	g.drawString(moveStatMas.lastAImoveString, 15, Y+27+barHeight*moveStatMas.getMoveStatLength());
 	
 	max=moveStatMas.getMoveStatMax();
@@ -111,12 +111,12 @@ public void paintFrame(DotsAI pointsAI){
 		if(images[i]!=null)g.drawImage(images[i],6, Y-2+barHeight*i,null);
 	}
 	
-	//итоговые суммы ходов
+	//РёС‚РѕРіРѕРІС‹Рµ СЃСѓРјРјС‹ С…РѕРґРѕРІ
 	g.setColor(Color.lightGray);
 	g.fillRect(10, Y+32+barHeight*moveStatMas.getMoveStatLength(), barWidth+55, 13);
 	
 	g.setColor(Color.black);
-	g.drawString("Всего ходов ИИ: "+sumOfMoveStat, 15, Y+43+barHeight*moveStatMas.getMoveStatLength());
+	g.drawString("Р’СЃРµРіРѕ С…РѕРґРѕРІ РР: "+sumOfMoveStat, 15, Y+43+barHeight*moveStatMas.getMoveStatLength());
 }
 
 }

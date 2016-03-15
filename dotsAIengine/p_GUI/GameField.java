@@ -1,12 +1,12 @@
-//Класс хранит состояние поля и считает траектории возможных окружений.
-//Требования к хранению состояния поля - это легковесность - как можно меньше памяти для хранения.
-//При проверке ситуаций возможных окружений необходимо клонировать поле целиком, 
-//что гораздо быстрее, чем делать ходы от первого до последнего.
-//Поэтому, чем меньше памяти нужно для хранения поля, тем быстрее клонируется состояние поля.
-//Ведь операция клонирования - это операция копирования памяти.
+//РљР»Р°СЃСЃ С…СЂР°РЅРёС‚ СЃРѕСЃС‚РѕСЏРЅРёРµ РїРѕР»СЏ Рё СЃС‡РёС‚Р°РµС‚ С‚СЂР°РµРєС‚РѕСЂРёРё РІРѕР·РјРѕР¶РЅС‹С… РѕРєСЂСѓР¶РµРЅРёР№.
+//РўСЂРµР±РѕРІР°РЅРёСЏ Рє С…СЂР°РЅРµРЅРёСЋ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїРѕР»СЏ - СЌС‚Рѕ Р»РµРіРєРѕРІРµСЃРЅРѕСЃС‚СЊ - РєР°Рє РјРѕР¶РЅРѕ РјРµРЅСЊС€Рµ РїР°РјСЏС‚Рё РґР»СЏ С…СЂР°РЅРµРЅРёСЏ.
+//РџСЂРё РїСЂРѕРІРµСЂРєРµ СЃРёС‚СѓР°С†РёР№ РІРѕР·РјРѕР¶РЅС‹С… РѕРєСЂСѓР¶РµРЅРёР№ РЅРµРѕР±С…РѕРґРёРјРѕ РєР»РѕРЅРёСЂРѕРІР°С‚СЊ РїРѕР»Рµ С†РµР»РёРєРѕРј, 
+//С‡С‚Рѕ РіРѕСЂР°Р·РґРѕ Р±С‹СЃС‚СЂРµРµ, С‡РµРј РґРµР»Р°С‚СЊ С…РѕРґС‹ РѕС‚ РїРµСЂРІРѕРіРѕ РґРѕ РїРѕСЃР»РµРґРЅРµРіРѕ.
+//РџРѕСЌС‚РѕРјСѓ, С‡РµРј РјРµРЅСЊС€Рµ РїР°РјСЏС‚Рё РЅСѓР¶РЅРѕ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РїРѕР»СЏ, С‚РµРј Р±С‹СЃС‚СЂРµРµ РєР»РѕРЅРёСЂСѓРµС‚СЃСЏ СЃРѕСЃС‚РѕСЏРЅРёРµ РїРѕР»СЏ.
+//Р’РµРґСЊ РѕРїРµСЂР°С†РёСЏ РєР»РѕРЅРёСЂРѕРІР°РЅРёСЏ - СЌС‚Рѕ РѕРїРµСЂР°С†РёСЏ РєРѕРїРёСЂРѕРІР°РЅРёСЏ РїР°РјСЏС‚Рё.
 
-//Алгоритм поиска окружений имеет простую идею и высокую скорость,
-//однако код алгоритма значительно осложнен необходимость обрабатывать редкие случаи поиска траекторий окружений - тупиков.
+//РђР»РіРѕСЂРёС‚Рј РїРѕРёСЃРєР° РѕРєСЂСѓР¶РµРЅРёР№ РёРјРµРµС‚ РїСЂРѕСЃС‚СѓСЋ РёРґРµСЋ Рё РІС‹СЃРѕРєСѓСЋ СЃРєРѕСЂРѕСЃС‚СЊ,
+//РѕРґРЅР°РєРѕ РєРѕРґ Р°Р»РіРѕСЂРёС‚РјР° Р·РЅР°С‡РёС‚РµР»СЊРЅРѕ РѕСЃР»РѕР¶РЅРµРЅ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚СЊ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ СЂРµРґРєРёРµ СЃР»СѓС‡Р°Рё РїРѕРёСЃРєР° С‚СЂР°РµРєС‚РѕСЂРёР№ РѕРєСЂСѓР¶РµРЅРёР№ - С‚СѓРїРёРєРѕРІ.
 
 package p_GUI;
 
@@ -21,24 +21,24 @@ public class GameField {
 
 	public static byte BLUE=1;//1=blue
 	public static byte RED=2;//2=red
-	private byte BLUE_IN_RED=3;//3=окруженный синий
-	private byte RED_IN_BLUE=4;//4=окруженный красный
-	private byte EMPTY=0;//0=пустое место на поле
-	private byte EMPTY_IN_RED_ENCIRCLEMENT=-1;//-1=пустое место внутри красного окружения
-	private byte EMPTY_IN_BLUE_ENCIRCLEMENT=-2;//-2=пустое место внутри синего окружения
-	private byte EMPTY_IN_RED_HOUSE=-3;//-3=пустое место в красном домике
-	private byte EMPTY_IN_BLUE_HOUSE=-4;//-4=пустое место в синем домике
+	private byte BLUE_IN_RED=3;//3=РѕРєСЂСѓР¶РµРЅРЅС‹Р№ СЃРёРЅРёР№
+	private byte RED_IN_BLUE=4;//4=РѕРєСЂСѓР¶РµРЅРЅС‹Р№ РєСЂР°СЃРЅС‹Р№
+	private byte EMPTY=0;//0=РїСѓСЃС‚РѕРµ РјРµСЃС‚Рѕ РЅР° РїРѕР»Рµ
+	private byte EMPTY_IN_RED_ENCIRCLEMENT=-1;//-1=РїСѓСЃС‚РѕРµ РјРµСЃС‚Рѕ РІРЅСѓС‚СЂРё РєСЂР°СЃРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
+	private byte EMPTY_IN_BLUE_ENCIRCLEMENT=-2;//-2=РїСѓСЃС‚РѕРµ РјРµСЃС‚Рѕ РІРЅСѓС‚СЂРё СЃРёРЅРµРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
+	private byte EMPTY_IN_RED_HOUSE=-3;//-3=РїСѓСЃС‚РѕРµ РјРµСЃС‚Рѕ РІ РєСЂР°СЃРЅРѕРј РґРѕРјРёРєРµ
+	private byte EMPTY_IN_BLUE_HOUSE=-4;//-4=РїСѓСЃС‚РѕРµ РјРµСЃС‚Рѕ РІ СЃРёРЅРµРј РґРѕРјРёРєРµ
 	
-	public byte[][] gameField;//игровое поле
-	public byte[][] fieldForBuffer;//вспомогательное буферное поле	
-	public int scoreBlue,scoreRed;//число набранных очков
-	public byte sizeX,sizeY;//размер поля
-	public Point lastDot=new Point();//последний ход
-	public byte lastDotType;//последний ход, 1=blue, 2=red
-	public ArrayList<Polygon> blueEnclosures=new ArrayList<Polygon>();//синие окружения
-	public ArrayList<Polygon> redEnclosures=new ArrayList<Polygon>();//красные окружения
+	public byte[][] gameField;//РёРіСЂРѕРІРѕРµ РїРѕР»Рµ
+	public byte[][] fieldForBuffer;//РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅРѕРµ Р±СѓС„РµСЂРЅРѕРµ РїРѕР»Рµ	
+	public int scoreBlue,scoreRed;//С‡РёСЃР»Рѕ РЅР°Р±СЂР°РЅРЅС‹С… РѕС‡РєРѕРІ
+	public byte sizeX,sizeY;//СЂР°Р·РјРµСЂ РїРѕР»СЏ
+	public Point lastDot=new Point();//РїРѕСЃР»РµРґРЅРёР№ С…РѕРґ
+	public byte lastDotType;//РїРѕСЃР»РµРґРЅРёР№ С…РѕРґ, 1=blue, 2=red
+	public ArrayList<Polygon> blueEnclosures=new ArrayList<Polygon>();//СЃРёРЅРёРµ РѕРєСЂСѓР¶РµРЅРёСЏ
+	public ArrayList<Polygon> redEnclosures=new ArrayList<Polygon>();//РєСЂР°СЃРЅС‹Рµ РѕРєСЂСѓР¶РµРЅРёСЏ
 	
-	public GameField(byte sizeX,byte sizeY){//создание игрового поля, начало игры
+	public GameField(byte sizeX,byte sizeY){//СЃРѕР·РґР°РЅРёРµ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ, РЅР°С‡Р°Р»Рѕ РёРіСЂС‹
 		gameField=new byte[sizeX][sizeY];
 		fieldForBuffer=new byte[sizeX][sizeY];
 		scoreBlue=0;
@@ -65,9 +65,9 @@ public class GameField {
 			}
 		}
     	
-    	//хотя может быть Polygons и не надо клонировать
-    	obj.blueEnclosures=clonePolygons(blueEnclosures);//синие окружения
-    	obj.redEnclosures=clonePolygons(redEnclosures);//красные окружения
+    	//С…РѕС‚СЏ РјРѕР¶РµС‚ Р±С‹С‚СЊ Polygons Рё РЅРµ РЅР°РґРѕ РєР»РѕРЅРёСЂРѕРІР°С‚СЊ
+    	obj.blueEnclosures=clonePolygons(blueEnclosures);//СЃРёРЅРёРµ РѕРєСЂСѓР¶РµРЅРёСЏ
+    	obj.redEnclosures=clonePolygons(redEnclosures);//РєСЂР°СЃРЅС‹Рµ РѕРєСЂСѓР¶РµРЅРёСЏ
     	
         return obj;
     }
@@ -87,49 +87,49 @@ public class GameField {
 		return enclosures;
 	}
 	
-	public void addMove(Point p,byte type){//сделать ход, 2=red, 1=blue
+	public void addMove(Point p,byte type){//СЃРґРµР»Р°С‚СЊ С…РѕРґ, 2=red, 1=blue
 		addMove((byte)p.x,(byte)p.y,type);
 	}
 	
-	public void addMove(byte x,byte y,byte type){//сделать ход, 2=red, 1=blue
-		if(!canAddMove(x,y))return;//нельзя сделать ход
+	public void addMove(byte x,byte y,byte type){//СЃРґРµР»Р°С‚СЊ С…РѕРґ, 2=red, 1=blue
+		if(!canAddMove(x,y))return;//РЅРµР»СЊР·СЏ СЃРґРµР»Р°С‚СЊ С…РѕРґ
 		
-		boolean isInHouseOfSameColor=false;//сделан ли ход в домик
+		boolean isInHouseOfSameColor=false;//СЃРґРµР»Р°РЅ Р»Рё С…РѕРґ РІ РґРѕРјРёРє
 		if(
 				(gameField[x][y]==EMPTY_IN_BLUE_HOUSE&type==BLUE)
 				||
 				(gameField[x][y]==EMPTY_IN_RED_HOUSE&type==RED)
 			){
-			isInHouseOfSameColor=true;//ход сделан в домик чужого цвета
+			isInHouseOfSameColor=true;//С…РѕРґ СЃРґРµР»Р°РЅ РІ РґРѕРјРёРє С‡СѓР¶РѕРіРѕ С†РІРµС‚Р°
 		}
 		
-		boolean isInHouseOfOtherColor=false;//сделан ли ход в домик
+		boolean isInHouseOfOtherColor=false;//СЃРґРµР»Р°РЅ Р»Рё С…РѕРґ РІ РґРѕРјРёРє
 		if(
 				(gameField[x][y]==EMPTY_IN_BLUE_HOUSE&type==RED)
 				||
 				(gameField[x][y]==EMPTY_IN_RED_HOUSE&type==BLUE)
 			){
-			isInHouseOfOtherColor=true;//ход сделан в домик чужого цвета
+			isInHouseOfOtherColor=true;//С…РѕРґ СЃРґРµР»Р°РЅ РІ РґРѕРјРёРє С‡СѓР¶РѕРіРѕ С†РІРµС‚Р°
 		}
 		
 		gameField[x][y]=type;
-		lastDotType=type;//запомнить последний ход
+		lastDotType=type;//Р·Р°РїРѕРјРЅРёС‚СЊ РїРѕСЃР»РµРґРЅРёР№ С…РѕРґ
 				
-		//запомнить координаты последнего хода
+		//Р·Р°РїРѕРјРЅРёС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРѕСЃР»РµРґРЅРµРіРѕ С…РѕРґР°
 		lastDot.x=x;
 		lastDot.y=y;
 		
-		if(isInHouseOfSameColor)return;//если ход в домике того же цвета, то не искать окружение		
+		if(isInHouseOfSameColor)return;//РµСЃР»Рё С…РѕРґ РІ РґРѕРјРёРєРµ С‚РѕРіРѕ Р¶Рµ С†РІРµС‚Р°, С‚Рѕ РЅРµ РёСЃРєР°С‚СЊ РѕРєСЂСѓР¶РµРЅРёРµ		
 				
-		//найдено ли новое окружение, поиск окружения
+		//РЅР°Р№РґРµРЅРѕ Р»Рё РЅРѕРІРѕРµ РѕРєСЂСѓР¶РµРЅРёРµ, РїРѕРёСЃРє РѕРєСЂСѓР¶РµРЅРёСЏ
 		boolean isFoundNewEnclosure=false;
 		try{isFoundNewEnclosure=isFoundNewEnclosure(x,y,type,(byte)-1,(byte)-1);}catch(Exception e){e.printStackTrace();}		
 		
-		if(!isFoundNewEnclosure&&isInHouseOfOtherColor){//если точка поставлена в домик и не создает нового окружения, значит она окружается
+		if(!isFoundNewEnclosure&&isInHouseOfOtherColor){//РµСЃР»Рё С‚РѕС‡РєР° РїРѕСЃС‚Р°РІР»РµРЅР° РІ РґРѕРјРёРє Рё РЅРµ СЃРѕР·РґР°РµС‚ РЅРѕРІРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ, Р·РЅР°С‡РёС‚ РѕРЅР° РѕРєСЂСѓР¶Р°РµС‚СЃСЏ
 			for(byte j=y;j<sizeY;j++){
-				//поиск точки соперника, образующей границы домика, которая будет границей нового окружения
+				//РїРѕРёСЃРє С‚РѕС‡РєРё СЃРѕРїРµСЂРЅРёРєР°, РѕР±СЂР°Р·СѓСЋС‰РµР№ РіСЂР°РЅРёС†С‹ РґРѕРјРёРєР°, РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РіСЂР°РЅРёС†РµР№ РЅРѕРІРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
 				try{if(gameField[x][j]==getTranformedType(type)&&(gameField[x][j-1]==EMPTY_IN_BLUE_HOUSE||gameField[x][j-1]==EMPTY_IN_RED_HOUSE||gameField[x][j-1]==type||gameField[x][j-1]==getTranformedType(type))){
-					if(isFoundNewEnclosure(x,j,getTranformedType(type),x,y))break;//домик стал окружением
+					if(isFoundNewEnclosure(x,j,getTranformedType(type),x,y))break;//РґРѕРјРёРє СЃС‚Р°Р» РѕРєСЂСѓР¶РµРЅРёРµРј
 					else{
 						continue;
 					}
@@ -138,9 +138,9 @@ public class GameField {
 		}
 	}
 	
-	private boolean isFoundNewEnclosure(byte x,byte y,byte type,byte i1,byte j1){//поиск окружения
+	private boolean isFoundNewEnclosure(byte x,byte y,byte type,byte i1,byte j1){//РїРѕРёСЃРє РѕРєСЂСѓР¶РµРЅРёСЏ
 				
-		//если у точки меньше двух соседей того же цвета, то нельзя провести окружение
+		//РµСЃР»Рё Сѓ С‚РѕС‡РєРё РјРµРЅСЊС€Рµ РґРІСѓС… СЃРѕСЃРµРґРµР№ С‚РѕРіРѕ Р¶Рµ С†РІРµС‚Р°, С‚Рѕ РЅРµР»СЊР·СЏ РїСЂРѕРІРµСЃС‚Рё РѕРєСЂСѓР¶РµРЅРёРµ
 		byte neighbors=0;
 		try{if(gameField[x+1][y]==type){neighbors++;}}catch(Exception e){}
 		try{if(gameField[x][y+1]==type){neighbors++;}}catch(Exception e){}
@@ -152,49 +152,49 @@ public class GameField {
 		try{if(gameField[x-1][y-1]==type){neighbors++;}}catch(Exception e){}
 		if(neighbors<2)return false;
 		
-		//проверяются на вхождение в новое окружение 4 соседние позиции точки по горизонтали и вертикали, но не диагонали
-		boolean isFoundNewEnclosure=false;//найдено ли хотя бы одно реальное окружение (не домик)
-		ArrayList<Point> foundEnclosuresPoints=new ArrayList<Point>();//хранит по одной точке каждого найденного окружения
-		if(i1==-1&&j1==-1){//проверка - создает ли точка новое окружение, даже если она поставлена в домик
+		//РїСЂРѕРІРµСЂСЏСЋС‚СЃСЏ РЅР° РІС…РѕР¶РґРµРЅРёРµ РІ РЅРѕРІРѕРµ РѕРєСЂСѓР¶РµРЅРёРµ 4 СЃРѕСЃРµРґРЅРёРµ РїРѕР·РёС†РёРё С‚РѕС‡РєРё РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё Рё РІРµСЂС‚РёРєР°Р»Рё, РЅРѕ РЅРµ РґРёР°РіРѕРЅР°Р»Рё
+		boolean isFoundNewEnclosure=false;//РЅР°Р№РґРµРЅРѕ Р»Рё С…РѕС‚СЏ Р±С‹ РѕРґРЅРѕ СЂРµР°Р»СЊРЅРѕРµ РѕРєСЂСѓР¶РµРЅРёРµ (РЅРµ РґРѕРјРёРє)
+		ArrayList<Point> foundEnclosuresPoints=new ArrayList<Point>();//С…СЂР°РЅРёС‚ РїРѕ РѕРґРЅРѕР№ С‚РѕС‡РєРµ РєР°Р¶РґРѕРіРѕ РЅР°Р№РґРµРЅРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
+		if(i1==-1&&j1==-1){//РїСЂРѕРІРµСЂРєР° - СЃРѕР·РґР°РµС‚ Р»Рё С‚РѕС‡РєР° РЅРѕРІРѕРµ РѕРєСЂСѓР¶РµРЅРёРµ, РґР°Р¶Рµ РµСЃР»Рё РѕРЅР° РїРѕСЃС‚Р°РІР»РµРЅР° РІ РґРѕРјРёРє
 			try{if(fieldForBuffer[x+1][y]==0&&gameField[x+1][y]!=type&&gameField[x+1][y]!=type+2&&gameField[x+1][y]!=getTranformedType(type)+2){
-				if(x+1==0||x+1==sizeX-1||y==0||y==sizeY-1){}//если на границе поля - ничего не делать
+				if(x+1==0||x+1==sizeX-1||y==0||y==sizeY-1){}//РµСЃР»Рё РЅР° РіСЂР°РЅРёС†Рµ РїРѕР»СЏ - РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°С‚СЊ
 				else{
 					fieldForBuffer[x+1][y]=3;
-					boolean isCreatedNewEnclosure=analyzeForEnclosure((byte)3,getTranformedType(type),(byte)(x+1),y);//создается ли новое окружение
-					if(isCreatedNewEnclosure)foundEnclosuresPoints.add(new Point(x+1,y));//добавление точки из найденного окружения
+					boolean isCreatedNewEnclosure=analyzeForEnclosure((byte)3,getTranformedType(type),(byte)(x+1),y);//СЃРѕР·РґР°РµС‚СЃСЏ Р»Рё РЅРѕРІРѕРµ РѕРєСЂСѓР¶РµРЅРёРµ
+					if(isCreatedNewEnclosure)foundEnclosuresPoints.add(new Point(x+1,y));//РґРѕР±Р°РІР»РµРЅРёРµ С‚РѕС‡РєРё РёР· РЅР°Р№РґРµРЅРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
 				}
 			}}catch(Exception e){}
 			try{if(fieldForBuffer[x][y+1]==0&&gameField[x][y+1]!=type&&gameField[x][y+1]!=type+2&&gameField[x][y+1]!=getTranformedType(type)+2){
-				if(x==0||x==sizeX-1||y+1==0||y+1==sizeY-1){}//если на границе поля - ничего не делать
+				if(x==0||x==sizeX-1||y+1==0||y+1==sizeY-1){}//РµСЃР»Рё РЅР° РіСЂР°РЅРёС†Рµ РїРѕР»СЏ - РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°С‚СЊ
 				else{
 					fieldForBuffer[x][y+1]=4;
-					boolean isCreatedNewEnclosure=analyzeForEnclosure((byte)4,getTranformedType(type),x,(byte)(y+1));//создается ли новое окружение
-					if(isCreatedNewEnclosure)foundEnclosuresPoints.add(new Point(x,y+1));//добавление точки из найденного окружения
+					boolean isCreatedNewEnclosure=analyzeForEnclosure((byte)4,getTranformedType(type),x,(byte)(y+1));//СЃРѕР·РґР°РµС‚СЃСЏ Р»Рё РЅРѕРІРѕРµ РѕРєСЂСѓР¶РµРЅРёРµ
+					if(isCreatedNewEnclosure)foundEnclosuresPoints.add(new Point(x,y+1));//РґРѕР±Р°РІР»РµРЅРёРµ С‚РѕС‡РєРё РёР· РЅР°Р№РґРµРЅРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
 				}
 			}}catch(Exception e){}
 			try{if(fieldForBuffer[x-1][y]==0&&gameField[x-1][y]!=type&&gameField[x-1][y]!=type+2&&gameField[x-1][y]!=getTranformedType(type)+2){
-				if(x-1==0||x-1==sizeX-1||y==0||y==sizeY-1){}//если на границе поля - ничего не делать
+				if(x-1==0||x-1==sizeX-1||y==0||y==sizeY-1){}//РµСЃР»Рё РЅР° РіСЂР°РЅРёС†Рµ РїРѕР»СЏ - РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°С‚СЊ
 				else{
 					fieldForBuffer[x-1][y]=5;			
-					boolean isCreatedNewEnclosure=analyzeForEnclosure((byte)5,getTranformedType(type),(byte)(x-1),y);//создается ли новое окружение
-					if(isCreatedNewEnclosure)foundEnclosuresPoints.add(new Point(x-1,y));//добавление точки из найденного окружения
+					boolean isCreatedNewEnclosure=analyzeForEnclosure((byte)5,getTranformedType(type),(byte)(x-1),y);//СЃРѕР·РґР°РµС‚СЃСЏ Р»Рё РЅРѕРІРѕРµ РѕРєСЂСѓР¶РµРЅРёРµ
+					if(isCreatedNewEnclosure)foundEnclosuresPoints.add(new Point(x-1,y));//РґРѕР±Р°РІР»РµРЅРёРµ С‚РѕС‡РєРё РёР· РЅР°Р№РґРµРЅРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
 				}
 			}}catch(Exception e){}
 			try{if(fieldForBuffer[x][y-1]==0&&gameField[x][y-1]!=type&&gameField[x][y-1]!=type+2&&gameField[x][y-1]!=getTranformedType(type)+2){
-				if(x==0||x==sizeX-1||y-1==0||y-1==sizeY-1){}//если на границе поля - ничего не делать
+				if(x==0||x==sizeX-1||y-1==0||y-1==sizeY-1){}//РµСЃР»Рё РЅР° РіСЂР°РЅРёС†Рµ РїРѕР»СЏ - РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°С‚СЊ
 				else{
 					fieldForBuffer[x][y-1]=6;
-					boolean isCreatedNewEnclosure=analyzeForEnclosure((byte)6,getTranformedType(type),x,(byte)(y-1));//создается ли новое окружение
-					if(isCreatedNewEnclosure)foundEnclosuresPoints.add(new Point(x,y-1));//добавление точки из найденного окружения
+					boolean isCreatedNewEnclosure=analyzeForEnclosure((byte)6,getTranformedType(type),x,(byte)(y-1));//СЃРѕР·РґР°РµС‚СЃСЏ Р»Рё РЅРѕРІРѕРµ РѕРєСЂСѓР¶РµРЅРёРµ
+					if(isCreatedNewEnclosure)foundEnclosuresPoints.add(new Point(x,y-1));//РґРѕР±Р°РІР»РµРЅРёРµ С‚РѕС‡РєРё РёР· РЅР°Р№РґРµРЅРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
 				}
 			}}catch(Exception e){}
-		}else{//если точка поставлена в домик и не создает нового окружения, значит она окружается
+		}else{//РµСЃР»Рё С‚РѕС‡РєР° РїРѕСЃС‚Р°РІР»РµРЅР° РІ РґРѕРјРёРє Рё РЅРµ СЃРѕР·РґР°РµС‚ РЅРѕРІРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ, Р·РЅР°С‡РёС‚ РѕРЅР° РѕРєСЂСѓР¶Р°РµС‚СЃСЏ
 			fieldForBuffer[i1][j1]=2;
-			boolean isCreatedNewEnclosure=analyzeForEnclosure((byte)2,getTranformedType(type),i1,j1);//создается ли новое окружение
-			if(isCreatedNewEnclosure)foundEnclosuresPoints.add(new Point(i1,j1));//добавление точки из найденного окружения
+			boolean isCreatedNewEnclosure=analyzeForEnclosure((byte)2,getTranformedType(type),i1,j1);//СЃРѕР·РґР°РµС‚СЃСЏ Р»Рё РЅРѕРІРѕРµ РѕРєСЂСѓР¶РµРЅРёРµ
+			if(isCreatedNewEnclosure)foundEnclosuresPoints.add(new Point(i1,j1));//РґРѕР±Р°РІР»РµРЅРёРµ С‚РѕС‡РєРё РёР· РЅР°Р№РґРµРЅРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
 		}
 		
-		//против одного из видов тупиков (вертикальное вхождение одного окружения в другое)
+		//РїСЂРѕС‚РёРІ РѕРґРЅРѕРіРѕ РёР· РІРёРґРѕРІ С‚СѓРїРёРєРѕРІ (РІРµСЂС‚РёРєР°Р»СЊРЅРѕРµ РІС…РѕР¶РґРµРЅРёРµ РѕРґРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ РІ РґСЂСѓРіРѕРµ)
 		if(foundEnclosuresPoints.size()>0){
 				boolean isFoundDeadEnd=false;
 				for(int i=0;i<foundEnclosuresPoints.size();i++){
@@ -253,7 +253,7 @@ public class GameField {
 						}			
 					}
 				}}catch(Exception e){}
-				//против одного из видов тупиков (горизонтальное вхождение одного окружения в другое)
+				//РїСЂРѕС‚РёРІ РѕРґРЅРѕРіРѕ РёР· РІРёРґРѕРІ С‚СѓРїРёРєРѕРІ (РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕРµ РІС…РѕР¶РґРµРЅРёРµ РѕРґРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ РІ РґСЂСѓРіРѕРµ)
 				boolean isFoundDeadEnd2=false;
 				for(int i=0;i<foundEnclosuresPoints.size();i++){
 					if(
@@ -313,30 +313,30 @@ public class GameField {
 				}}catch(Exception e){}
 		}
 		
-		for(byte k=0;k<foundEnclosuresPoints.size();k++){//поиск границ окружения и корректировка счета для найденных окружений
-			//поиск границ окружения (поиск полигона)
+		for(byte k=0;k<foundEnclosuresPoints.size();k++){//РїРѕРёСЃРє РіСЂР°РЅРёС† РѕРєСЂСѓР¶РµРЅРёСЏ Рё РєРѕСЂСЂРµРєС‚РёСЂРѕРІРєР° СЃС‡РµС‚Р° РґР»СЏ РЅР°Р№РґРµРЅРЅС‹С… РѕРєСЂСѓР¶РµРЅРёР№
+			//РїРѕРёСЃРє РіСЂР°РЅРёС† РѕРєСЂСѓР¶РµРЅРёСЏ (РїРѕРёСЃРє РїРѕР»РёРіРѕРЅР°)
 			Polygon p=searchPolygon(type,x,y,(byte)foundEnclosuresPoints.get(k).x,(byte)foundEnclosuresPoints.get(k).y,fieldForBuffer[foundEnclosuresPoints.get(k).x][foundEnclosuresPoints.get(k).y]);
 			if(p==null)continue;
 			
-			int foundedScore=0;//число захваченных точек соперника в окружении
+			int foundedScore=0;//С‡РёСЃР»Рѕ Р·Р°С…РІР°С‡РµРЅРЅС‹С… С‚РѕС‡РµРє СЃРѕРїРµСЂРЅРёРєР° РІ РѕРєСЂСѓР¶РµРЅРёРё
 			for(byte i=0;i<sizeX;i++){
 				for(byte j=0;j<sizeY;j++){
 					if(fieldForBuffer[i][j]==fieldForBuffer[foundEnclosuresPoints.get(k).x][foundEnclosuresPoints.get(k).y]){
-						if(gameField[i][j]==getTranformedType(type)){//подсчет числа захваченных точек соперника в окружении
+						if(gameField[i][j]==getTranformedType(type)){//РїРѕРґСЃС‡РµС‚ С‡РёСЃР»Р° Р·Р°С…РІР°С‡РµРЅРЅС‹С… С‚РѕС‡РµРє СЃРѕРїРµСЂРЅРёРєР° РІ РѕРєСЂСѓР¶РµРЅРёРё
 							foundedScore++;
 							gameField[i][j]=(byte)(getTranformedType(type)+2);
-						}else if(gameField[i][j]==type+2){//подсчет числа освобожденных из окружения соперника точек своего цвета
+						}else if(gameField[i][j]==type+2){//РїРѕРґСЃС‡РµС‚ С‡РёСЃР»Р° РѕСЃРІРѕР±РѕР¶РґРµРЅРЅС‹С… РёР· РѕРєСЂСѓР¶РµРЅРёСЏ СЃРѕРїРµСЂРЅРёРєР° С‚РѕС‡РµРє СЃРІРѕРµРіРѕ С†РІРµС‚Р°
 							if(type==BLUE){scoreRed--;}
 							else if(type==RED){scoreBlue--;}
 							gameField[i][j]=type;
-						}else if(gameField[i][j]==EMPTY){//пустые места в окружении отмечаются как -1
+						}else if(gameField[i][j]==EMPTY){//РїСѓСЃС‚С‹Рµ РјРµСЃС‚Р° РІ РѕРєСЂСѓР¶РµРЅРёРё РѕС‚РјРµС‡Р°СЋС‚СЃСЏ РєР°Рє -1
 							if(type==BLUE)gameField[i][j]=EMPTY_IN_BLUE_ENCIRCLEMENT;
 							else if(type==RED)gameField[i][j]=EMPTY_IN_RED_ENCIRCLEMENT;
 						}						
 					}
 				}
 			}
-			if(foundedScore>0){//если найдено окружение (не домик)
+			if(foundedScore>0){//РµСЃР»Рё РЅР°Р№РґРµРЅРѕ РѕРєСЂСѓР¶РµРЅРёРµ (РЅРµ РґРѕРјРёРє)
 				if(type==BLUE){scoreBlue+=foundedScore;blueEnclosures.add(p);isFoundNewEnclosure=true;}
 				else if(type==RED){scoreRed+=foundedScore;redEnclosures.add(p);isFoundNewEnclosure=true;}
 				
@@ -347,16 +347,16 @@ public class GameField {
 							(gameField[i][j]==EMPTY_IN_BLUE_HOUSE||gameField[i][j]==EMPTY_IN_RED_HOUSE)
 						){
 							if(type==BLUE)gameField[i][j]=EMPTY_IN_BLUE_ENCIRCLEMENT;
-							else if(type==RED)gameField[i][j]=EMPTY_IN_RED_ENCIRCLEMENT;//для домиков внутри окружения ставится -1, чтобы запретить в них ставить точки
+							else if(type==RED)gameField[i][j]=EMPTY_IN_RED_ENCIRCLEMENT;//РґР»СЏ РґРѕРјРёРєРѕРІ РІРЅСѓС‚СЂРё РѕРєСЂСѓР¶РµРЅРёСЏ СЃС‚Р°РІРёС‚СЃСЏ -1, С‡С‚РѕР±С‹ Р·Р°РїСЂРµС‚РёС‚СЊ РІ РЅРёС… СЃС‚Р°РІРёС‚СЊ С‚РѕС‡РєРё
 						}
 					}
 				}
-			}else{//если найден домик
+			}else{//РµСЃР»Рё РЅР°Р№РґРµРЅ РґРѕРјРёРє
 				
 				for(byte i=0;i<sizeX;i++){
 					for(byte j=0;j<sizeY;j++){
 						if(fieldForBuffer[i][j]==fieldForBuffer[foundEnclosuresPoints.get(k).x][foundEnclosuresPoints.get(k).y]){
-							if(gameField[i][j]<=EMPTY){//для мест внутри домика ставится EMPTY_IN_, чтобы можно было в них ставить точки
+							if(gameField[i][j]<=EMPTY){//РґР»СЏ РјРµСЃС‚ РІРЅСѓС‚СЂРё РґРѕРјРёРєР° СЃС‚Р°РІРёС‚СЃСЏ EMPTY_IN_, С‡С‚РѕР±С‹ РјРѕР¶РЅРѕ Р±С‹Р»Рѕ РІ РЅРёС… СЃС‚Р°РІРёС‚СЊ С‚РѕС‡РєРё
 								if(type==BLUE)gameField[i][j]=EMPTY_IN_BLUE_HOUSE;
 								else if(type==RED)gameField[i][j]=EMPTY_IN_RED_HOUSE;
 							}
@@ -368,37 +368,37 @@ public class GameField {
 		
 		for(byte i=0;i<sizeX;i++){
 			for(byte j=0;j<sizeY;j++){
-				fieldForBuffer[i][j]=EMPTY;//очистка буферного поля
+				fieldForBuffer[i][j]=EMPTY;//РѕС‡РёСЃС‚РєР° Р±СѓС„РµСЂРЅРѕРіРѕ РїРѕР»СЏ
 			}
 		}
 		
 		return isFoundNewEnclosure;
 	}
 	
-	private Polygon searchPolygon(byte type,byte x,byte y,byte i,byte j,byte idx){//поиск границ окружения (полигона)
-		ArrayList<Point> point=new ArrayList<Point>();//хранить точки, образующие границу окружения
-		point.add(new Point(x,y));//добавить точку, от которой начинается поиск
+	private Polygon searchPolygon(byte type,byte x,byte y,byte i,byte j,byte idx){//РїРѕРёСЃРє РіСЂР°РЅРёС† РѕРєСЂСѓР¶РµРЅРёСЏ (РїРѕР»РёРіРѕРЅР°)
+		ArrayList<Point> point=new ArrayList<Point>();//С…СЂР°РЅРёС‚СЊ С‚РѕС‡РєРё, РѕР±СЂР°Р·СѓСЋС‰РёРµ РіСЂР°РЅРёС†Сѓ РѕРєСЂСѓР¶РµРЅРёСЏ
+		point.add(new Point(x,y));//РґРѕР±Р°РІРёС‚СЊ С‚РѕС‡РєСѓ, РѕС‚ РєРѕС‚РѕСЂРѕР№ РЅР°С‡РёРЅР°РµС‚СЃСЏ РїРѕРёСЃРє
 		
-		ArrayList<Point> pointDeadEnd=new ArrayList<Point>();//точки, входящие в тупик
+		ArrayList<Point> pointDeadEnd=new ArrayList<Point>();//С‚РѕС‡РєРё, РІС…РѕРґСЏС‰РёРµ РІ С‚СѓРїРёРє
 		
-		byte initX=x;//первая точка в окружении
+		byte initX=x;//РїРµСЂРІР°СЏ С‚РѕС‡РєР° РІ РѕРєСЂСѓР¶РµРЅРёРё
 		byte initY=y;
-		byte dir=0;//направление прохода по окружению
+		byte dir=0;//РЅР°РїСЂР°РІР»РµРЅРёРµ РїСЂРѕС…РѕРґР° РїРѕ РѕРєСЂСѓР¶РµРЅРёСЋ
 		
-		Point p=new Point();//выбираем соседнюю точку исходя из направления
+		Point p=new Point();//РІС‹Р±РёСЂР°РµРј СЃРѕСЃРµРґРЅСЋСЋ С‚РѕС‡РєСѓ РёСЃС…РѕРґСЏ РёР· РЅР°РїСЂР°РІР»РµРЅРёСЏ
 		
 		byte iterationsCount=0;
 		byte preX=x;
 		byte preY=y;
 		
 		for(;;){
-			for(int k=0;k<Integer.MAX_VALUE;k++){//ищем следующую точку по всем направлениям
+			for(int k=0;k<Integer.MAX_VALUE;k++){//РёС‰РµРј СЃР»РµРґСѓСЋС‰СѓСЋ С‚РѕС‡РєСѓ РїРѕ РІСЃРµРј РЅР°РїСЂР°РІР»РµРЅРёСЏРј
 				
-				dir++;//меняем направление
-				if(dir>7)dir-=8;//корректируем направление
+				dir++;//РјРµРЅСЏРµРј РЅР°РїСЂР°РІР»РµРЅРёРµ
+				if(dir>7)dir-=8;//РєРѕСЂСЂРµРєС‚РёСЂСѓРµРј РЅР°РїСЂР°РІР»РµРЅРёРµ
 				if(dir<0)dir+=8;
 				
-				//выбираем соседнюю точку исходя из направления
+				//РІС‹Р±РёСЂР°РµРј СЃРѕСЃРµРґРЅСЋСЋ С‚РѕС‡РєСѓ РёСЃС…РѕРґСЏ РёР· РЅР°РїСЂР°РІР»РµРЅРёСЏ
 				if(dir==0){p.x=x+1;p.y=y;}
 				else if(dir==1){p.x=x+1;p.y=y+1;}
 				else if(dir==2){p.x=x;p.y=y+1;}
@@ -408,7 +408,7 @@ public class GameField {
 				else if(dir==6){p.x=x;p.y=y-1;}
 				else{p.x=x+1;p.y=y-1;}
 
-				//против одного из видов тупиков	
+				//РїСЂРѕС‚РёРІ РѕРґРЅРѕРіРѕ РёР· РІРёРґРѕРІ С‚СѓРїРёРєРѕРІ	
 				if(preX==x&preY==y)iterationsCount++;
 				else iterationsCount=0;
 				preX=x;
@@ -416,17 +416,17 @@ public class GameField {
 				if(iterationsCount>7){	
 					fieldForBuffer[x][y]=idx;
 					point.removeAll(point);
-					point.add(new Point(initX,initY));//добавить точку, от которой начинается поиск
+					point.add(new Point(initX,initY));//РґРѕР±Р°РІРёС‚СЊ С‚РѕС‡РєСѓ, РѕС‚ РєРѕС‚РѕСЂРѕР№ РЅР°С‡РёРЅР°РµС‚СЃСЏ РїРѕРёСЃРє
 					x=initX;
 					y=initY;
 					continue;
 				}
 				
-				//дошли до исходной точки, значит полигон найден
+				//РґРѕС€Р»Рё РґРѕ РёСЃС…РѕРґРЅРѕР№ С‚РѕС‡РєРё, Р·РЅР°С‡РёС‚ РїРѕР»РёРіРѕРЅ РЅР°Р№РґРµРЅ
 				if(p.x==initX&&p.y==initY){
 					if(point.size()>3){
 						if(point.get(point.size()-2).x==point.get(point.size()-1).x&&point.get(point.size()-2).y==point.get(point.size()-1).y){
-							//удалить одну из разновидностей тупика
+							//СѓРґР°Р»РёС‚СЊ РѕРґРЅСѓ РёР· СЂР°Р·РЅРѕРІРёРґРЅРѕСЃС‚РµР№ С‚СѓРїРёРєР°
 							int xToDelete=point.get(point.size()-1).x;
 							int yToDelete=point.get(point.size()-1).y;
 							fieldForBuffer[x][y]=idx;
@@ -438,7 +438,7 @@ public class GameField {
 							x=initX;
 							y=initY;
 							continue;
-						}else if(point.size()==4){//удалить другой вид тупика
+						}else if(point.size()==4){//СѓРґР°Р»РёС‚СЊ РґСЂСѓРіРѕР№ РІРёРґ С‚СѓРїРёРєР°
 							boolean isFoundDeadEnd=false;
 							for(int i1=point.size()-1;i1>=0;i1--){
 								int inCount=0;
@@ -461,28 +461,28 @@ public class GameField {
 								continue;
 							}
 						}
-						break;//найден полный полигон
+						break;//РЅР°Р№РґРµРЅ РїРѕР»РЅС‹Р№ РїРѕР»РёРіРѕРЅ
 					}else{
 						dir++;
 						continue;
 					}
 				}
-				if(p.x<0||p.y<0||p.x>sizeX-1||p.y>sizeY-1)continue;//точка выходит за край поля - не рассматриваем ее
-				if(gameField[p.x][p.y]==type&fieldForBuffer[p.x][p.y]!=idx){//если точка того же типа, что и полигон
-					boolean isChainDot=false;//если точка граничит с содержимым внутри окружения, значит она является его границей
+				if(p.x<0||p.y<0||p.x>sizeX-1||p.y>sizeY-1)continue;//С‚РѕС‡РєР° РІС‹С…РѕРґРёС‚ Р·Р° РєСЂР°Р№ РїРѕР»СЏ - РЅРµ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРј РµРµ
+				if(gameField[p.x][p.y]==type&fieldForBuffer[p.x][p.y]!=idx){//РµСЃР»Рё С‚РѕС‡РєР° С‚РѕРіРѕ Р¶Рµ С‚РёРїР°, С‡С‚Рѕ Рё РїРѕР»РёРіРѕРЅ
+					boolean isChainDot=false;//РµСЃР»Рё С‚РѕС‡РєР° РіСЂР°РЅРёС‡РёС‚ СЃ СЃРѕРґРµСЂР¶РёРјС‹Рј РІРЅСѓС‚СЂРё РѕРєСЂСѓР¶РµРЅРёСЏ, Р·РЅР°С‡РёС‚ РѕРЅР° СЏРІР»СЏРµС‚СЃСЏ РµРіРѕ РіСЂР°РЅРёС†РµР№
 					try{if(fieldForBuffer[p.x+1][p.y]==idx)isChainDot=true;}catch(Exception e){}
 					try{if(fieldForBuffer[p.x-1][p.y]==idx)isChainDot=true;}catch(Exception e){}
 					try{if(fieldForBuffer[p.x][p.y+1]==idx)isChainDot=true;}catch(Exception e){}
 					try{if(fieldForBuffer[p.x][p.y-1]==idx)isChainDot=true;}catch(Exception e){}					
 					if(!isChainDot)continue;
 					
-					if(pointDeadEnd.size()>1){//выход из тупика
+					if(pointDeadEnd.size()>1){//РІС‹С…РѕРґ РёР· С‚СѓРїРёРєР°
 						if(p.x==pointDeadEnd.get(1).x&&p.y==pointDeadEnd.get(1).y){
 							
 							boolean isRemoved=false;
 							for(int n=0;n<point.size();n++){
 								if(pointDeadEnd.get(1).x==point.get(n).x&&pointDeadEnd.get(1).y==point.get(n).y){									
-									for(int n1=point.size()-1;n1>=n;n1--){//удаление из тупика
+									for(int n1=point.size()-1;n1>=n;n1--){//СѓРґР°Р»РµРЅРёРµ РёР· С‚СѓРїРёРєР°
 										fieldForBuffer[point.get(n1).x][point.get(n1).y]=idx;
 										point.remove(n1);
 									}
@@ -493,14 +493,14 @@ public class GameField {
 							if(isRemoved){
 								x=(byte)point.get(point.size()-1).x;
 								y=(byte)point.get(point.size()-1).y;								
-								pointDeadEnd.removeAll(pointDeadEnd);//удаление рассмотренных точек тупика
+								pointDeadEnd.removeAll(pointDeadEnd);//СѓРґР°Р»РµРЅРёРµ СЂР°СЃСЃРјРѕС‚СЂРµРЅРЅС‹С… С‚РѕС‡РµРє С‚СѓРїРёРєР°
 								dir-=4;
 								continue;
 							}
 						}
 					}
 					
-					//подозрение на тупик
+					//РїРѕРґРѕР·СЂРµРЅРёРµ РЅР° С‚СѓРїРёРє
 					try{if(fieldForBuffer[p.x-1][p.y]==idx&&fieldForBuffer[p.x+1][p.y]==idx){
 						try{if(fieldForBuffer[p.x-1][p.y-1]==idx&&fieldForBuffer[p.x+1][p.y-1]==idx&&gameField[p.x][p.y-1]==type&&fieldForBuffer[p.x][p.y-1]!=idx/*&&gameField[p.x][p.y+1]==EMPTY*/){
 							if(p.x==initX&&p.y-1==initY){
@@ -511,7 +511,7 @@ public class GameField {
 							x=initX;
 							y=initY;
 							point.removeAll(point);
-							point.add(new Point(initX,initY));//добавить точку, от которой начинается поиск
+							point.add(new Point(initX,initY));//РґРѕР±Р°РІРёС‚СЊ С‚РѕС‡РєСѓ, РѕС‚ РєРѕС‚РѕСЂРѕР№ РЅР°С‡РёРЅР°РµС‚СЃСЏ РїРѕРёСЃРє
 							continue;
 						}}catch(Exception e){}
 						
@@ -524,11 +524,11 @@ public class GameField {
 							x=initX;
 							y=initY;
 							point.removeAll(point);
-							point.add(new Point(initX,initY));//добавить точку, от которой начинается поиск
+							point.add(new Point(initX,initY));//РґРѕР±Р°РІРёС‚СЊ С‚РѕС‡РєСѓ, РѕС‚ РєРѕС‚РѕСЂРѕР№ РЅР°С‡РёРЅР°РµС‚СЃСЏ РїРѕРёСЃРє
 							continue;
 						}}catch(Exception e){}
 						
-						if(pointDeadEnd.size()>0){//удаление предыдущего тупика при нахождении нового							
+						if(pointDeadEnd.size()>0){//СѓРґР°Р»РµРЅРёРµ РїСЂРµРґС‹РґСѓС‰РµРіРѕ С‚СѓРїРёРєР° РїСЂРё РЅР°С…РѕР¶РґРµРЅРёРё РЅРѕРІРѕРіРѕ							
 							if(Math.abs(pointDeadEnd.get(pointDeadEnd.size()-1).x-p.x)<=1&&Math.abs(pointDeadEnd.get(pointDeadEnd.size()-1).y-p.y)<=1){}
 							else{pointDeadEnd.removeAll(pointDeadEnd);}
 						}
@@ -544,7 +544,7 @@ public class GameField {
 							x=initX;
 							y=initY;
 							point.removeAll(point);
-							point.add(new Point(initX,initY));//добавить точку, от которой начинается поиск
+							point.add(new Point(initX,initY));//РґРѕР±Р°РІРёС‚СЊ С‚РѕС‡РєСѓ, РѕС‚ РєРѕС‚РѕСЂРѕР№ РЅР°С‡РёРЅР°РµС‚СЃСЏ РїРѕРёСЃРє
 							continue;
 						}}catch(Exception e){}
 						
@@ -557,23 +557,23 @@ public class GameField {
 							x=initX;
 							y=initY;
 							point.removeAll(point);
-							point.add(new Point(initX,initY));//добавить точку, от которой начинается поиск
+							point.add(new Point(initX,initY));//РґРѕР±Р°РІРёС‚СЊ С‚РѕС‡РєСѓ, РѕС‚ РєРѕС‚РѕСЂРѕР№ РЅР°С‡РёРЅР°РµС‚СЃСЏ РїРѕРёСЃРє
 							continue;
 						}}catch(Exception e){}
 						
-						if(pointDeadEnd.size()>0){//удаление предыдущего тупика при нахождении нового							
+						if(pointDeadEnd.size()>0){//СѓРґР°Р»РµРЅРёРµ РїСЂРµРґС‹РґСѓС‰РµРіРѕ С‚СѓРїРёРєР° РїСЂРё РЅР°С…РѕР¶РґРµРЅРёРё РЅРѕРІРѕРіРѕ							
 							if(Math.abs(pointDeadEnd.get(pointDeadEnd.size()-1).x-p.x)<=1&&Math.abs(pointDeadEnd.get(pointDeadEnd.size()-1).y-p.y)<=1){}
 							else{pointDeadEnd.removeAll(pointDeadEnd);}
 						}
 						pointDeadEnd.add(new Point(p.x,p.y));
 					}}catch(Exception e){}
 										
-					if(isChainDot){//найдена ли следующая точка цепи окружения						
-						point.add(new Point(p.x,p.y));//добавляем следующую точку
+					if(isChainDot){//РЅР°Р№РґРµРЅР° Р»Рё СЃР»РµРґСѓСЋС‰Р°СЏ С‚РѕС‡РєР° С†РµРїРё РѕРєСЂСѓР¶РµРЅРёСЏ						
+						point.add(new Point(p.x,p.y));//РґРѕР±Р°РІР»СЏРµРј СЃР»РµРґСѓСЋС‰СѓСЋ С‚РѕС‡РєСѓ
 						x=(byte)p.x;
 						y=(byte)p.y;
 						dir-=4;
-						if(point.size()>1000)return null;//пока неудачная обработка одного из видов тупиков
+						if(point.size()>1000)return null;//РїРѕРєР° РЅРµСѓРґР°С‡РЅР°СЏ РѕР±СЂР°Р±РѕС‚РєР° РѕРґРЅРѕРіРѕ РёР· РІРёРґРѕРІ С‚СѓРїРёРєРѕРІ
 						continue;
 					}
 				}
@@ -582,20 +582,20 @@ public class GameField {
 			if(point.size()<7){
 				break;
 			}else{					
-				//поле для обработки тупиков из точек
+				//РїРѕР»Рµ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё С‚СѓРїРёРєРѕРІ РёР· С‚РѕС‡РµРє
 				int[][] fieldForDeadEnd=new int[sizeX][sizeY];
-				for(int k=0;k<point.size();k++){//отметить на поле точки, образующие границу полигона
+				for(int k=0;k<point.size();k++){//РѕС‚РјРµС‚РёС‚СЊ РЅР° РїРѕР»Рµ С‚РѕС‡РєРё, РѕР±СЂР°Р·СѓСЋС‰РёРµ РіСЂР°РЅРёС†Сѓ РїРѕР»РёРіРѕРЅР°
 					fieldForDeadEnd[point.get(k).x][point.get(k).y]=1;
 				}
 				
 				for(int i1=0;i1<sizeX;i1++){
-					for(int j1=0;j1<sizeY;j1++){//отметить на поле найденные ранее точки внутри найденного полигона
+					for(int j1=0;j1<sizeY;j1++){//РѕС‚РјРµС‚РёС‚СЊ РЅР° РїРѕР»Рµ РЅР°Р№РґРµРЅРЅС‹Рµ СЂР°РЅРµРµ С‚РѕС‡РєРё РІРЅСѓС‚СЂРё РЅР°Р№РґРµРЅРЅРѕРіРѕ РїРѕР»РёРіРѕРЅР°
 						if(fieldForBuffer[i1][j1]==idx)fieldForDeadEnd[i1][j1]=idx+3;
 					}
 				}
 				
 				int count=1;
-				while(count>0){//отметить все точки внутри полигона, принадлежащие вложенным полигонам
+				while(count>0){//РѕС‚РјРµС‚РёС‚СЊ РІСЃРµ С‚РѕС‡РєРё РІРЅСѓС‚СЂРё РїРѕР»РёРіРѕРЅР°, РїСЂРёРЅР°РґР»РµР¶Р°С‰РёРµ РІР»РѕР¶РµРЅРЅС‹Рј РїРѕР»РёРіРѕРЅР°Рј
 					count=0;
 					for(int i1=1;i1<sizeX-1;i1++){
 						for(int j1=1;j1<sizeY-1;j1++){
@@ -621,7 +621,7 @@ public class GameField {
 					}
 				}
 				
-				//все точки внутри полигона, не найденные ранее, сейчас отмечаются
+				//РІСЃРµ С‚РѕС‡РєРё РІРЅСѓС‚СЂРё РїРѕР»РёРіРѕРЅР°, РЅРµ РЅР°Р№РґРµРЅРЅС‹Рµ СЂР°РЅРµРµ, СЃРµР№С‡Р°СЃ РѕС‚РјРµС‡Р°СЋС‚СЃСЏ
 				for(int i1=0;i1<sizeX;i1++){
 					for(int j1=0;j1<sizeY;j1++){
 						if(fieldForDeadEnd[i1][j1]==idx+3){
@@ -633,7 +633,7 @@ public class GameField {
 			}
 		}
 		
-		//создается и заполняется новый полигон
+		//СЃРѕР·РґР°РµС‚СЃСЏ Рё Р·Р°РїРѕР»РЅСЏРµС‚СЃСЏ РЅРѕРІС‹Р№ РїРѕР»РёРіРѕРЅ
 		Polygon polygon=new Polygon();
 		polygon.xpoints=new int[point.size()];
 		polygon.ypoints=new int[point.size()];
@@ -644,96 +644,96 @@ public class GameField {
 		return polygon;
 	}
 	
-	private boolean analyzeForEnclosure(byte idx,byte type,byte x,byte y){//поиск окружения
+	private boolean analyzeForEnclosure(byte idx,byte type,byte x,byte y){//РїРѕРёСЃРє РѕРєСЂСѓР¶РµРЅРёСЏ
 		int count=0;
-		//поиск соседей начиная от точки x,y
+		//РїРѕРёСЃРє СЃРѕСЃРµРґРµР№ РЅР°С‡РёРЅР°СЏ РѕС‚ С‚РѕС‡РєРё x,y
 		if(x!=-1){
-			if(x<sizeX-1){//не на краю поля
+			if(x<sizeX-1){//РЅРµ РЅР° РєСЂР°СЋ РїРѕР»СЏ
 				for(int k=x+1;k<sizeX;k++){
 					if(gameField[k][y]<=0||gameField[k][y]==type||gameField[k][y]==getTranformedType(type)+2){
-						fieldForBuffer[k][y]=idx;//отметить соседа, что он входит в то же окружение
+						fieldForBuffer[k][y]=idx;//РѕС‚РјРµС‚РёС‚СЊ СЃРѕСЃРµРґР°, С‡С‚Рѕ РѕРЅ РІС…РѕРґРёС‚ РІ С‚Рѕ Р¶Рµ РѕРєСЂСѓР¶РµРЅРёРµ
 						count++;
-						if(k==sizeX-1)return false;//если сосед граничит с краем поля, значит окружение не создается
+						if(k==sizeX-1)return false;//РµСЃР»Рё СЃРѕСЃРµРґ РіСЂР°РЅРёС‡РёС‚ СЃ РєСЂР°РµРј РїРѕР»СЏ, Р·РЅР°С‡РёС‚ РѕРєСЂСѓР¶РµРЅРёРµ РЅРµ СЃРѕР·РґР°РµС‚СЃСЏ
 					}else break;
 				}
 			}
-			if(y<sizeY-1){//не на краю поля
+			if(y<sizeY-1){//РЅРµ РЅР° РєСЂР°СЋ РїРѕР»СЏ
 				for(int k=y+1;k<sizeY;k++){
 					if(gameField[x][k]<=0||gameField[x][k]==type||gameField[x][k]==getTranformedType(type)+2){
-						fieldForBuffer[x][k]=idx;//отметить соседа, что он входит в то же окружение
+						fieldForBuffer[x][k]=idx;//РѕС‚РјРµС‚РёС‚СЊ СЃРѕСЃРµРґР°, С‡С‚Рѕ РѕРЅ РІС…РѕРґРёС‚ РІ С‚Рѕ Р¶Рµ РѕРєСЂСѓР¶РµРЅРёРµ
 						count++;
-						if(k==sizeY-1)return false;//если сосед граничит с краем поля, значит окружение не создается
+						if(k==sizeY-1)return false;//РµСЃР»Рё СЃРѕСЃРµРґ РіСЂР°РЅРёС‡РёС‚ СЃ РєСЂР°РµРј РїРѕР»СЏ, Р·РЅР°С‡РёС‚ РѕРєСЂСѓР¶РµРЅРёРµ РЅРµ СЃРѕР·РґР°РµС‚СЃСЏ
 					}else break;
 				}
 			}
-			if(x>0){//не на краю поля
+			if(x>0){//РЅРµ РЅР° РєСЂР°СЋ РїРѕР»СЏ
 				for(int k=x-1;k>=0;k--){
 					if(gameField[k][y]<=0||gameField[k][y]==type||gameField[k][y]==getTranformedType(type)+2){
-						fieldForBuffer[k][y]=idx;//отметить соседа, что он входит в то же окружение
+						fieldForBuffer[k][y]=idx;//РѕС‚РјРµС‚РёС‚СЊ СЃРѕСЃРµРґР°, С‡С‚Рѕ РѕРЅ РІС…РѕРґРёС‚ РІ С‚Рѕ Р¶Рµ РѕРєСЂСѓР¶РµРЅРёРµ
 						count++;
-						if(k==0)return false;//если сосед граничит с краем поля, значит окружение не создается
+						if(k==0)return false;//РµСЃР»Рё СЃРѕСЃРµРґ РіСЂР°РЅРёС‡РёС‚ СЃ РєСЂР°РµРј РїРѕР»СЏ, Р·РЅР°С‡РёС‚ РѕРєСЂСѓР¶РµРЅРёРµ РЅРµ СЃРѕР·РґР°РµС‚СЃСЏ
 					}else break;
 				}
 			}
-			if(y>0){//не на краю поля
+			if(y>0){//РЅРµ РЅР° РєСЂР°СЋ РїРѕР»СЏ
 				for(int k=y-1;k>=0;k--){
 					if(gameField[x][k]<=0||gameField[x][k]==type||gameField[x][k]==getTranformedType(type)+2){
-						fieldForBuffer[x][k]=idx;//отметить соседа, что он входит в то же окружение
+						fieldForBuffer[x][k]=idx;//РѕС‚РјРµС‚РёС‚СЊ СЃРѕСЃРµРґР°, С‡С‚Рѕ РѕРЅ РІС…РѕРґРёС‚ РІ С‚Рѕ Р¶Рµ РѕРєСЂСѓР¶РµРЅРёРµ
 						count++;
-						if(k==0)return false;//если сосед граничит с краем поля, значит окружение не создается
+						if(k==0)return false;//РµСЃР»Рё СЃРѕСЃРµРґ РіСЂР°РЅРёС‡РёС‚ СЃ РєСЂР°РµРј РїРѕР»СЏ, Р·РЅР°С‡РёС‚ РѕРєСЂСѓР¶РµРЅРёРµ РЅРµ СЃРѕР·РґР°РµС‚СЃСЏ
 					}else break;
 				}
 			}
 		}
-		while(count>0){//поиск пока не будут найдены все соседи
+		while(count>0){//РїРѕРёСЃРє РїРѕРєР° РЅРµ Р±СѓРґСѓС‚ РЅР°Р№РґРµРЅС‹ РІСЃРµ СЃРѕСЃРµРґРё
 			count=0;
 			for(byte i=0;i<sizeX;i++){
 				for(byte j=0;j<sizeY;j++){
-					if(fieldForBuffer[i][j]==idx){//поиск соседей для уже найденных точек окружения
-						if(i<sizeX-1){//не на краю поля
+					if(fieldForBuffer[i][j]==idx){//РїРѕРёСЃРє СЃРѕСЃРµРґРµР№ РґР»СЏ СѓР¶Рµ РЅР°Р№РґРµРЅРЅС‹С… С‚РѕС‡РµРє РѕРєСЂСѓР¶РµРЅРёСЏ
+						if(i<sizeX-1){//РЅРµ РЅР° РєСЂР°СЋ РїРѕР»СЏ
 							for(int k=i+1;k<sizeX;k++){
-								if(fieldForBuffer[k][j]<idx){//если точка еще не была найдена для данного окружения
-									if(fieldForBuffer[k][j]>1)return false;//неудача поиска окружения была найдена в предыдущих idx
+								if(fieldForBuffer[k][j]<idx){//РµСЃР»Рё С‚РѕС‡РєР° РµС‰Рµ РЅРµ Р±С‹Р»Р° РЅР°Р№РґРµРЅР° РґР»СЏ РґР°РЅРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
+									if(fieldForBuffer[k][j]>1)return false;//РЅРµСѓРґР°С‡Р° РїРѕРёСЃРєР° РѕРєСЂСѓР¶РµРЅРёСЏ Р±С‹Р»Р° РЅР°Р№РґРµРЅР° РІ РїСЂРµРґС‹РґСѓС‰РёС… idx
 									if(gameField[k][j]<=0||gameField[k][j]==type||gameField[k][j]==getTranformedType(type)+2){
-										fieldForBuffer[k][j]=idx;//отметить соседа, что он входит в то же окружение
+										fieldForBuffer[k][j]=idx;//РѕС‚РјРµС‚РёС‚СЊ СЃРѕСЃРµРґР°, С‡С‚Рѕ РѕРЅ РІС…РѕРґРёС‚ РІ С‚Рѕ Р¶Рµ РѕРєСЂСѓР¶РµРЅРёРµ
 										count++;
-										if(k==sizeX-1)return false;//если сосед граничит с краем поля, значит окружение не создается
+										if(k==sizeX-1)return false;//РµСЃР»Рё СЃРѕСЃРµРґ РіСЂР°РЅРёС‡РёС‚ СЃ РєСЂР°РµРј РїРѕР»СЏ, Р·РЅР°С‡РёС‚ РѕРєСЂСѓР¶РµРЅРёРµ РЅРµ СЃРѕР·РґР°РµС‚СЃСЏ
 									}else break;
 								}else break;								
 							}
 						}
-						if(j<sizeY-1){//не на краю поля
+						if(j<sizeY-1){//РЅРµ РЅР° РєСЂР°СЋ РїРѕР»СЏ
 							for(int k=j+1;k<sizeY;k++){
-								if(fieldForBuffer[i][k]<idx){//если точка еще не была найдена для данного окружения
-									if(fieldForBuffer[i][k]>1)return false;//неудача поиска окружения была найдена в предыдущих idx
+								if(fieldForBuffer[i][k]<idx){//РµСЃР»Рё С‚РѕС‡РєР° РµС‰Рµ РЅРµ Р±С‹Р»Р° РЅР°Р№РґРµРЅР° РґР»СЏ РґР°РЅРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
+									if(fieldForBuffer[i][k]>1)return false;//РЅРµСѓРґР°С‡Р° РїРѕРёСЃРєР° РѕРєСЂСѓР¶РµРЅРёСЏ Р±С‹Р»Р° РЅР°Р№РґРµРЅР° РІ РїСЂРµРґС‹РґСѓС‰РёС… idx
 									if(gameField[i][k]<=0||gameField[i][k]==type||gameField[i][k]==getTranformedType(type)+2){
-										fieldForBuffer[i][k]=idx;//отметить соседа, что он входит в то же окружение
+										fieldForBuffer[i][k]=idx;//РѕС‚РјРµС‚РёС‚СЊ СЃРѕСЃРµРґР°, С‡С‚Рѕ РѕРЅ РІС…РѕРґРёС‚ РІ С‚Рѕ Р¶Рµ РѕРєСЂСѓР¶РµРЅРёРµ
 										count++;
-										if(k==sizeY-1)return false;//если сосед граничит с краем поля, значит окружение не создается
+										if(k==sizeY-1)return false;//РµСЃР»Рё СЃРѕСЃРµРґ РіСЂР°РЅРёС‡РёС‚ СЃ РєСЂР°РµРј РїРѕР»СЏ, Р·РЅР°С‡РёС‚ РѕРєСЂСѓР¶РµРЅРёРµ РЅРµ СЃРѕР·РґР°РµС‚СЃСЏ
 									}else break;
 								}else break;
 							}
 						}
-						if(i>0){//не на краю поля
+						if(i>0){//РЅРµ РЅР° РєСЂР°СЋ РїРѕР»СЏ
 							for(int k=i-1;k>=0;k--){
-								if(fieldForBuffer[k][j]<idx){//если точка еще не была найдена для данного окружения
-									if(fieldForBuffer[k][j]>1)return false;//неудача поиска окружения была найдена в предыдущих idx
+								if(fieldForBuffer[k][j]<idx){//РµСЃР»Рё С‚РѕС‡РєР° РµС‰Рµ РЅРµ Р±С‹Р»Р° РЅР°Р№РґРµРЅР° РґР»СЏ РґР°РЅРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
+									if(fieldForBuffer[k][j]>1)return false;//РЅРµСѓРґР°С‡Р° РїРѕРёСЃРєР° РѕРєСЂСѓР¶РµРЅРёСЏ Р±С‹Р»Р° РЅР°Р№РґРµРЅР° РІ РїСЂРµРґС‹РґСѓС‰РёС… idx
 									if(gameField[k][j]<=0||gameField[k][j]==type||gameField[k][j]==getTranformedType(type)+2){
-										fieldForBuffer[k][j]=idx;//отметить соседа, что он входит в то же окружение
+										fieldForBuffer[k][j]=idx;//РѕС‚РјРµС‚РёС‚СЊ СЃРѕСЃРµРґР°, С‡С‚Рѕ РѕРЅ РІС…РѕРґРёС‚ РІ С‚Рѕ Р¶Рµ РѕРєСЂСѓР¶РµРЅРёРµ
 										count++;
-										if(k==0)return false;//если сосед граничит с краем поля, значит окружение не создается
+										if(k==0)return false;//РµСЃР»Рё СЃРѕСЃРµРґ РіСЂР°РЅРёС‡РёС‚ СЃ РєСЂР°РµРј РїРѕР»СЏ, Р·РЅР°С‡РёС‚ РѕРєСЂСѓР¶РµРЅРёРµ РЅРµ СЃРѕР·РґР°РµС‚СЃСЏ
 									}else break;
 								}else break;
 							}
 						}
-						if(j>0){//не на краю поля
+						if(j>0){//РЅРµ РЅР° РєСЂР°СЋ РїРѕР»СЏ
 							for(int k=j-1;k>=0;k--){
-								if(fieldForBuffer[i][k]<idx){//если точка еще не была найдена для данного окружения
-									if(fieldForBuffer[i][k]>1)return false;//неудача поиска окружения была найдена в предыдущих idx
+								if(fieldForBuffer[i][k]<idx){//РµСЃР»Рё С‚РѕС‡РєР° РµС‰Рµ РЅРµ Р±С‹Р»Р° РЅР°Р№РґРµРЅР° РґР»СЏ РґР°РЅРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
+									if(fieldForBuffer[i][k]>1)return false;//РЅРµСѓРґР°С‡Р° РїРѕРёСЃРєР° РѕРєСЂСѓР¶РµРЅРёСЏ Р±С‹Р»Р° РЅР°Р№РґРµРЅР° РІ РїСЂРµРґС‹РґСѓС‰РёС… idx
 									if(gameField[i][k]<=0||gameField[i][k]==type||gameField[i][k]==getTranformedType(type)+2){
-										fieldForBuffer[i][k]=idx;//отметить соседа, что он входит в то же окружение
+										fieldForBuffer[i][k]=idx;//РѕС‚РјРµС‚РёС‚СЊ СЃРѕСЃРµРґР°, С‡С‚Рѕ РѕРЅ РІС…РѕРґРёС‚ РІ С‚Рѕ Р¶Рµ РѕРєСЂСѓР¶РµРЅРёРµ
 										count++;
-										if(k==0)return false;//если сосед граничит с краем поля, значит окружение не создается
+										if(k==0)return false;//РµСЃР»Рё СЃРѕСЃРµРґ РіСЂР°РЅРёС‡РёС‚ СЃ РєСЂР°РµРј РїРѕР»СЏ, Р·РЅР°С‡РёС‚ РѕРєСЂСѓР¶РµРЅРёРµ РЅРµ СЃРѕР·РґР°РµС‚СЃСЏ
 									}else break;
 								}else break;
 							}
@@ -745,20 +745,20 @@ public class GameField {
 		return true;
 	}
 	
-	private byte getTranformedType(byte type){//получить точку противоположного цвета
+	private byte getTranformedType(byte type){//РїРѕР»СѓС‡РёС‚СЊ С‚РѕС‡РєСѓ РїСЂРѕС‚РёРІРѕРїРѕР»РѕР¶РЅРѕРіРѕ С†РІРµС‚Р°
 		if(type==BLUE)return RED;
 		if(type==RED)return BLUE;
 		return 0;
 	}
 	
-	public boolean canAddMove(byte x,byte y){//можно ли сделать ход на поле
+	public boolean canAddMove(byte x,byte y){//РјРѕР¶РЅРѕ Р»Рё СЃРґРµР»Р°С‚СЊ С…РѕРґ РЅР° РїРѕР»Рµ
 		try{
 			if(gameField[x][y]==EMPTY||gameField[x][y]==EMPTY_IN_BLUE_HOUSE||gameField[x][y]==EMPTY_IN_RED_HOUSE)return true;
 			else return false;
 		}catch(Exception e){return false;}		
 	}
 		
-	public byte[][] getFieldState(){//получить состояние поля
+	public byte[][] getFieldState(){//РїРѕР»СѓС‡РёС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ РїРѕР»СЏ
 		byte[][]fieldState=new byte[sizeX][sizeY];
 		for(byte x=0;x<sizeX;x++){
 			for(byte y=0;y<sizeY;y++){
@@ -768,7 +768,7 @@ public class GameField {
 		return fieldState;
 	}
 
-	public byte[][] getTerrytoryState(){//получить состояние поля с учетом территории, т.е. точки внутри домика имеют цвет домика
+	public byte[][] getTerrytoryState(){//РїРѕР»СѓС‡РёС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ РїРѕР»СЏ СЃ СѓС‡РµС‚РѕРј С‚РµСЂСЂРёС‚РѕСЂРёРё, С‚.Рµ. С‚РѕС‡РєРё РІРЅСѓС‚СЂРё РґРѕРјРёРєР° РёРјРµСЋС‚ С†РІРµС‚ РґРѕРјРёРєР°
 		byte[][]fieldTerrytoryState=new byte[sizeX][sizeY];
 		for(byte x=0;x<sizeX;x++){
 			for(byte y=0;y<sizeY;y++){
@@ -778,7 +778,7 @@ public class GameField {
 		return fieldTerrytoryState;
 	}
 	
-	//получить в объект с игрой состояние игрового поля 
+	//РїРѕР»СѓС‡РёС‚СЊ РІ РѕР±СЉРµРєС‚ СЃ РёРіСЂРѕР№ СЃРѕСЃС‚РѕСЏРЅРёРµ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ 
 	public void setFieldState(Game game){
 		for(byte x=0;x<sizeX;x++){
 			for(byte y=0;y<sizeY;y++){
@@ -787,7 +787,7 @@ public class GameField {
 		}
 	}
 	
-	//получить в объект с игрой состояние игрового поля с учетом территории внутри домиков (пустые места внутри домиков получают цвет домика)
+	//РїРѕР»СѓС‡РёС‚СЊ РІ РѕР±СЉРµРєС‚ СЃ РёРіСЂРѕР№ СЃРѕСЃС‚РѕСЏРЅРёРµ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ СЃ СѓС‡РµС‚РѕРј С‚РµСЂСЂРёС‚РѕСЂРёРё РІРЅСѓС‚СЂРё РґРѕРјРёРєРѕРІ (РїСѓСЃС‚С‹Рµ РјРµСЃС‚Р° РІРЅСѓС‚СЂРё РґРѕРјРёРєРѕРІ РїРѕР»СѓС‡Р°СЋС‚ С†РІРµС‚ РґРѕРјРёРєР°)
 	public void setTerrytoryState(Game game){
 		for(byte x=0;x<sizeX;x++){
 			for(byte y=0;y<sizeY;y++){
@@ -796,15 +796,15 @@ public class GameField {
 		}
 	}
 	
-	//вернуть принадлежность точки на поле с учетом территории, т.к. пустые места внутри домиков получают цвет домика
-	public byte toTerrytoryStringDotType(int type){//работает как обычный StringDotType, т.к. не различает пространство внутри домиков по цвету
+	//РІРµСЂРЅСѓС‚СЊ РїСЂРёРЅР°РґР»РµР¶РЅРѕСЃС‚СЊ С‚РѕС‡РєРё РЅР° РїРѕР»Рµ СЃ СѓС‡РµС‚РѕРј С‚РµСЂСЂРёС‚РѕСЂРёРё, С‚.Рє. РїСѓСЃС‚С‹Рµ РјРµСЃС‚Р° РІРЅСѓС‚СЂРё РґРѕРјРёРєРѕРІ РїРѕР»СѓС‡Р°СЋС‚ С†РІРµС‚ РґРѕРјРёРєР°
+	public byte toTerrytoryStringDotType(int type){//СЂР°Р±РѕС‚Р°РµС‚ РєР°Рє РѕР±С‹С‡РЅС‹Р№ StringDotType, С‚.Рє. РЅРµ СЂР°Р·Р»РёС‡Р°РµС‚ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РІРЅСѓС‚СЂРё РґРѕРјРёРєРѕРІ РїРѕ С†РІРµС‚Сѓ
 		if(type==EMPTY)return Protocol.templateDotType_EMPTY;//empty
 		if(type==BLUE||type==RED_IN_BLUE||type==EMPTY_IN_BLUE_HOUSE||type==EMPTY_IN_BLUE_ENCIRCLEMENT)return Protocol.templateDotType_BLUE;//blue
 		if(type==RED||type==BLUE_IN_RED||type==EMPTY_IN_RED_HOUSE||type==EMPTY_IN_RED_ENCIRCLEMENT)return Protocol.templateDotType_RED;//red
 		return (byte)type;
 	}
 	
-	//вернуть принадлежность точки на поле
+	//РІРµСЂРЅСѓС‚СЊ РїСЂРёРЅР°РґР»РµР¶РЅРѕСЃС‚СЊ С‚РѕС‡РєРё РЅР° РїРѕР»Рµ
 	public byte toStringDotType(int type){
 		if(type==EMPTY||type==EMPTY_IN_BLUE_HOUSE||type==EMPTY_IN_RED_HOUSE)return Protocol.templateDotType_EMPTY;//empty
 		if(type==BLUE||type==RED_IN_BLUE||type==EMPTY_IN_BLUE_ENCIRCLEMENT)return Protocol.templateDotType_BLUE;//blue

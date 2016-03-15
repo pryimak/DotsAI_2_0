@@ -10,7 +10,7 @@ import javax.swing.JMenuItem;
 
 public class Pattern_Resources {
 
-	//далее перечислены директории, в которых хранятся рисунки и другие файлы, которые используются в программе DotsAI
+	//РґР°Р»РµРµ РїРµСЂРµС‡РёСЃР»РµРЅС‹ РґРёСЂРµРєС‚РѕСЂРёРё, РІ РєРѕС‚РѕСЂС‹С… С…СЂР°РЅСЏС‚СЃСЏ СЂРёСЃСѓРЅРєРё Рё РґСЂСѓРіРёРµ С„Р°Р№Р»С‹, РєРѕС‚РѕСЂС‹Рµ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ РІ РїСЂРѕРіСЂР°РјРјРµ DotsAI
 	
 	public static String directory="dotsAIresources//";
 	
@@ -52,7 +52,7 @@ public class Pattern_Resources {
 		return b;
 	}
 	
-	//иконки для окон
+	//РёРєРѕРЅРєРё РґР»СЏ РѕРєРѕРЅ
 	private static class IconImage extends BufferedImage{
 		public IconImage(String src){
 			super(20,20,BufferedImage.TYPE_INT_RGB);

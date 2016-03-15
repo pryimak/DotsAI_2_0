@@ -1,5 +1,5 @@
-//Класс Chain хранит информацию о цепях точек красного и синего игроков.
-//Анализ цепей происходит в классе Protocol.
+//РљР»Р°СЃСЃ Chain С…СЂР°РЅРёС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С†РµРїСЏС… С‚РѕС‡РµРє РєСЂР°СЃРЅРѕРіРѕ Рё СЃРёРЅРµРіРѕ РёРіСЂРѕРєРѕРІ.
+//РђРЅР°Р»РёР· С†РµРїРµР№ РїСЂРѕРёСЃС…РѕРґРёС‚ РІ РєР»Р°СЃСЃРµ Protocol.
 
 package p_DotsAI;
 
@@ -10,23 +10,23 @@ import p_DotsAI.Protocol.Game;
 
 public class Chain{
 
-	public ArrayList<Point> points;//обычные ходы
-	public ArrayList<Point> abstractPoints;//ходы ИИ, сделанные по абстрактным шаблонам
+	public ArrayList<Point> points;//РѕР±С‹С‡РЅС‹Рµ С…РѕРґС‹
+	public ArrayList<Point> abstractPoints;//С…РѕРґС‹ РР, СЃРґРµР»Р°РЅРЅС‹Рµ РїРѕ Р°Р±СЃС‚СЂР°РєС‚РЅС‹Рј С€Р°Р±Р»РѕРЅР°Рј
 	
-	int chainStartX;//точка начала цепи
-	int chainStartY;//точка начала цепи
-	public int chainEndX;//точка конца цепи
-	public int chainEndY;//точка конца цепи
-	int wallIndex;//индекс цепи
-	double chainLength;//длина цепи
-	String sign;//знак цепи - красная или синяя
+	int chainStartX;//С‚РѕС‡РєР° РЅР°С‡Р°Р»Р° С†РµРїРё
+	int chainStartY;//С‚РѕС‡РєР° РЅР°С‡Р°Р»Р° С†РµРїРё
+	public int chainEndX;//С‚РѕС‡РєР° РєРѕРЅС†Р° С†РµРїРё
+	public int chainEndY;//С‚РѕС‡РєР° РєРѕРЅС†Р° С†РµРїРё
+	int wallIndex;//РёРЅРґРµРєСЃ С†РµРїРё
+	double chainLength;//РґР»РёРЅР° С†РµРїРё
+	String sign;//Р·РЅР°Рє С†РµРїРё - РєСЂР°СЃРЅР°СЏ РёР»Рё СЃРёРЅСЏСЏ
 	
-	//ранее происходил более глубокий анализ ситуации на поле и искались удаленные (абстрактные точки)
-	//и разрывы в цепях (связи). Из-за сложностей выполненной оптимизации программы 
-	//поиск таких точек не происходит, однако он был бы полезен
-	//public ArrayList<Point> connections;//связи
-	//public ArrayList<Point> abstracts;//абстрактные точки
-	//public ArrayList<Point> links;//абстрактные связи
+	//СЂР°РЅРµРµ РїСЂРѕРёСЃС…РѕРґРёР» Р±РѕР»РµРµ РіР»СѓР±РѕРєРёР№ Р°РЅР°Р»РёР· СЃРёС‚СѓР°С†РёРё РЅР° РїРѕР»Рµ Рё РёСЃРєР°Р»РёСЃСЊ СѓРґР°Р»РµРЅРЅС‹Рµ (Р°Р±СЃС‚СЂР°РєС‚РЅС‹Рµ С‚РѕС‡РєРё)
+	//Рё СЂР°Р·СЂС‹РІС‹ РІ С†РµРїСЏС… (СЃРІСЏР·Рё). РР·-Р·Р° СЃР»РѕР¶РЅРѕСЃС‚РµР№ РІС‹РїРѕР»РЅРµРЅРЅРѕР№ РѕРїС‚РёРјРёР·Р°С†РёРё РїСЂРѕРіСЂР°РјРјС‹ 
+	//РїРѕРёСЃРє С‚Р°РєРёС… С‚РѕС‡РµРє РЅРµ РїСЂРѕРёСЃС…РѕРґРёС‚, РѕРґРЅР°РєРѕ РѕРЅ Р±С‹Р» Р±С‹ РїРѕР»РµР·РµРЅ
+	//public ArrayList<Point> connections;//СЃРІСЏР·Рё
+	//public ArrayList<Point> abstracts;//Р°Р±СЃС‚СЂР°РєС‚РЅС‹Рµ С‚РѕС‡РєРё
+	//public ArrayList<Point> links;//Р°Р±СЃС‚СЂР°РєС‚РЅС‹Рµ СЃРІСЏР·Рё
 	
 	public Chain(Game game,int x,int y,int wallIndex,String sign,String[][] fieldOfChains){		
 		points=new ArrayList<Point>();
@@ -36,17 +36,17 @@ public class Chain{
 		//links=new ArrayList<Point>();
 		points.add(new Point(x,y));
 		
-		//точка начала цепи
+		//С‚РѕС‡РєР° РЅР°С‡Р°Р»Р° С†РµРїРё
 		chainStartX=x;
 		chainStartY=y;
 		
-		this.wallIndex=wallIndex;//индекс цепи
-		this.sign=sign;//знак цепи - красная или синяя
-		fieldOfChains[x][y]="P"+sign+wallIndex;//код точки цепи
+		this.wallIndex=wallIndex;//РёРЅРґРµРєСЃ С†РµРїРё
+		this.sign=sign;//Р·РЅР°Рє С†РµРїРё - РєСЂР°СЃРЅР°СЏ РёР»Рё СЃРёРЅСЏСЏ
+		fieldOfChains[x][y]="P"+sign+wallIndex;//РєРѕРґ С‚РѕС‡РєРё С†РµРїРё
 	}
 	
-	//поиск конца цепи
-	public void searchChainEnd(Game game,String[][] fieldOfChains){//искать концы цепей
+	//РїРѕРёСЃРє РєРѕРЅС†Р° С†РµРїРё
+	public void searchChainEnd(Game game,String[][] fieldOfChains){//РёСЃРєР°С‚СЊ РєРѕРЅС†С‹ С†РµРїРµР№
 		chainEndX=chainStartX;
 		chainEndY=chainStartY;
 		chainLength=0;
@@ -65,7 +65,7 @@ public class Chain{
 		chainLength=Math.abs(chainEndX-chainStartX)+Math.abs(chainEndY-chainStartY);		
 	}
 	
-	//запомнить точку цепи
+	//Р·Р°РїРѕРјРЅРёС‚СЊ С‚РѕС‡РєСѓ С†РµРїРё
 	public void addPoint(Game game,int x,int y,String[][] fieldOfWalls){
 		if(!fieldOfWalls[x][y].equals("N")){return;}
 		fieldOfWalls[x][y]="P"+sign+wallIndex;
@@ -84,19 +84,19 @@ public class Chain{
 		links.add(new Point(x,y));
 	}
 	
-	public void addConnection(Game game,int x,int y,String[][] fieldOfWalls){//пустые клетки - пустые пространства в стенах
+	public void addConnection(Game game,int x,int y,String[][] fieldOfWalls){//РїСѓСЃС‚С‹Рµ РєР»РµС‚РєРё - РїСѓСЃС‚С‹Рµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР° РІ СЃС‚РµРЅР°С…
 		if(!fieldOfWalls[x][y].equals("N")){return;}
 		fieldOfWalls[x][y]="C"+sign+wallIndex;
 		connections.add(new Point(x,y));
 	}*/
 	
-	//определение расстояния от конца ветки до последней поставленной синей точки
+	//РѕРїСЂРµРґРµР»РµРЅРёРµ СЂР°СЃСЃС‚РѕСЏРЅРёСЏ РѕС‚ РєРѕРЅС†Р° РІРµС‚РєРё РґРѕ РїРѕСЃР»РµРґРЅРµР№ РїРѕСЃС‚Р°РІР»РµРЅРЅРѕР№ СЃРёРЅРµР№ С‚РѕС‡РєРё
 	public double getLengthFromLastBlue(Point p){
 		chainLength=Math.sqrt(Math.abs(chainEndX-p.x)*Math.abs(chainEndX-p.x)+Math.abs(chainEndY-p.y)*Math.abs(chainEndY-p.y));
 		return chainLength;
 	}
 	
-	//проверка, находится ли конец цепи на краю поля
+	//РїСЂРѕРІРµСЂРєР°, РЅР°С…РѕРґРёС‚СЃСЏ Р»Рё РєРѕРЅРµС† С†РµРїРё РЅР° РєСЂР°СЋ РїРѕР»СЏ
 	public boolean isAtSide(Game game){
 		if(chainEndX<2|chainEndY<2|chainEndX>game.sizeX-3|chainEndY>game.sizeY-3){return true;}else{return false;}
 	}		
